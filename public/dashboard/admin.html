@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin Dashboard</title>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- External CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="Oladayo enterprises Logo">
+                    <h2>Oladayo enterprises</h2>
+                </div>
+                <button class="toggle-sidebar-btn">&times;</button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <ul>
+                        <li class="nav-item"><a href="#" id="product-btn"><i class="fas fa-box"></i> Products</a></li>
+                        <li class="nav-item"><a href="#" id="orders-btn"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                        <li class="nav-item"><a href="#" id="update-inventory-btn"><i class="fas fa-warehouse"></i> Update Inventory</a></li>
+                        <li class="nav-item"><a href="#" id="calculator-btn"><i class="fas fa-calculator"></i> Calculator</a></li>
+                        <li class="nav-item"><a href="#" id="add-cashier-btn"><i class="fas fa-user-plus"></i> Add Cashier</a></li>
+                        <li class="nav-item"><a href="#" id="daily-signups-btn"><i class="fas fa-users"></i> Daily Signups</a></li>
+                        <li class="nav-item"><a href="#" id="user-management-btn"><i class="fas fa-users"></i> User Management</a></li>
+                        <li class="nav-item"><a href="#" id="inventory-management-btn"><i class="fas fa-warehouse"></i> Inventory Management</a></li>
+                        <li class="nav-item"><a href="#" id="site-customization-btn"><i class="fas fa-paint-brush"></i> Site Customization</a></li>
+                        <li class="nav-item"><a href="#" id="revenue-reporting-btn"><i class="fas fa-chart-line"></i> Revenue & Orders</a></li>
+                        <li class="nav-item"><a href="#" id="activity-tracking-btn"><i class="fas fa-user-clock"></i> Activity Tracking</a></li>
+                    </ul>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="toggle-sidebar-btn">&#9776;</button>
+                    <h1>Admin Dashboard</h1>
+                </div>
+                <div class="navbar-middle">
+                    <input type="text" class="search-bar" placeholder="Search...">
+                </div>
+                <div class="navbar-right">
+                    <div class="nav-item dropdown">
+                        <button class="dropbtn">Messages <span class="badge">5</span></button>
+                        <div class="dropdown-content">
+                            <a href="#">New Message 1</a>
+                            <a href="#">New Message 2</a>
+                            <a href="#">New Message 3</a>
+                            <a href="#">View All Messages</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <button class="dropbtn">Notifications <span class="badge">8</span></button>
+                        <div class="dropdown-content">
+                            <a href="#">Notification 1</a>
+                            <a href="#">Notification 2</a>
+                            <a href="#">Notification 3</a>
+                            <a href="#">View All Notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <button class="dropbtn">Profile <i class="fas fa-user-circle"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Profile Settings</a>
+                            <button id="openLoginModal">Login</button>                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Additional Admin Sections -->
+
+
+            </section>
+
+            <section id="site-customization">
+                <div class="card">
+                    <h2>Site Customization</h2>
+                    <label for="site-font">Choose Font:</label>
+                    <select id="site-font">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Helvetica">Helvetica</option>
+                    </select>
+                    <label for="site-color">Choose Color:</label>
+                    <input type="color" id="site-color">
+                </div>
+            </section>
+
+
+
+<!-- Login Modal Structure -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span> <!-- Close button -->
+
+        <div class="login-container">
+            <h2>Login</h2>
+
+            <!-- Username and Password -->
+            <div class="login-option">
+                <h3>Username & Password</h3>
+                <form id="login-username-form">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Phone Number and Password -->
+            <div class="login-option">
+                <h3>Phone Number & Password</h3>
+                <form id="login-phone-form">
+                    <input type="text" name="phone" placeholder="Phone Number" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Email and Password -->
+            <div class="login-option">
+                <h3>Email & Password</h3>
+                <form id="login-email-form">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Google Login -->
+            <div class="login-option">
+                <h3>Login with Google</h3>
+                <button id="google-login-btn">Login with Google</button>
+            </div>
+
+            <!-- Facebook Login -->
+            <div class="login-option">
+                <h3>Login with Facebook</h3>
+                <button id="facebook-login-btn">Login with Facebook</button>
+            </div>
+
+            <p><a href="retrieve.html">Forgot your password?</a></p>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+</div>
+
+    <!-- Orders Table -->
+    <div class="table-container">
+        <h2>Orders</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Buyer Name</th>
+                    <th>Store</th>
+                    <th>Product</th>
+                    <th>Order ID</th>
+                    <th>Tracking</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <!-- Orders will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+<!-- Main Content Area -->
+<div class="main-content">
+    <div class="dashboard">
+        <!-- Other dashboard content -->
+        
+        <!-- Create Blog Button -->
+        <button id="create-blog-btn">Create Blog</button>
+
+        <!-- Create Blog Section (Initially Hidden) -->
+        <div id="create-blog-section" style="display: none;">
+            <h2>Create Blog Post</h2>
+            <form id="create-blog-form">
+                <div>
+                    <label for="blog-title">Title:</label>
+                    <input type="text" id="blog-title" name="blog-title" required>
+                </div>
+                <div>
+                    <label for="blog-content">Content:</label>
+                    <textarea id="blog-content" name="blog-content" required></textarea>
+                </div>
+                <div>
+                    <label for="blog-category">Category:</label>
+                    <select id="blog-category" name="blog-category">
+                        <option value="news">News</option>
+                        <option value="updates">Updates</option>
+                        <option value="events">Events</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="blog-image">Upload Image:</label>
+                    <input type="file" id="blog-image" name="blog-image">
+                </div>
+                <button type="submit">Publish</button>
+                <button id="cancel-create-blog" type="button">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>               
+
+            <section id="revenue-reporting">
+                <div class="card">
+                    <h2>Revenue & Orders Reporting</h2>
+                    <div id="revenue-charts"></div>
+                    <div id="order-management"></div>
+                </div>
+            </section>
+
+            <section id="activity-tracking">
+                <div class="card">
+                    <h2>Activity Tracking</h2>
+                    <div id="cashier-activities"></div>
+                    <div id="user-activities"></div>
+                    <div id="top-products"></div>
+                    <div id="active-buyers"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+  
+
+    
+    <!-- Modals -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-product-modal">&times;</span>
+            <h2>Add New Product</h2>
+            <form id="add-product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name:</label>
+                    <input type="text" id="product-name" name="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Category:</label>
+                    <input type="text" id="product-category" name="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Product Price ($):</label>
+                    <input type="number" id="product-price" name="price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-quantity">Quantity:</label>
+                    <input type="number" id="product-quantity" name="quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="total-left">Total Left:</label>
+                    <input type="number" id="total-left" name="totalLeft" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Product Image:</label>
+                    <input type="file" id="product-image" name="image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="add-cashier-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-add-cashier-modal">&times;</span>
+            <h2>Add Cashier</h2>
+            <form id="add-cashier-form">
+                <div class="form-group">
+                    <label for="cashier-name">Full Name:</label>
+                    <input type="text" id="cashier-name" name="cashierName" required>
+                </div>
+                <div class="form-group">
+                    <label for="cashier-email">Email:</label>
+                    <input type="email" id="cashier-email" name="cashierEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="cashier-phone">Phone Number:</label>
+                    <input type="tel" id="cashier-phone" name="cashierPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="cashier-username">Username:</label>
+                    <input type="text" id="cashier-username" name="cashierUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="cashier-password">Password:</label>
+                    <input type="password" id="cashier-password" name="cashierPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="cashier-role">Role:</label>
+                    <select id="cashier-role" name="cashierRole">
+                        <option value="cashier">Cashier</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cashier-status">Status:</label>
+                    <select id="cashier-status" name="cashierStatus">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Add Cashier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="calculator-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-calculator-modal">&times;</span>
+            <h2>Product Calculator</h2>
+            <form id="calculator-form">
+                <div id="digit-buttons">
+                    <button type="button" data-value="0">0</button>
+                    <button type="button" data-value="1">1</button>
+                    <button type="button" data-value="2">2</button>
+                    <button type="button" data-value="3">3</button>
+                    <button type="button" data-value="4">4</button>
+                    <button type="button" data-value="5">5</button>
+                    <button type="button" data-value="6">6</button>
+                    <button type="button" data-value="7">7</button>
+                    <button type="button" data-value="8">8</button>
+                    <button type="button" data-value="9">9</button>
+                </div>
+                <div id="arithmetic-symbols">
+                    <button type="button" id="add-btn">+</button>
+                    <button type="button" id="subtract-btn">-</button>
+                    <button type="button" id="multiply-btn">*</button>
+                    <button type="button" id="divide-btn">/</button>
+                    <button type="button" id="equals-btn">=</button>
+                </div>
+                <div class="form-group">
+                    <label for="product-name">Product Name:</label>
+                    <input type="text" id="calculator-product-name" name="productName">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="calculator-quantity" name="quantity">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" id="calculator-price" name="price">
+                </div>
+                <div class="form-group">
+                    <label for="discount">Discount (%):</label>
+                    <input type="number" id="calculator-discount" name="discount">
+                </div>
+                <div id="input-display">
+                    <p>Product Name: <span id="display-product-name"></span></p>
+                    <p>Quantity: <span id="display-quantity"></span></p>
+                    <p>Price: <span id="display-price"></span></p>
+                    <p>Discount: <span id="display-discount"></span></p>
+                </div>
+                <button type="button" id="submit-calculator">Submit</button>
+            </form>
+        </div>
+    </div>
+    <!-- External Script Fallback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
+
+    <script>
+        // Show and close modals
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        document.getElementById('product-btn').addEventListener('click', function() {
+            showModal('product-modal');
+        });
+
+        document.getElementById('close-product-modal').addEventListener('click', function() {
+            closeModal('product-modal');
+        });
+
+        document.getElementById('add-cashier-btn').addEventListener('click', function() {
+            showModal('add-cashier-modal');
+        });
+
+        document.getElementById('close-add-cashier-modal').addEventListener('click', function() {
+            closeModal('add-cashier-modal');
+        });
+
+        // Add Product Form Submission with Validation
+        document.getElementById('add-product-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const productName = document.getElementById('product-name').value;
+            const productPrice = document.getElementById('product-price').value;
+
+            if (!productName.trim()) {
+                alert('Product name is required.');
+                return;
+            }
+
+            if (productPrice <= 0 || isNaN(productPrice)) {
+                alert('Valid product price is required.');
+                return;
+            }
+
+            const formData = new FormData(this);
+
+            fetch('/api/products', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to add product');
+                return response.json();
+            })
+            .then(data => {
+                alert('Product added successfully!');
+                closeModal('product-modal');
+            })
+            .catch(error => {
+                alert('Error adding product: ' + error.message);
+            });
+        });
+
+        // Add Cashier Form Submission with Validation
+        document.getElementById('add-cashier-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const cashierName = document.getElementById('cashier-name').value;
+
+            if (!cashierName.trim()) {
+                alert('Cashier name is required.');
+                return;
+            }
+
+            const formData = new URLSearchParams(new FormData(this));
+
+            fetch('/api/cashiers', {
+                method: 'POST',
+                body: formData,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to add cashier');
+                return response.json();
+            })
+            .then(data => {
+                alert('Cashier added successfully!');
+                closeModal('add-cashier-modal');
+            })
+            .catch(error => {
+                alert('Error adding cashier: ' + error.message);
+            });
+        });
+
+        // Fetch and Populate Orders Table
+        async function populateOrders() {
+            try {
+                const response = await fetch('/api/orders');
+                if (!response.ok) throw new Error('Failed to fetch orders');
+                
+                const data = await response.json();
+                const tableBody = document.getElementById('orderTableBody');
+                tableBody.innerHTML = data.map(order => `
+                    <tr>
+                        <td>${order.buyerName}</td>
+                        <td>${order.store}</td>
+                        <td>${order.productName}</td>
+                        <td>${order.orderId}</td>
+                        <td>${order.trackingNumber}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                alert('Failed to load orders.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', populateOrders);
+    </script>
+<!-- Styles for the Modal -->
+<style>
+    /* Modal container styling */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    }
+
+    /* Modal content box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%; /* Width of the modal */
+        border-radius: 8px;
+    }
+
+    /* Close button */
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-modal:hover,
+    .close-modal:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<!-- JavaScript to Open and Close Modal -->
+<script>
+    // Get the modal
+    const modal = document.getElementById("loginModal");
+
+    // Get the button that opens the modal
+    const btn = document.getElementById("openLoginModal");
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("close-modal")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+    <!-- JavaScript for AJAX and Modal Functionality -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       
+    <!-- Include necessary scripts -->
+    <script src="js/scripts.js"></script>
+    <script src="js/ajax.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet" onerror="this.href='assets/fullcalendar/main.min.css';">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.umd.js"></script>
+</body>
+</html>

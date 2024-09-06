@@ -1,0 +1,46 @@
+your_project/
+│
+├── public/
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   ├── product.js
+│   │   ├── cart.js
+│   └── products/
+│       ├── Bigi.html
+│       ├── Pepsi.html
+│       └── ...
+│
+├── routes/
+│   ├── productRoutes.js
+│   └── cartRoutes.js
+│
+├── controllers/
+│   ├── productController.js
+│   └── cartController.js
+│
+├── db/
+│   ├── db.js
+│   ├── schema.sql
+│   └── seed.sql
+│
+├── app.js
+├── package.json
+└── .env
+
+
+
+to set data base: "node -e "require('sqlite3').verbose().Database('./db/database.db').serialize(() => { require('fs').readFileSync('./db/database.sql').toString().split(';').forEach(sql => sql && require('sqlite3').verbose().Database('./db/database.db').run(sql)) })"
+"
+
+
+
+
+
+
+
+
+
+
+
+

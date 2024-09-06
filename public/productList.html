@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px;
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+    text-align: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.product-card h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.product-card p {
+    margin: 5px 0;
+}
+
+.product-card button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-card button:hover {
+    background-color: #218838;
+}
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/products')
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('product-list');
+                    products.forEach(product => {
+                        const productItem = document.createElement('div');
+                        productItem.classList.add('product-card');
+                        productItem.innerHTML = `
+                            <img src="${product.image}" alt="${product.name}">
+                            <h2>${product.name}</h2>
+                            <p>${product.category}</p>
+                            <p>$${product.price}</p>
+                            <button onclick="addToCart(${product.id})">Add to Cart</button>
+                        `;
+                        productList.appendChild(productItem);
+                    });
+                });
+        });
+
+        function addToCart(productId) {
+            fetch('/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId, quantity: 1 })
+            }).then(response => response.json())
+              .then(data => alert(data.message));
+        }
+    </script>
+</head>
+<body>
+    <h1>Products</h1>
+    <div id="product-list"></div>
+
+    
+<script src="main.js"></script>
+<script src="script.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>

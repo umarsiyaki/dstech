@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications and Messages</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="viewNotifications">View Notifications</button>
+    <button id="viewMessages">View Messages</button>
+
+    <!-- Notifications Subpage (Initially Hidden) -->
+    <div id="notificationsSubpage" style="display: none;">
+        <h2>Notifications</h2>
+        <ul id="notificationList"></ul>
+        <button id="closeNotifications">Close</button>
+    </div>
+
+    <!-- Messages Subpage (Initially Hidden) -->
+    <div id="messagesSubpage" style="display: none;">
+        <h2>Messages</h2>
+        <ul id="messageList"></ul>
+        <form id="sendMessageForm">
+            <input type="text" id="receiverId" placeholder="Receiver ID">
+            <textarea id="messageBody" placeholder="Your message..."></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <button id="closeMessages">Close</button>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+    <script src="profile.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>

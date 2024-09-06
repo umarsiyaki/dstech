@@ -1,0 +1,591 @@
+Great! Now that we have the login modal in place, we can proceed with the **AJAX integration** for handling login requests without refreshing the page. We’ll implement the functionality to send the form data to the server and handle responses.
+
+Here’s a step-by-step guide to integrate **AJAX-based login** and session handling. 
+
+### Updated Code with AJAX for Login
+
+```html
+<!-- Modal Trigger (Example: Can be a button on the admin dashboard page) -->
+<button id="openLoginModal">Login</button>
+
+<!-- Login Modal Structure -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+
+        <div class="login-container">
+            <h2>Login</h2>
+
+            <!-- Username and Password -->
+            <div class="login-option">
+                <h3>Username & Password</h3>
+                <form id="login-username-form">
+                    <input type="text" name="username" id="username" placeholder="Username" required>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Phone Number and Password -->
+            <div class="login-option">
+                <h3>Phone Number & Password</h3>
+                <form id="login-phone-form">
+                    <input type="text" name="phone" id="phone" placeholder="Phone Number" required>
+                    <input type="password" name="password" id="phone-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Email and Password -->
+            <div class="login-option">
+                <h3>Email & Password</h3>
+                <form id="login-email-form">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="password" name="password" id="email-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Google Login -->
+            <div class="login-option">
+                <h3>Login with Google</h3>
+                <button id="google-login-btn">Login with Google</button>
+            </div>
+
+            <!-- Facebook Login -->
+            <div class="login-option">
+                <h3>Login with Facebook</h3>
+                <button id="facebook-login-btn">Login with Facebook</button>
+            </div>
+
+            <p><a href="retrieve.html">Forgot your password?</a></p>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Styles for the Modal -->
+<style>
+    /* Existing styles (same as before) */
+</style>
+
+<!-- AJAX Script to Handle Form Submission -->
+<script>
+    // Get the modal elements
+    const modal = document.getElementById("loginModal");
+    const btn = document.getElementById("openLoginModal");
+    const span = document.getElementsByClassName("close-modal")[0];
+
+    // Open modal on button click
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Close modal when clicking the "X"
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close modal when clicking outside the modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Handle AJAX Login
+    document.getElementById("login-username-form").addEventListener("submit", function(e) {
+        e.preventDefault();  // Prevent the default form submission
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Send login request to server
+        fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Handle successful login (e.g., redirect, close modal, etc.)
+                alert("Login successful");
+                window.location.href = "/admin-dashboard";  // Redirect to dashboard
+            } else {
+                // Handle failed login
+                alert("Login failed: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error during login:", error);
+        });
+    });
+
+    // Similar AJAX form handlers can be added for phone and email login forms
+</script>
+```
+
+### Steps Explained:
+1. **AJAX Request for Login**:
+   - When the user submits the login form, we prevent the default form submission (`e.preventDefault()`).
+   - We collect the username and password, then send them via a `POST` request to a `/api/login` endpoint.
+   - The server should handle authentication and return a success or failure response.
+
+2. **Handling Server Response**:
+   - If the login is successful, we redirect the user to the admin dashboard using `window.location.href = "/admin-dashboard"`.
+   - If login fails, we display an alert with the failure message.
+
+3. **Modular Form Handling**:
+   - The code is structured so that similar AJAX handlers can be added for phone number and email login by adding event listeners to those forms.
+
+### Backend Side (Server API Endpoint):
+For the AJAX to work correctly, you need a corresponding **server-side** endpoint (e.g., `/api/login`) that authenticates the user. Here's a basic idea of how the backend might look in **Node.js** (assuming you're using it):
+
+```javascript
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Replace this with your actual authentication logic
+    if (username === 'admin' && password === 'adminpassword') {
+        // Success: Respond with a success message and user data
+        res.json({ success: true, message: 'Login successful' });
+    } else {
+        // Failure: Respond with an error message
+        res.json({ success: false, message: 'Invalid username or password' });
+    }
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+```
+
+### Next Step:
+1. **Session Management**: Once the login succeeds, we need to handle user sessions using cookies or tokens (e.g., JWT) to maintain the user's login state across pages.
+2. **Role-based Access Control (RBAC)**: After successful login, you can implement RBAC logic to ensure users only see sections of the admin panel they are authorized to access based on their role.
+
+Let me know if you'd like to proceed with session management and RBAC!
+
+
+To enhance **safety** and ensure a **robust** system in your code, you should implement logic to handle potential issues like validation, error handling, and fallbacks. I'll walk through the key areas where logic should be added to ensure safety and robustness in the code.
+
+### 1. **Image Path Validation**
+   - Ensure that the image path exists and provide a fallback image if the logo fails to load.
+
+   ```html
+   <img src="assets/images/logo.png" onerror="this.src='assets/images/default-logo.png';" alt="Logo">
+   ```
+
+   - This will ensure that if the logo fails to load, a default image (`default-logo.png`) is shown.
+
+### 2. **FullCalendar CSS/JS Fallback**
+   You can include fallback logic in case the CDN fails by providing a local alternative:
+
+   ```html
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet" onerror="this.href='assets/fullcalendar/main.min.css';">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
+   ```
+
+   - If the CDN fails, it will attempt to load the local version of the FullCalendar assets.
+
+### 3. **Form Validation**
+   For the form submissions (`add-product-form` and `add-cashier-form`), you should add client-side validation to ensure the data is correct before sending it to the server.
+
+   **Example: Add Product Form Validation**
+   ```javascript
+   document.getElementById('add-product-form').addEventListener('submit', function(e) {
+       e.preventDefault();
+       
+       // Validate form data before sending
+       const productName = document.getElementById('product-name').value;
+       const productPrice = document.getElementById('product-price').value;
+
+       if (!productName || productName.trim() === "") {
+           alert('Product name is required.');
+           return;
+       }
+
+       if (!productPrice || isNaN(productPrice) || productPrice <= 0) {
+           alert('Valid product price is required.');
+           return;
+       }
+
+       // Proceed with form submission if valid
+       const formData = new FormData(this);
+
+       fetch('/api/products', {
+           method: 'POST',
+           body: formData
+       })
+       .then(response => {
+           if (!response.ok) {
+               throw new Error('Network response was not ok');
+           }
+           return response.json();
+       })
+       .then(data => {
+           alert('Product added successfully!');
+           closeModal('product-modal');
+       })
+       .catch(error => {
+           alert('Error adding product: ' + error.message);
+       });
+   });
+   ```
+
+   **Key Safety Measures:**
+   - **Client-side validation:** Ensure mandatory fields are filled in.
+   - **Error handling:** If the server response is not OK, show a meaningful error message.
+   - **Avoid invalid submission:** Avoid sending the form if validation fails.
+
+### 4. **Network Error Handling for Fetch**
+   For robustness, add comprehensive error handling to all `fetch` calls to deal with issues like network failure, bad requests, or server errors.
+
+   ```javascript
+   async function fetchData(url, options = {}) {
+       try {
+           const response = await fetch(url, options);
+           if (!response.ok) {
+               throw new Error(`HTTP error! Status: ${response.status}`);
+           }
+           return await response.json();
+       } catch (error) {
+           console.error('Fetch error:', error);
+           alert('There was an issue fetching data: ' + error.message);
+       }
+   }
+
+   // Example usage for loading orders
+   document.addEventListener('DOMContentLoaded', function() {
+       fetchData('/api/orders')
+           .then(data => populateOrderTable(data))
+           .catch(error => console.log(error));
+   });
+
+
+   ```
+
+   **Key Safety Measures:**
+   - **Error handling for fetch:** If the response is not `ok` (e.g., 404 or 500 error), an appropriate message is shown.
+   - **General error handling:** Catches any network errors and provides feedback to the user.
+
+### 5. **Canvas Handling with `getContext()`**
+   Make sure the `getContext` method is only called if the canvas element exists to prevent errors.
+
+   ```javascript
+   const canvas = document.getElementById('revenueChart');
+   if (canvas) {
+       const ctx = canvas.getContext('2d');
+       if (ctx) {
+           new Chart(ctx, {
+               // Chart configuration
+           });
+       } else {
+           console.error('Canvas context not available');
+       }
+   } else {
+       console.error('Revenue chart canvas not found');
+   }
+   ```
+
+   **Key Safety Measures:**
+   - **Null-checks:** Ensure the canvas element and its context exist before trying to use them.
+
+### 6. **Improving the Calculator Logic**
+   Add checks to ensure valid input for calculations and prevent errors such as dividing by zero or invalid inputs.
+
+   ```javascript
+
+
+
+Great! Now that we have the login modal in place, we can proceed with the **AJAX integration** for handling login requests without refreshing the page. We’ll implement the functionality to send the form data to the server and handle responses.
+
+Here’s a step-by-step guide to integrate **AJAX-based login** and session handling. 
+
+### Updated Code with AJAX for Login
+
+```html
+<!-- Modal Trigger (Example: Can be a button on the admin dashboard page) -->
+<button id="openLoginModal">Login</button>
+
+<!-- Login Modal Structure -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+
+        <div class="login-container">
+            <h2>Login</h2>
+
+            <!-- Username and Password -->
+            <div class="login-option">
+                <h3>Username & Password</h3>
+                <form id="login-username-form">
+                    <input type="text" name="username" id="username" placeholder="Username" required>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Phone Number and Password -->
+            <div class="login-option">
+                <h3>Phone Number & Password</h3>
+                <form id="login-phone-form">
+                    <input type="text" name="phone" id="phone" placeholder="Phone Number" required>
+                    <input type="password" name="password" id="phone-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Email and Password -->
+            <div class="login-option">
+                <h3>Email & Password</h3>
+                <form id="login-email-form">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="password" name="password" id="email-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Google Login -->
+            <div class="login-option">
+                <h3>Login with Google</h3>
+                <button id="google-login-btn">Login with Google</button>
+            </div>
+
+            <!-- Facebook Login -->
+            <div class="login-option">
+                <h3>Login with Facebook</h3>
+                <button id="facebook-login-btn">Login with Facebook</button>
+            </div>
+
+            <p><a href="retrieve.html">Forgot your password?</a></p>
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Styles for the Modal -->
+<style>
+    /* Existing styles (same as before) */
+</style>
+
+<!-- AJAX Script to Handle Form Submission -->
+<script>
+    // Get the modal elements
+    const modal = document.getElementById("loginModal");
+    const btn = document.getElementById("openLoginModal");
+    const span = document.getElementsByClassName("close-modal")[0];
+
+    // Open modal on button click
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Close modal when clicking the "X"
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close modal when clicking outside the modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Handle AJAX Login
+    document.getElementById("login-username-form").addEventListener("submit", function(e) {
+        e.preventDefault();  // Prevent the default form submission
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Send login request to server
+        fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Handle successful login (e.g., redirect, close modal, etc.)
+                alert("Login successful");
+                window.location.href = "/admin-dashboard";  // Redirect to dashboard
+            } else {
+                // Handle failed login
+                alert("Login failed: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error during login:", error);
+        });
+    });
+
+    // Similar AJAX form handlers can be added for phone and email login forms
+</script>
+```
+
+### Steps Explained:
+1. **AJAX Request for Login**:
+   - When the user submits the login form, we prevent the default form submission (`e.preventDefault()`).
+   - We collect the username and password, then send them via a `POST` request to a `/api/login` endpoint.
+   - The server should handle authentication and return a success or failure response.
+
+2. **Handling Server Response**:
+   - If the login is successful, we redirect the user to the admin dashboard using `window.location.href = "/admin-dashboard"`.
+   - If login fails, we display an alert with the failure message.
+
+3. **Modular Form Handling**:
+   - The code is structured so that similar AJAX handlers can be added for phone number and email login by adding event listeners to those forms.
+
+### Backend Side (Server API Endpoint):
+For the AJAX to work correctly, you need a corresponding **server-side** endpoint (e.g., `/api/login`) that authenticates the user. Here's a basic idea of how the backend might look in **Node.js** (assuming you're using it):
+
+```javascript
+const express = require('express');
+const app = express();
+
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+```
+
+### Next Step:
+1. **Session Management**: Once the login succeeds, we need to handle user sessions using cookies or tokens (e.g., JWT) to maintain the user's login state across pages.
+2. **Role-based Access Control (RBAC)**: After successful login, you can implement RBAC logic to ensure users only see sections of the admin panel they are authorized to access based on their role.
+
+Let me know if you'd like to proceed with session management and RBAC!
+
+
+
+
+
+To build an advanced program that meets your server requirements with high-level features such as authentication, role-based access control (RBAC), session management, and real-time capabilities, we'll implement a **Node.js** backend with **Express.js**, **MongoDB**, and **JWT-based authentication**. The program will be designed to integrate seamlessly with the front-end, handle real-time data, and support future scalability.
+
+Below is a comprehensive guide and code snippets to build this server program:
+
+### High-Level Features:
+1. **User Authentication (JWT)** – Secure user login with JSON Web Tokens.
+2. **Role-Based Access Control (RBAC)** – Restrict access based on user roles (e.g., Admin, Manager, Cashier).
+3. **Session Management** – Ensure secure and persistent sessions using JWT or sessions.
+4. **Real-Time Notifications** – Push notifications using **Socket.io**.
+5. **Secure Routes** – Protect sensitive routes with role-based middleware.
+6. **RESTful API** – Build clean and modular RESTful API endpoints for future scalability.
+
+---
+
+### 1. **Project Structure**
+```
+myapp/
+│
+├── config/
+│   └── db.js                # Database connection
+├── controllers/
+│   └── authController.js     # Auth and session management
+│   └── userController.js     # User CRUD operations
+├── middlewares/
+│   └── authMiddleware.js     # JWT and role verification
+├── models/
+│   └── userModel.js          # User schema and model
+├── routes/
+│   └── authRoutes.js         # Auth routes
+│   └── userRoutes.js         # User routes (Admin)
+├── app.js                    # Main Express server
+└── package.json
+```
+
+### 2. **Backend Dependencies**
+You'll need the following npm packages:
+```bash
+npm install express mongoose bcryptjs jsonwebtoken cookie-parser socket.io cors dotenv
+```
+
+---
+
+### 3. **Database Configuration (MongoDB)**
+
+```javascript
+// config/db.js
+```
+
+### 4. **User Model**
+
+```javascript
+```
+
+### 5. **JWT Authentication (Login, Register)**
+
+#### Auth Controller
+```javascript
+```
+
+#### Auth Routes
+```javascript
+```
+
+---
+
+### 6. **Role-Based Access Control (RBAC)**
+
+#### Auth Middleware
+```javascript
+```
+
+---
+
+### 7. **User Routes (Protected & Role-Based)**
+
+```javascript
+// routes/userRoutes.js
+const express = require('express');
+module.exports = router;
+```
+
+#### User Controller
+```javascript
+```
+
+---
+
+### 8. **Real-Time Notifications (Socket.io)**
+
+#### Basic Socket Setup for Notifications
+```javascript
+// app.js
+const express = require('express');
+
+```
+
+---
+
+### 9. **Advanced Features**
+
+1. **Session Management** – We use JWT, which doesn't require server-side sessions.
+2. **Real-Time Notifications** – Using **Socket.io** for notifications. The server can push real-time updates to users (e.g., new orders, messages).
+3. **Analytics and Reporting** – You can integrate tools like **Chart.js** to visualize data in the admin dashboard by building APIs that return sales and user
+
+ data.
+4. **Error Handling** – Ensure proper validation and error handling in all routes.
+
+---
+
+### 10. **Testing and Deployment**
+- **Testing** – Use **Postman** or **Insomnia** to test the RESTful APIs.
+- **Deployment** – Deploy to **Heroku** or **AWS**, and use **MongoDB Atlas** for the cloud-based database.
+
+This program sets a foundation for building out the admin panel's back-end and connecting it to the front-end dynamically via AJAX. Let me know if you need additional enhancements or customization.

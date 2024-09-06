@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
+.login-container, .retrieve-container, .register-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px #aaa;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea, select, button {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.social-register {
+    text-align: center;
+}
+
+.social-register button {
+    background-color: #d9534f;
+    margin: 5px;
+}
+
+.social-register button:hover {
+    background-color: #c9302c;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: #0275d8;
+    text-decoration: none;
+}
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register</h2>
+        <form id="register-form" enctype="multipart/form-data">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="firstname" placeholder="First Name" required>
+            <input type="text" name="middlename" placeholder="Middle Name">
+            <input type="text" name="surname" placeholder="Surname" required>
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="town" placeholder="Town/City" required>
+            <input type="text" name="nin" placeholder="National ID Number" required>
+            <input type="file" name="image" accept="image/*" required>
+            <textarea name="education" placeholder="Educational Background" required></textarea>
+            <select name="country" required>
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="NG">Nigeria</option>
+                <!-- Add more countries as needed -->
+            </select>
+            <button type="submit">Register</button>
+        </form>
+
+        <div class="social-register">
+            <h3>Or Register with:</h3>
+            <button id="google-register-btn">Google</button>
+            <button id="facebook-register-btn">Facebook</button>
+        </div>
+
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+
+    <script src="dashboard/js/main.js"></script>
+    <script src="dashboard/js/script.js"></script>
+    <script src="dashboard/js/profile.js"></script>
+    <script src="dashboard/js/register.js"></script>
+</body>
+</html>

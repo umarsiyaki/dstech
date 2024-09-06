@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Landing Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 1. Navbar Section -->
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Products</a>
+                    <ul class="dropdown">
+                        <li><a href="cocacola.html">Coca-Cola</a></li>
+                        <li><a href="pepsi.html">Pepsi</a></li>
+                        <li><a href="viju.html">Viju</a></li>
+                        <!-- Add more product links here -->
+                    </ul>
+                </li>
+                <li><a href="#">Notifications</a>
+                    <ul class="dropdown">
+                        <li><a href="#">View All Notifications</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Messages</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Inbox</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Profile</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <input type="search" placeholder="Search products..." class="search-bar">
+        </nav>
+    </header>
+
+    <!-- 2. Slideshow Section -->
+    <section class="slideshow">
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="slide1.jpg" alt="Slide 1">
+                <div class="caption">Slide 1 Caption</div>
+            </div>
+            <div class="slide fade">
+                <img src="slide2.jpg" alt="Slide 2">
+                <div class="caption">Slide 2 Caption</div>
+            </div>
+            <div class="slide fade">
+                <img src="slide3.jpg" alt="Slide 3">
+                <div class="caption">Slide 3 Caption</div>
+            </div>
+        </div>
+        <br>
+        <div class="dot-container">
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+        </div>
+    </section>
+
+    <!-- 3. About Us Section -->
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>Welcome to our product page where we offer a variety of beverages to suit your taste. Our mission is to provide high-quality drinks that refresh and energize.</p>
+    </section>
+
+    <!-- 4. Product Section -->
+    <section class="products">
+        <h2>Our Products</h2>
+        
+        <!-- Coca-Cola Products -->
+        <div class="product-category">
+            <h3>Coca-Cola</h3>
+            <div class="product-cards" id="cocacola-products">
+                <!-- Coca-Cola product cards will be dynamically inserted here -->
+            </div>
+            <button class="see-more-btn" onclick="window.location.href='cocacola.html'">See More</button>
+        </div>
+        
+        <!-- Pepsi Products -->
+        <div class="product-category">
+            <h3>Pepsi</h3>
+            <div class="product-cards" id="pepsi-products">
+                <!-- Pepsi product cards will be dynamically inserted here -->
+            </div>
+            <button class="see-more-btn" onclick="window.location.href='pepsi.html'">See More</button>
+        </div>
+
+        <!-- Other Product Categories Here -->
+        <!-- Repeat the structure above for other products like Viju, Climax, etc. -->
+    </section>
+
+    <!-- 5. Contact Form Section -->
+    <section class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea><br><br>
+            <input type="submit" value="Send">
+        </form>
+    </section>
+
+    <!-- 6. Happy Customers Section -->
+    <section class="happy-customers">
+        <h2>Happy Customers</h2>
+        <div class="customer-cards" id="customer-reviews">
+            <!-- Customer review cards will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- 7. Footer Section -->
+    <footer class="footer">
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <!-- Add more social media links as needed -->
+        </ul>
+        <p>&copy; 2024 Product Page</p>
+    </footer>
+
+    <!-- 8. Important Links Section -->
+    <section class="important-links">
+        <h2>Important Links</h2>
+        <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="cocacola.html">Coca-Cola Products</a></li>
+            <li><a href="pepsi.html">Pepsi Products</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="more.html">More</a></li>
+        </ul>
+    </section>
+
+    <!-- JavaScript -->
+<script src="main.js"></script>
+<script src="script.js"></script>
+<script src="profile.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

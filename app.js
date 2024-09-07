@@ -21,9 +21,47 @@ require('dotenv').config();
 
 // Create express app
 const app = express();
+const io = socketIo(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+});
 
+// Event triggers for new notifications
+io.on('connection', (socket) => {
+  console.log('Client connected');
+
+  // Listen for admin-side events (e.g., new order, low stock)
+  socket.on('newOrder', (orderData) => {
+    io.emit('receiveNotification', {
+      message: `New Order #${orderData.orderId} received.`,
+      timestamp: new Date(),
+    });
+  });
+
+  // Event: Low stock alert
+  socket.on('lowStockAlert', (productData) => {
+    io.emit('receiveNotification', {
+      message: `Low stock alert for product: ${productData.name}`,
+      timestamp: new Date(),
+    });
+  });
+
+  // Event: User message
+  socket.on('newMessage', (messageData) => {
+    io.emit('receiveNotification', {
+      message: `New message from ${messageData.senderName}`,
+      timestamp: new Date(),
+    });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
 // MongoDB connection setup
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/yourdb', {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/db/database.sql', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected'))
@@ -143,6 +181,46 @@ const io = socketIo(server, {
     origin: '*',
     methods: ['GET', 'POST'],
   },
+});
+
+const io = socketIo(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+});
+
+// Event triggers for new notifications
+io.on('connection', (socket) => {
+  console.log('Client connected');
+
+  // Listen for admin-side events (e.g., new order, low stock)
+  socket.on('newOrder', (orderData) => {
+    io.emit('receiveNotification', {
+      message: `New Order #${orderData.orderId} received.`,
+      timestamp: new Date(),
+    });
+  });
+
+  // Event: Low stock alert
+  socket.on('lowStockAlert', (productData) => {
+    io.emit('receiveNotification', {
+      message: `Low stock alert for product: ${productData.name}`,
+      timestamp: new Date(),
+    });
+  });
+
+  // Event: User message
+  socket.on('newMessage', (messageData) => {
+    io.emit('receiveNotification', {
+      message: `New message from ${messageData.senderName}`,
+      timestamp: new Date(),
+    });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
 });
 
 // Real-time notifications with Socket.io

@@ -44,3 +44,13 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAH9zgS4AELK21fF6hMlS0GllR6Ek52_zs",
+  authDomain: "oladayo-enterprises.firebaseapp.com",
+  projectId: "oladayo-enterprises",
+  storageBucket: "oladayo-enterprises.appspot.com",
+  messagingSenderId: "75285671355",
+  appId: "1:75285671355:web:d7924bba01aa659fd1289e",
+  measurementId: "G-SNN1RY2S9S"
+};

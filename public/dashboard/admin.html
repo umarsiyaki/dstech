@@ -11,6 +11,60 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    
+<script>
+    const socket = io('http://localhost:5000');
+
+    // Listen for new notifications
+    socket.on('receiveNotification', function (notification) {
+        // Update your notifications section
+        const notificationList = document.getElementById('notificationList');
+        const newNotification = document.createElement('li');
+        newNotification.innerHTML = `${notification.message} - ${new Date(notification.timestamp).toLocaleTimeString()}`;
+        notificationList.appendChild(newNotification);
+
+        // Show a real-time alert (optional)
+        alert(notification.message);
+    });
+</script><script src="/socket.io/socket.io.js"></script>
+   <!-- Include Firebase SDK -->
+   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+
+   <script>
+     // Firebase configuration
+     const firebaseConfig = {
+       apiKey: "YOUR_API_KEY",
+       authDomain: "YOUR_AUTH_DOMAIN",
+       projectId: "YOUR_PROJECT_ID",
+       storageBucket: "YOUR_STORAGE_BUCKET",
+       messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+       appId: "YOUR_APP_ID"
+     };
+
+     // Initialize Firebase
+     const app = firebase.initializeApp(firebaseConfig);
+     const messaging = firebase.messaging();
+
+     // Get registration token for push notifications
+     messaging.getToken({ vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
+       if (currentToken) {
+         console.log('Token:', currentToken);
+         // Send token to server to subscribe for push notifications
+       } else {
+         console.log('No registration token available. Request permission to generate one.');
+       }
+     }).catch((err) => {
+       console.log('An error occurred while retrieving token.', err);
+     });
+
+     // Listen for incoming messages
+     messaging.onMessage((payload) => {
+       console.log('Message received. ', payload);
+       // Display push notification
+       alert(`New Notification: ${payload.notification.title}`);
+     });
+   </script>
 </head>
 <body>
     
@@ -87,6 +141,68 @@
 
             </section>
 
+<div class="search-filter-container">
+    <h2>Search and Filter</h2>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search products, users, or orders..." oninput="autoSuggest()">
+        <div id="suggestions" class="suggestions-box"></div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-options">
+        <h3>Filter By</h3>
+
+        <!-- Category Filter -->
+        <div class="filter-group">
+            <label for="categoryFilter">Category:</label>
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="home-appliances">Home Appliances</option>
+            </select>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div class="filter-group">
+            <label for="dateStart">Start Date:</label>
+            <input type="date" id="dateStart">
+            <label for="dateEnd">End Date:</label>
+            <input type="date" id="dateEnd">
+        </div>
+
+        <!-- Order Status Filter -->
+        <div class="filter-group">
+            <label for="statusFilter">Order Status:</label>
+            <select id="statusFilter">
+                <option value="">All Orders</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+                <option value="canceled">Canceled</option>
+            </select>
+        </div>
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Results Table -->
+    <div class="results-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable"></tbody>
+        </table>
+    </div>
+</div>
             <section id="site-customization">
                 <div class="card">
                     <h2>Site Customization</h2>
@@ -372,6 +488,36 @@
             </form>
         </div>
     </div>
+    <div class="analytics-container">
+  <h2>Analytics and Reports</h2>
+
+  <!-- Revenue Chart -->
+  <div class="chart-container">
+    <h3>Revenue Report</h3>
+    <canvas id="revenueChart"></canvas>
+  </div>
+
+  <!-- Product Sales Chart -->
+  <div class="chart-container">
+    <h3>Product Sales Report</h3>
+    <canvas id="salesChart"></canvas>
+  </div>
+
+  <!-- Admin Activity Log -->
+  <div class="activity-log">
+    <h3>Admin Activity Log</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Admin</th>
+          <th>Action</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody id="activityLogTable"></tbody>
+    </table>
+  </div>
+</div>
     <!-- External Script Fallback -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
 
@@ -570,7 +716,9 @@
     <script src="js/ajax.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet" onerror="this.href='assets/fullcalendar/main.min.css';">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.umd.js"></script>
+    
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

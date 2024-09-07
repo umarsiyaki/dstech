@@ -1,4 +1,524 @@
-Great! Now that we have the login modal in place, we can proceed with the **AJAX integration** for handling login requests without refreshing the page. We’ll implement the functionality to send the form data to the server and handle responses.
+Let's move on to the next feature: **Real-Time Notifications** with **Push Notifications** integration.
+
+We'll add **Socket.io** for in-app notifications and integrate **Firebase Cloud Messaging (FCM)** for push notifications to provide a complete real-time notification system for your admin dashboard.
+
+### 1. **Socket.io for Real-Time In-App Notifications**
+
+**Steps:**
+- Set up **Socket.io** for sending and receiving notifications in real-time.
+- Display notifications in the admin dashboard as soon as events happen, like new orders or low stock alerts.
+
+#### **Backend (Socket.io) Configuration:**
+
+We’ve already initialized **Socket.io** in the previous step. Let’s build upon that with real-time notifications for events like new orders.
+
+#### Modify **Socket.io** in `app.js`:
+
+```javascript
+// app.js (Continuing from previous)
+
+```
+
+#### **Front-End JavaScript**:
+
+To listen for real-time notifications on the front end, we’ll use **Socket.io-client**. Make sure you include the Socket.io library in your front-end code.
+
+```html
+<!-- Include Socket.io in your admin dashboard -->
+```
+
+Now, whenever an event occurs (e.g., new order, low stock), notifications will be pushed to the admin panel in real-time.
+
+### 2. **Push Notifications with Firebase Cloud Messaging (FCM)**
+
+To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)** for web push notifications that work outside the application.
+
+#### **Setting up Firebase Cloud Messaging (FCM)**:
+
+1. **Create a Firebase Project**:
+   - Go to the [Firebase Console]().
+   - Create a new project.
+
+2. **Add Firebase to Your Web App**:
+   - In your Firebase project, go to **Project Settings**.
+   - Under the **General** tab, scroll to the **Your apps** section and click **Web** to register your web app.
+   - Copy your **Firebase SDK Config**.
+
+3. **Install Firebase SDK**:
+   - Install the Firebase SDK in your project:
+   ```bash
+   npm install firebase
+   ```
+
+4. **Add Firebase Config in the Front-End**:
+
+   ```html
+
+   ```
+
+5. **Backend Integration with Firebase FCM**:
+   You can trigger push notifications from your server-side application whenever significant events occur.
+
+   Use the **Firebase Admin SDK** to send push notifications from your back-end:
+
+   ```bash
+   npm install firebase-admin
+   ```
+
+   Create a Firebase admin instance:
+
+   ```javascript
+
+```
+
+### 3. **Push Notification Handling on the Front-End**
+
+On receiving a push notification, users will see the notification as a browser pop-up even if they aren’t actively on the site.
+
+```javascript
+```
+
+### Summary:
+- **Socket.io** allows for in-app real-time notifications for events like new orders or stock updates.
+- **Firebase Cloud Messaging** adds push notification functionality, which can notify users even when they are not actively using the admin panel.
+  
+With these notification systems, your admin panel will be capable of sending both real-time in-app notifications and push notifications for important events. Next steps could involve **customizing notification content**, handling **read/unread states**, and adding **notifications history**.
+
+Let me know if you would like to move forward with additional features or modifications!Next, we'll focus on **Analytics and Reporting** for your admin dashboard.
+
+This feature will allow you to visualize data such as revenue, product sales, and user activity. We’ll use **Chart.js** for graphical representations, as well as log admin activity and display reports.
+
+### 1. **Revenue Reports with Chart.js**
+
+We'll implement dynamic charts to visualize data trends, such as revenue over time, product sales, and order statistics.
+
+#### **Install Chart.js:**
+
+Include **Chart.js** in your project:
+
+```bash
+npm install chart.js
+```
+
+Alternatively, you can add it via CDN in the front-end:
+
+```html
+
+```
+
+#### **HTML Structure for the Reports Section:**
+
+Add a section to your admin dashboard for displaying analytics and reports.
+
+```html
+
+```
+
+#### **JavaScript to Generate the Charts (Using Chart.js):**
+
+```javascript
+
+```
+
+### 2. **Admin Activity Tracking**
+
+We’ll implement a **logging system** that tracks admin activities (e.g., adding a product, managing users) and displays it in the activity log.
+
+#### **Backend (Node.js/Express) to Log Admin Actions:**
+
+Modify your back-end to log admin activities into the database (MongoDB).
+
+```javascript
+// 
+```
+
+#### **Frontend to Display the Activity Log:**
+
+Fetch the activity log from your back-end and display it in the activity log table.
+
+```javascript
+// Fetch and display activity log
+fetch('/api/activityLog')
+    .then(response => response.json())
+    .then(logs => {
+        const activityLogTable = document.getElementById('activityLogTable');
+        activityLogTable.innerHTML = '';
+
+        logs.forEach(log => {
+            const row = `<tr>
+                <td>${log.admin}</td>
+                <td>${log.action}</td>
+                <td>${new Date(log.timestamp).toLocaleString()}</td>
+            </tr>`;
+            activityLogTable.innerHTML += row;
+        });
+    });
+
+
+//#### **Backend Route to Fetch 
+app.get('/api/activityLog', async (req, res) => {
+    const logs = await ActivityLog.find().sort({ timestamp: -1 });  // Fetch logs in descending order
+    res.json(logs);
+});
+```
+
+### 3. **Additional Analytics and Reports Features:**
+
+- **Order Reports:** You can also implement charts for tracking total orders and order statuses over time.
+- **Filter by Date Range:** Add date range filters to allow admins to view reports for custom periods (e.g., last 30 days, this week, etc.).
+
+```html
+<div class="date-filter">
+    <label for="dateStart">Start Date:</label>
+    <input type="date" id="dateStart">
+    <label for="dateEnd">End Date:</label>
+    <input type="date" id="dateEnd">
+    <button onclick="fetchReports()">Filter</button>
+</div>
+```
+
+### Summary:
+- **Revenue Reports:** Using **Chart.js**, you can generate dynamic line charts for revenue trends.
+- **Sales Reports:** A bar chart for product sales.
+- **Admin Activity Log:** A table that displays actions taken by admins, such as product additions and user management tasks.
+  
+Next, we can continue with implementing **Search and Filter Functionality** or move to another feature of your choice. Let me know how you'd like to proceedLet's move on to the next feature: **Real-Time Notifications** with **Push Notifications** integration.
+
+We'll add **Socket.io** for in-app notifications and integrate **Firebase Cloud Messaging (FCM)** for push notifications to provide a complete real-time notification system for your admin dashboard.
+
+### 1. **Socket.io for Real-Time In-App Notifications**
+
+**Steps:**
+- Set up **Socket.io** for sending and receiving notifications in real-time.
+- Display notifications in the admin dashboard as soon as events happen, like new orders or low stock alerts.
+
+#### **Backend (Socket.io) Configuration:**
+
+We’ve already initialized **Socket.io** in the previous step. Let’s build upon that with real-time notifications for events like new orders.
+
+#### Modify **Socket.io** in `app.js`:
+
+```javascript
+// app.js (Continuing from previous)
+
+```
+
+#### **Front-End JavaScript**:
+
+To listen for real-time notifications on the front end, we’ll use **Socket.io-client**. Make sure you include the Socket.io library in your front-end code.
+
+```html
+<!-- Include Socket.io in your admin dashboard -->
+
+<script>
+    
+</script>
+```
+
+Now, whenever an event occurs (e.g., new order, low stock), notifications will be pushed to the admin panel in real-time.
+
+### 2. **Push Notifications with Firebase Cloud Messaging (FCM)**
+
+To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)** for web push notifications that work outside the application.
+
+#### **Setting up Firebase Cloud Messaging (FCM)**:
+
+1. **Create a Firebase Project**:
+   - Go to the [Firebase Console](https://console.firebase.google.com/).
+   - Create a new project.
+
+2. **Add Firebase to Your Web App**:
+   - In your Firebase project, go to **Project Settings**.
+   - Under the **General** tab, scroll to the **Your apps** section and click **Web** to register your web app.
+   - Copy your **Firebase SDK Config**.
+
+3. **Install Firebase SDK**:
+   - Install the Firebase SDK in your project:
+   ```bash
+   npm install firebase
+   ```
+
+4. **Add Firebase Config in the Front-End**:
+
+   ```html
+   <!-- Include Firebase SDK -->
+   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+   
+   <script>
+       // Firebase configuration
+       const firebaseConfig = {
+           apiKey: "YOUR_API_KEY",
+           authDomain: "YOUR_AUTH_DOMAIN",
+           projectId: "YOUR_PROJECT_ID",
+           storageBucket: "YOUR_STORAGE_BUCKET",
+           messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+           appId: "YOUR_APP_ID"
+       };
+
+       // Initialize Firebase
+       const app = firebase.initializeApp(firebaseConfig);
+       const messaging = firebase.messaging();
+
+       // Get registration token for push notifications
+       messaging.getToken({ vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
+           if (currentToken) {
+               console.log('Token:', currentToken);
+               // Send token to server to subscribe for push notifications
+           } else {
+               console.log('No registration token available. Request permission to generate one.');
+           }
+       }).catch((err) => {
+           console.log('An error occurred while retrieving token.', err);
+       });
+
+       // Listen for incoming messages
+       messaging.onMessage((payload) => {
+           console.log('Message received. ', payload);
+           // Display push notification
+           alert(`New Notification: ${payload.notification.title}`);
+       });
+   </script>
+   ```
+
+5. **Backend Integration with Firebase FCM**:
+   You can trigger push notifications from your server-side application whenever significant events occur.
+
+   Use the **Firebase Admin SDK** to send push notifications from your back-end:
+
+   ```bash
+   npm install firebase-admin
+   ```
+
+   Create a Firebase admin instance:
+
+   ```javascript
+   // config/firebase.js
+   const admin = require('firebase-admin');
+   const serviceAccount = require('./path/to/your-firebase-service-account.json');
+
+   admin.initializeApp({
+       credential: admin.credential.cert(serviceAccount),
+       databaseURL: "https://your-project-id.firebaseio.com"
+   });
+
+   module.exports = admin;
+   ```
+
+#### **Send Push Notifications from Backend**:
+
+Whenever an important event occurs (like a new order), you can trigger a push notification to all subscribed users.
+
+```javascript
+// Send push notification for new order
+const sendPushNotification = async (token, message) => {
+    const payload = {
+        notification: {
+            title: 'New Order',
+            body: `Order #${message.orderId} has been placed.`,
+        }
+    };
+
+    try {
+        await admin.messaging().sendToDevice(token, payload);
+        console.log('Push notification sent');
+    } catch (error) {
+        console.error('Error sending push notification:', error);
+    }
+};
+
+// Trigger when new order event occurs
+socket.on('newOrder', (orderData) => {
+    const message = {
+        orderId: orderData.orderId
+    };
+    // Send notification to the user's device token
+    sendPushNotification(userDeviceToken, message);
+});
+```
+
+### 3. **Push Notification Handling on the Front-End**
+
+On receiving a push notification, users will see the notification as a browser pop-up even if they aren’t actively on the site.
+
+```javascript
+// Handle incoming message
+messaging.onMessage((payload) => {
+    console.log('Message received. ', payload);
+    // Display push notification
+    const notificationOptions = {
+        body: payload.notification.body,
+        icon: '/icon.png'
+    };
+
+    new Notification(payload.notification.title, notificationOptions);
+});
+```
+
+### Summary:
+- **Socket.io** allows for in-app real-time notifications for events like new orders or stock updates.
+- **Firebase Cloud Messaging** adds push notification functionality, which can notify users even when they are not actively using the admin panel.
+  
+With these notification systems, your admin panel will be capable of sending both real-time in-app notifications and push notifications for important events. Next steps could involve **customizing notification content**, handling **read/unread states**, and adding **notifications history**.
+
+Let me know if you would like to move forward with additional features or modifications!!### **4. Search and Filter Functionality**
+
+This feature will enhance user experience by allowing admins to search and filter through products, users, and orders based on multiple criteria (e.g., category, date range, order status). We will also add **auto-suggestion/autocomplete** functionality to provide quick search results.
+
+#### **HTML Structure for the Search and Filter:**
+
+We will create a search bar and filter section within the admin dashboard.
+Here is an updated version of the `App.js` file that includes rendering static files:
+```
+jsx
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Header from './Header';
+import Navigation from './Navigation';
+import Footer from './Footer';
+import ProductCard from './ProductCard';
+import ProductList from './ProductList';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import Dashboard from './Dashboard';
+import UserProfile from './UserProfile';
+import ProductDetail from './ProductDetail';
+import ShoppingCart from './ShoppingCart';
+import CheckoutForm from './CheckoutForm';
+import OrderSummary from './OrderSummary';
+import ErrorPage from './ErrorPage';
+import { useAuth } from './auth';
+
+function App() {
+const [products, setProducts] = useState([]);
+const [cart, setCart] = useState([]);
+const [user, setUser] = useState(null);
+const [error, setError] = useState(null);
+const auth = useAuth();
+
+useEffect(() => {
+// Fetch products from API
+fetch('/api/products')
+.then(response => response.json())
+.then(data => setProducts(data));
+}, []);
+
+// ...
+
+return (
+<BrowserRouter>
+  <Header />
+  <Navigation />
+  <Switch>
+    <Route path="/" exact>
+      {user ? (
+      <Redirect to="/dashboard" />
+      ) : (
+      <LoginForm onLogin={handleLogin} />
+      )}
+    </Route>
+    <Route path="/dashboard">
+      {user ? (
+      <Dashboard>
+        <ProductList products={products} onAddToCart={handleAddToCart} />
+        <ShoppingCart cart={cart} onRemoveFromCart={handleRemoveFromCart} />
+        <CheckoutForm onCheckout={handleCheckout} />
+      </Dashboard>
+      ) : (
+      <Redirect to="/" />
+      )}
+    </Route>
+    <Route path="/products/:id">
+      <ProductDetail />
+    </Route>
+    <Route path="/register">
+      <RegisterForm onRegister={handleRegister} />
+    </Route>
+    <Route path="/profile">
+      {user ? (
+      <UserProfile />
+      ) : (
+      <Redirect to="/" />
+      )}
+    </Route>
+    <Route path="/order-summary">
+      {user ? (
+      <OrderSummary />
+      ) : (
+      <Redirect to="/" />
+      )}
+    </Route>
+    <Route path="/static/:filename">
+      <StaticFile />
+    </Route>
+    <Route path="*">
+      <ErrorPage error="Page not found" />
+    </Route>
+  </Switch>
+  <Footer />
+</BrowserRouter>
+);
+}
+
+const StaticFile = () => {
+const { filename } = useParams();
+const [file, setFile] = useState(null);
+
+useEffect(() => {
+fetch(`/static/${filename}`)
+.then(response => response.blob())
+.then(blob => setFile(blob));
+}, [filename]);
+
+return file ? (
+<div>
+  <h1>Static File: {filename}</h1>
+  <object data={URL.createObjectURL(file)} type="application/pdf" />
+</div>
+) : (
+<div>Loading...</div>
+);
+};
+
+export default App;
+```
+This updated version includes a new route for static files, which uses the `StaticFile` component to render the file. The `StaticFile` component fetches the file from the server and displays it using an `object` tag.
+
+Please create the `App.js` file with this code, and then I'll provide the code for the next file, `ProductCard.js`.
+```html
+```
+
+#### **JavaScript for Search and Auto-Suggestion:**
+
+Here, we’ll implement search functionality with auto-suggestions that dynamically fetch matching results from the back-end as the user types.
+
+```javascript
+
+```
+
+#### **JavaScript for Applying Filters:**
+
+We will now handle filtering based on the options selected (category, date range, and status).
+
+```javascript
+
+
+### 5. **Auto-Suggestion/Autocomplete Feature:**
+
+The auto-suggestion feature improves the search experience by showing suggestions as users type. It also enables faster search for matching results.
+
+```javascript
+// Auto-suggest function already implemented above
+```
+
+### Summary:
+- **Search Functionality:** Search through products, orders, and users using a search bar.
+- **Auto-Suggestions:** Provide real-time suggestions as users type in the search bar.
+- **Filter Options:** Filter search results by category, date range, and order status.
+  
+With these implementations, the search and filter functionality is now complete.
+
+Would you like to move on to the next feature or further improve this section?Great! Now that we have the login modal in place, we can proceed with the **AJAX integration** for handling login requests without refreshing the page. We’ll implement the functionality to send the form data to the server and handle responses.
 
 Here’s a step-by-step guide to integrate **AJAX-based login** and session handling. 
 

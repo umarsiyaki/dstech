@@ -1,142 +1,4 @@
-Let's move on to the next feature: **Real-Time Notifications** with **Push Notifications** integration.
 
-We'll add **Socket.io** for in-app notifications and integrate **Firebase Cloud Messaging (FCM)** for push notifications to provide a complete real-time notification system for your admin dashboard.
-
-### 1. **Socket.io for Real-Time In-App Notifications**
-
-**Steps:**
-- Set up **Socket.io** for sending and receiving notifications in real-time.
-- Display notifications in the admin dashboard as soon as events happen, like new orders or low stock alerts.
-
-#### **Backend (Socket.io) Configuration:**
-
-We’ve already initialized **Socket.io** in the previous step. Let’s build upon that with real-time notifications for events like new orders.
-
-#### Modify **Socket.io** in `app.js`:
-
-```javascript
-// app.js (Continuing from previous)
-
-```
-
-#### **Front-End JavaScript**:
-
-To listen for real-time notifications on the front end, we’ll use **Socket.io-client**. Make sure you include the Socket.io library in your front-end code.
-
-```html
-<!-- Include Socket.io in your admin dashboard -->
-```
-
-Now, whenever an event occurs (e.g., new order, low stock), notifications will be pushed to the admin panel in real-time.
-
-### 2. **Push Notifications with Firebase Cloud Messaging (FCM)**
-
-To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)** for web push notifications that work outside the application.
-
-#### **Setting up Firebase Cloud Messaging (FCM)**:
-
-1. **Create a Firebase Project**:
-   - Go to the [Firebase Console]().
-   - Create a new project.
-
-2. **Add Firebase to Your Web App**:
-   - In your Firebase project, go to **Project Settings**.
-   - Under the **General** tab, scroll to the **Your apps** section and click **Web** to register your web app.
-   - Copy your **Firebase SDK Config**.
-
-3. **Install Firebase SDK**:
-   - Install the Firebase SDK in your project:
-   ```bash
-   npm install firebase
-   ```
-
-4. **Add Firebase Config in the Front-End**:
-
-   ```html
-
-   ```
-
-5. **Backend Integration with Firebase FCM**:
-   You can trigger push notifications from your server-side application whenever significant events occur.
-
-   Use the **Firebase Admin SDK** to send push notifications from your back-end:
-
-   ```bash
-   npm install firebase-admin
-   ```
-
-   Create a Firebase admin instance:
-
-   ```javascript
-
-```
-
-### 3. **Push Notification Handling on the Front-End**
-
-On receiving a push notification, users will see the notification as a browser pop-up even if they aren’t actively on the site.
-
-```javascript
-```
-
-### Summary:
-- **Socket.io** allows for in-app real-time notifications for events like new orders or stock updates.
-- **Firebase Cloud Messaging** adds push notification functionality, which can notify users even when they are not actively using the admin panel.
-  
-With these notification systems, your admin panel will be capable of sending both real-time in-app notifications and push notifications for important events. Next steps could involve **customizing notification content**, handling **read/unread states**, and adding **notifications history**.
-
-Let me know if you would like to move forward with additional features or modifications!Next, we'll focus on **Analytics and Reporting** for your admin dashboard.
-
-This feature will allow you to visualize data such as revenue, product sales, and user activity. We’ll use **Chart.js** for graphical representations, as well as log admin activity and display reports.
-
-### 1. **Revenue Reports with Chart.js**
-
-We'll implement dynamic charts to visualize data trends, such as revenue over time, product sales, and order statistics.
-
-#### **Install Chart.js:**
-
-Include **Chart.js** in your project:
-
-```bash
-npm install chart.js
-```
-
-Alternatively, you can add it via CDN in the front-end:
-
-```html
-
-```
-
-#### **HTML Structure for the Reports Section:**
-
-Add a section to your admin dashboard for displaying analytics and reports.
-
-```html
-
-```
-
-#### **JavaScript to Generate the Charts (Using Chart.js):**
-
-```javascript
-
-```
-
-### 2. **Admin Activity Tracking**
-
-We’ll implement a **logging system** that tracks admin activities (e.g., adding a product, managing users) and displays it in the activity log.
-
-#### **Backend (Node.js/Express) to Log Admin Actions:**
-
-Modify your back-end to log admin activities into the database (MongoDB).
-
-```javascript
-// 
-```
-
-#### **Frontend to Display the Activity Log:**
-
-Fetch the activity log from your back-end and display it in the activity log table.
-
-```javascript
 // Fetch and display activity log
 fetch('/api/activityLog')
     .then(response => response.json())
@@ -155,11 +17,7 @@ fetch('/api/activityLog')
     });
 
 
-//#### **Backend Route to Fetch 
-app.get('/api/activityLog', async (req, res) => {
-    const logs = await ActivityLog.find().sort({ timestamp: -1 });  // Fetch logs in descending order
-    res.json(logs);
-});
+
 ```
 
 ### 3. **Additional Analytics and Reports Features:**
@@ -591,6 +449,8 @@ Here’s a step-by-step guide to integrate **AJAX-based login** and session hand
 
 <!-- AJAX Script to Handle Form Submission -->
 <script>
+
+
     // Get the modal elements
     const modal = document.getElementById("loginModal");
     const btn = document.getElementById("openLoginModal");
@@ -723,389 +583,126 @@ To enhance **safety** and ensure a **robust** system in your code, you should im
 
    **Example: Add Product Form Validation**
    ```javascript
-   document.getElementById('add-product-form').addEventListener('submit', function(e) {
-       e.preventDefault();
-       
-       // Validate form data before sending
-       const productName = document.getElementById('product-name').value;
-       const productPrice = document.getElementById('product-price').value;
-
-       if (!productName || productName.trim() === "") {
-           alert('Product name is required.');
-           return;
-       }
-
-       if (!productPrice || isNaN(productPrice) || productPrice <= 0) {
-           alert('Valid product price is required.');
-           return;
-       }
-
-       // Proceed with form submission if valid
-       const formData = new FormData(this);
-
-       fetch('/api/products', {
-           method: 'POST',
-           body: formData
-       })
-       .then(response => {
-           if (!response.ok) {
-               throw new Error('Network response was not ok');
-           }
-           return response.json();
-       })
-       .then(data => {
-           alert('Product added successfully!');
-           closeModal('product-modal');
-       })
-       .catch(error => {
-           alert('Error adding product: ' + error.message);
-       });
-   });
-   ```
-
-   **Key Safety Measures:**
-   - **Client-side validation:** Ensure mandatory fields are filled in.
-   - **Error handling:** If the server response is not OK, show a meaningful error message.
-   - **Avoid invalid submission:** Avoid sending the form if validation fails.
-
-### 4. **Network Error Handling for Fetch**
-   For robustness, add comprehensive error handling to all `fetch` calls to deal with issues like network failure, bad requests, or server errors.
-
-   ```javascript
-   async function fetchData(url, options = {}) {
-       try {
-           const response = await fetch(url, options);
-           if (!response.ok) {
-               throw new Error(`HTTP error! Status: ${response.status}`);
-           }
-           return await response.json();
-       } catch (error) {
-           console.error('Fetch error:', error);
-           alert('There was an issue fetching data: ' + error.message);
-       }
-   }
-
-   // Example usage for loading orders
-   document.addEventListener('DOMContentLoaded', function() {
-       fetchData('/api/orders')
-           .then(data => populateOrderTable(data))
-           .catch(error => console.log(error));
-   });
-
-
-   ```
-
-   **Key Safety Measures:**
-   - **Error handling for fetch:** If the response is not `ok` (e.g., 404 or 500 error), an appropriate message is shown.
-   - **General error handling:** Catches any network errors and provides feedback to the user.
-
-### 5. **Canvas Handling with `getContext()`**
-   Make sure the `getContext` method is only called if the canvas element exists to prevent errors.
-
-   ```javascript
-   const canvas = document.getElementById('revenueChart');
-   if (canvas) {
-       const ctx = canvas.getContext('2d');
-       if (ctx) {
-           new Chart(ctx, {
-               // Chart configuration
-           });
-       } else {
-           console.error('Canvas context not available');
-       }
-   } else {
-       console.error('Revenue chart canvas not found');
-   }
-   ```
-
-   **Key Safety Measures:**
-   - **Null-checks:** Ensure the canvas element and its context exist before trying to use them.
-
-### 6. **Improving the Calculator Logic**
-   Add checks to ensure valid input for calculations and prevent errors such as dividing by zero or invalid inputs.
-
-   ```javascript
 
 
 
-Great! Now that we have the login modal in place, we can proceed with the **AJAX integration** for handling login requests without refreshing the page. We’ll implement the functionality to send the form data to the server and handle responses.
 
-Here’s a step-by-step guide to integrate **AJAX-based login** and session handling. 
 
-### Updated Code with AJAX for Login
 
-```html
-<!-- Modal Trigger (Example: Can be a button on the admin dashboard page) -->
-<button id="openLoginModal">Login</button>
 
-<!-- Login Modal Structure -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
 
-        <div class="login-container">
-            <h2>Login</h2>
 
-            <!-- Username and Password -->
-            <div class="login-option">
-                <h3>Username & Password</h3>
-                <form id="login-username-form">
-                    <input type="text" name="username" id="username" placeholder="Username" required>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+   Certainly! For a real-world database, especially for an e-commerce project, you'll need to address various practical scenarios and data management needs. Here’s a refined set of SQL queries and schema adjustments that cater to real-life use cases:
 
-            <!-- Phone Number and Password -->
-            <div class="login-option">
-                <h3>Phone Number & Password</h3>
-                <form id="login-phone-form">
-                    <input type="text" name="phone" id="phone" placeholder="Phone Number" required>
-                    <input type="password" name="password" id="phone-password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+### **Schema Enhancements**
 
-            <!-- Email and Password -->
-            <div class="login-option">
-                <h3>Email & Password</h3>
-                <form id="login-email-form">
-                    <input type="email" name="email" id="email" placeholder="Email" required>
-                    <input type="password" name="password" id="email-password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+**1. Create Archive Tables:**
+Ensure archive tables exist before moving data from main tables.
 
-            <!-- Google Login -->
-            <div class="login-option">
-                <h3>Login with Google</h3>
-                <button id="google-login-btn">Login with Google</button>
-            </div>
-
-            <!-- Facebook Login -->
-            <div class="login-option">
-                <h3>Login with Facebook</h3>
-                <button id="facebook-login-btn">Login with Facebook</button>
-            </div>
-
-            <p><a href="retrieve.html">Forgot your password?</a></p>
-            <p>Don't have an account? <a href="register.html">Register here</a></p>
-        </div>
-    </div>
-</div>
-
-<!-- Styles for the Modal -->
-<style>
-    /* Existing styles (same as before) */
-</style>
-
-<!-- AJAX Script to Handle Form Submission -->
-<script>
-    // Get the modal elements
-    const modal = document.getElementById("loginModal");
-    const btn = document.getElementById("openLoginModal");
-    const span = document.getElementsByClassName("close-modal")[0];
-
-    // Open modal on button click
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // Close modal when clicking the "X"
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Close modal when clicking outside the modal
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    // Handle AJAX Login
-    document.getElementById("login-username-form").addEventListener("submit", function(e) {
-        e.preventDefault();  // Prevent the default form submission
-
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-
-        // Send login request to server
-        fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Handle successful login (e.g., redirect, close modal, etc.)
-                alert("Login successful");
-                window.location.href = "/admin-dashboard";  // Redirect to dashboard
-            } else {
-                // Handle failed login
-                alert("Login failed: " + data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error during login:", error);
-        });
-    });
-
-    // Similar AJAX form handlers can be added for phone and email login forms
-</script>
+```sql
+CREATE TABLE IF NOT EXISTS orders_archive (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    status TEXT CHECK(status IN ('pending', 'confirmed', 'canceled')) DEFAULT 'pending',
+    shipping_address TEXT,
+    payment_method TEXT CHECK(payment_method IN ('credit_card', 'paypal', 'bank_transfer')),
+    payment_status TEXT CHECK(payment_status IN ('pending', 'paid', 'failed')) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
 ```
 
-### Steps Explained:
-1. **AJAX Request for Login**:
-   - When the user submits the login form, we prevent the default form submission (`e.preventDefault()`).
-   - We collect the username and password, then send them via a `POST` request to a `/api/login` endpoint.
-   - The server should handle authentication and return a success or failure response.
+### **Queries**
 
-2. **Handling Server Response**:
-   - If the login is successful, we redirect the user to the admin dashboard using `window.location.href = "/admin-dashboard"`.
-   - If login fails, we display an alert with the failure message.
-
-3. **Modular Form Handling**:
-   - The code is structured so that similar AJAX handlers can be added for phone number and email login by adding event listeners to those forms.
-
-### Backend Side (Server API Endpoint):
-For the AJAX to work correctly, you need a corresponding **server-side** endpoint (e.g., `/api/login`) that authenticates the user. Here's a basic idea of how the backend might look in **Node.js** (assuming you're using it):
-
-```javascript
-const express = require('express');
-const app = express();
-
-
-app.listen(3000, () => console.log('Server running on port 3000'));
+**1. Update User Email Domain**
+```sql
+-- This query updates all user emails from an old domain to a new domain.
+UPDATE users
+SET email = REPLACE(email, '@old-domain.com', '@new-domain.com')
+WHERE email LIKE '%@old-domain.com';
 ```
 
-### Next Step:
-1. **Session Management**: Once the login succeeds, we need to handle user sessions using cookies or tokens (e.g., JWT) to maintain the user's login state across pages.
-2. **Role-based Access Control (RBAC)**: After successful login, you can implement RBAC logic to ensure users only see sections of the admin panel they are authorized to access based on their role.
-
-Let me know if you'd like to proceed with session management and RBAC!
-
-
-
-
-
-To build an advanced program that meets your server requirements with high-level features such as authentication, role-based access control (RBAC), session management, and real-time capabilities, we'll implement a **Node.js** backend with **Express.js**, **MongoDB**, and **JWT-based authentication**. The program will be designed to integrate seamlessly with the front-end, handle real-time data, and support future scalability.
-
-Below is a comprehensive guide and code snippets to build this server program:
-
-### High-Level Features:
-1. **User Authentication (JWT)** – Secure user login with JSON Web Tokens.
-2. **Role-Based Access Control (RBAC)** – Restrict access based on user roles (e.g., Admin, Manager, Cashier).
-3. **Session Management** – Ensure secure and persistent sessions using JWT or sessions.
-4. **Real-Time Notifications** – Push notifications using **Socket.io**.
-5. **Secure Routes** – Protect sensitive routes with role-based middleware.
-6. **RESTful API** – Build clean and modular RESTful API endpoints for future scalability.
-
----
-
-### 1. **Project Structure**
-```
-myapp/
-│
-├── config/
-│   └── db.js                # Database connection
-├── controllers/
-│   └── authController.js     # Auth and session management
-│   └── userController.js     # User CRUD operations
-├── middlewares/
-│   └── authMiddleware.js     # JWT and role verification
-├── models/
-│   └── userModel.js          # User schema and model
-├── routes/
-│   └── authRoutes.js         # Auth routes
-│   └── userRoutes.js         # User routes (Admin)
-├── app.js                    # Main Express server
-└── package.json
+**2. Deactivate Inactive Users**
+```sql
+-- This query sets the status of users who haven't logged in for over a year to 'inactive'.
+UPDATE users
+SET status = 'inactive'
+WHERE last_login < datetime('now', '-1 year')
+AND status = 'active';
 ```
 
-### 2. **Backend Dependencies**
-You'll need the following npm packages:
-```bash
-npm install express mongoose bcryptjs jsonwebtoken cookie-parser socket.io cors dotenv
+**3. Clear Old Notifications**
+```sql
+-- This query deletes notifications that are older than 6 months.
+DELETE FROM notifications
+WHERE created_at < datetime('now', '-6 months');
 ```
 
----
+**4. Archive Old Orders**
+```sql
+-- Move orders older than 1 year to an archive table.
+INSERT INTO orders_archive (id, user_id, total, status, shipping_address, payment_method, payment_status, created_at)
+SELECT id, user_id, total, status, shipping_address, payment_method, payment_status, created_at
+FROM orders
+WHERE created_at < datetime('now', '-1 year');
 
-### 3. **Database Configuration (MongoDB)**
-
-```javascript
-// config/db.js
+-- Delete orders from the main table after archiving.
+DELETE FROM orders
+WHERE created_at < datetime('now', '-1 year');
 ```
 
-### 4. **User Model**
-
-```javascript
+**5. Update Product Prices Based on Discount**
+```sql
+-- This query applies a discount to all products in a certain category.
+UPDATE products
+SET price = price * (1 - (discount / 100.0))
+WHERE category = 'Drinks'
+AND discount IS NOT NULL
+AND discount > 0;
 ```
 
-### 5. **JWT Authentication (Login, Register)**
-
-#### Auth Controller
-```javascript
+**6. Reset User Passwords**
+```sql
+-- This query sets a default password for all users. 
+-- Replace 'default_password_hash' with a properly hashed password.
+UPDATE users
+SET password = 'default_password_hash' -- Make sure this is a secure hash
+WHERE password IS NOT NULL;
 ```
 
-#### Auth Routes
-```javascript
+-- This query deletes promotions that have expired.
+DELETE FROM promotions
+WHERE end_date < datetime('now');
+
+-- This query deletes cart items where the referenced product no longer exists.
+DELETE FROM cart
+WHERE product_id NOT IN (SELECT id FROM products);
+
+-- Insert a log entry for a user activity.
+INSERT INTO activities (user_id, activity_type, description, timestamp)
+VALUES (1, 'login', 'User logged in successfully.', datetime('now'));
+
+-- Increase the stock of all products in a certain category.
+UPDATE products
+SET quantity = quantity + 10
+WHERE category = 'Energy Drinks';
+
+
+--straints and indices to ensure data integrity and improve query performance.
+
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
+CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
+
+BEGIN TRANSACTION;
+
+-- Perform multiple operations here
+
+COMMIT;
+
+--  Backup a table
+CREATE TABLE backup_orders AS SELECT * FROM orders;
 ```
 
----
-
-### 6. **Role-Based Access Control (RBAC)**
-
-#### Auth Middleware
-```javascript
-```
-
----
-
-### 7. **User Routes (Protected & Role-Based)**
-
-```javascript
-// routes/userRoutes.js
-const express = require('express');
-module.exports = router;
-```
-
-#### User Controller
-```javascript
-```
-
----
-
-### 8. **Real-Time Notifications (Socket.io)**
-
-#### Basic Socket Setup for Notifications
-```javascript
-// app.js
-const express = require('express');
-
-```
-
----
-
-### 9. **Advanced Features**
-
-1. **Session Management** – We use JWT, which doesn't require server-side sessions.
-2. **Real-Time Notifications** – Using **Socket.io** for notifications. The server can push real-time updates to users (e.g., new orders, messages).
-3. **Analytics and Reporting** – You can integrate tools like **Chart.js** to visualize data in the admin dashboard by building APIs that return sales and user
-
- data.
-4. **Error Handling** – Ensure proper validation and error handling in all routes.
-
----
-
-### 10. **Testing and Deployment**
-- **Testing** – Use **Postman** or **Insomnia** to test the RESTful APIs.
-- **Deployment** – Deploy to **Heroku** or **AWS**, and use **MongoDB Atlas** for the cloud-based database.
-
-This program sets a foundation for building out the admin panel's back-end and connecting it to the front-end dynamically via AJAX. Let me know if you need additional enhancements or customization.
+This setup will help manage your e-commerce platform's database more effectively by addressing real-life requirements such as data archiving, user management, and inventory control. Adjustments might be needed based on specific use cases and business logic.

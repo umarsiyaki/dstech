@@ -60,4 +60,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 reviewsContainer.appendChild(reviewCard);
             });
         });
+        const canvas = document.getElementById('revenueChart');
+   if (canvas) {
+       const ctx = canvas.getContext('2d');
+       if (ctx) {
+           new Chart(ctx, {
+               // Chart configuration
+           });
+       } else {
+           console.error('Canvas context not available');
+       }
+   } else {
+       console.error('Revenue chart canvas not found');
+   }
 });

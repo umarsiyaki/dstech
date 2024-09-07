@@ -82,3 +82,44 @@ module.exports = mongoose.model('User', UserSchema);
 
     res.json({ token });
   };
+  // models/userModel.js (using Sequelize as ORM)
+const { DataTypes } = require('sequelize');
+const db = require('../db/database.sql');
+
+const User = db.define('User', {
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    role: {
+        type: DataTypes.ENUM('admin', 'user', 'cashier'),
+        defaultValue: 'user',
+    },
+    isActivated: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    activationToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    resetPasswordToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    resetPasswordExpires: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+});
+
+module.exports = User;

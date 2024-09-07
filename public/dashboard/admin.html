@@ -274,7 +274,153 @@
         </div>
     </div>
 </div>
+<div class="data-import-export-container">
+    <h2>Data Import/Export</h2>
 
+    <!-- Export Section -->
+    <div class="export-section">
+        <h3>Export Data</h3>
+        <button id="exportCSV">Export as CSV</button>
+        <button id="exportExcel">Export as Excel</button>
+    </div>
+
+    <!-- Import Section -->
+    <div class="import-section">
+        <h3>Import Data</h3>
+        <input type="file" id="fileInput" accept=".csv, .xlsx">
+        <button onclick="importData()">Import Data</button>
+    </div>
+</div>
+
+<div class="modal" id="dataImportModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Import Data</h2>
+        <form id="importDataForm" enctype="multipart/form-data">
+            <label for="dataType">Select Data Type:</label>
+            <select id="importDataType" name="importDataType">
+                <option value="products">Products</option>
+                <option value="orders">Orders</option>
+                <option value="users">Users</option>
+            </select>
+            
+            <label for="uploadFile">Upload File:</label>
+            <input type="file" id="uploadFile" name="uploadFile" accept=".csv, .xlsx" required>
+            
+            <button type="submit">Import</button>
+        </form>
+    </div>
+</div>
+
+<!-- Data Import/Export Section -->
+<div class="modal" id="dataImportExportModal">
+    <div class="modal-content">
+      <h2>Data Import/Export</h2>
+  
+      <!-- Export Section -->
+      <div class="export-section">
+        <h3>Export Data</h3>
+        <form id="exportDataForm">
+          <label for="exportType">Select Data Type to Export:</label>
+          <select id="exportType">
+            <option value="products">Products</option>
+            <option value="orders">Orders</option>
+            <option value="users">Users</option>
+          </select>
+          <button type="submit">Export as CSV</button>
+          <button type="submit">Export as Excel</button>
+        </form>
+      </div>
+  
+      <!-- Import Section -->
+      <div class="import-section">
+        <h3>Import Data</h3>
+        <form id="importDataForm" enctype="multipart/form-data">
+          <label for="importFile">Choose CSV/Excel file:</label>
+          <input type="file" id="importFile" accept=".csv, .xlsx" required>
+          <button type="submit">Import Data</button>
+        </form>
+      </div>
+  
+      <button class="close-modal" id="closeImportExport">Close</button>
+    </div>
+  </div>
+  
+  <!-- Audit Logs Section -->
+  <div class="modal" id="auditLogsModal">
+    <div class="modal-content">
+      <h2>Audit Logs</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Admin</th>
+            <th>Action</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="auditLogsTable">
+          <!-- Dynamic rows will populate this table -->
+        </tbody>
+      </table>
+      <button class="close-modal" id="closeAuditLogs">Close</button>
+    </div>
+  </div>
+  
+  <!-- Dynamic Dashboard Widgets Section -->
+  <div class="dashboard-widget-container">
+    <div class="widget">
+      <h3>Sales Chart</h3>
+      <canvas id="salesChart"></canvas>
+      <button class="remove-widget">Remove</button>
+    </div>
+    <div class="widget">
+      <h3>Recent Orders</h3>
+      <ul id="recentOrdersList"></ul>
+      <button class="remove-widget">Remove</button>
+    </div>
+    <div class="widget">
+      <h3>Task List</h3>
+      <ul id="taskList">
+        <li><input type="checkbox"> Update Product Prices</li>
+        <li><input type="checkbox"> Check Inventory</li>
+      </ul>
+      <button class="remove-widget">Remove</button>
+    </div>
+  </div>
+  <button id="addWidgetButton">Add Widget</button>
+  
+  <!-- Inventory Management Section -->
+  <div class="modal" id="inventoryManagementModal">
+    <div class="modal-content">
+      <h2>Inventory Management</h2>
+  
+      <!-- Low Stock Alerts -->
+      <div class="low-stock-section">
+        <h3>Low Stock Alerts</h3>
+        <ul id="lowStockList"></ul>
+      </div>
+  
+      <!-- Stock History -->
+      <div class="stock-history-section">
+        <h3>Stock History</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity Changed</th>
+              <th>Admin</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="stockHistoryTable">
+            <!-- Stock changes will be dynamically loaded -->
+          </tbody>
+        </table>
+      </div>
+  
+      <button class="close-modal" id="closeInventoryManagement">Close</button>
+    </div>
+  </div>
     <!-- Orders Table -->
     <div class="table-container">
         <h2>Orders</h2>
@@ -293,6 +439,8 @@
             </tbody>
         </table>
     </div>
+
+    
 <!-- Main Content Area -->
 <div class="main-content">
     <div class="dashboard">

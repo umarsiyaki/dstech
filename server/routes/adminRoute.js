@@ -2,129 +2,140 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// Log activity
+// Utility function for logging activities
 const logActivity = (userId, activityType, description) => {
     db.run('INSERT INTO activities (user_id, activity_type, description) VALUES (?, ?, ?)', [userId, activityType, description]);
 };
 
-// Add cashier
+// Middleware for handling database errors
+const handleDBError = (res, message) => (err) => {
+    if (err) {
+        return res.status(500).json({ message });
+    }
+};
+
+// Route to add a new cashier
 router.post('/cashiers', (req, res) => {
     const { username, password, email } = req.body;
-    db.run('INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)', [username, password, email, 'cashier'], function(err) {
-        if (err) {
-            return res.status(500).json({ message: 'Error adding cashier' });
-        }
+    const query = 'INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)';
+    
+    db.run(query, [username, password, email, 'cashier'], function (err) {
+        if (err) return res.status(500).json({ message: 'Error adding cashier' });
         logActivity(this.lastID, 'cashier_add', `Cashier ${username} added`);
         res.status(201).json({ id: this.lastID });
     });
 });
 
-// Add/update product
+// Route to add a new product
 router.post('/products', (req, res) => {
     const { name, price, size, category, stock, rating, image, description, brand, discount } = req.body;
-    db.run('INSERT INTO products (name, price, size, category, stock, rating, image, description, brand, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-        [name, price, size, category, stock, rating, image, description, brand, discount], 
-        function(err) {
-            if (err) {
-                return res.status(500).json({ message: 'Error adding product' });
-            }
-            res.status(201).json({ id: this.lastID });
-        }
-    );
+    const query = `
+        INSERT INTO products (name, price, size, category, stock, rating, image, description, brand, discount) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    db.run(query, [name, price, size, category, stock, rating, image, description, brand, discount], function (err) {
+        handleDBError(res, 'Error adding product')(err);
+        res.status(201).json({ id: this.lastID });
+    });
 });
 
-// Update product
+// Route to update an existing product
 router.put('/products/:id', (req, res) => {
     const { name, price, size, category, stock, rating, image, description, brand, discount } = req.body;
     const productId = req.params.id;
-    db.run('UPDATE products SET name = ?, price = ?, size = ?, category = ?, stock = ?, rating = ?, image = ?, description = ?, brand = ?, discount = ? WHERE id = ?', 
-        [name, price, size, category, stock, rating, image, description, brand, discount, productId], 
-        (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Error updating product' });
-            }
-            logActivity(req.session.userId, 'product_update', `Product ${name} updated`);
-            res.json({ message: 'Product updated successfully' });
-        }
-    );
+    const query = `
+        UPDATE products 
+        SET name = ?, price = ?, size = ?, category = ?, stock = ?, rating = ?, image = ?, description = ?, brand = ?, discount = ?
+        WHERE id = ?
+    `;
+
+    db.run(query, [name, price, size, category, stock, rating, image, description, brand, discount, productId], (err) => {
+        if (err) return res.status(500).json({ message: 'Error updating product' });
+        logActivity(req.session.userId, 'product_update', `Product ${name} updated`);
+        res.json({ message: 'Product updated successfully' });
+    });
 });
 
-// Track revenue
+// Route to get all revenue records
 router.get('/revenue', (req, res) => {
     db.all('SELECT * FROM revenue', (err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error fetching revenue data' });
-        }
+        handleDBError(res, 'Error fetching revenue data')(err);
         res.json(rows);
     });
 });
 
-// Track cashier performance
+// Route to get cashier performance data
 router.get('/cashiers/performance', (req, res) => {
     db.all('SELECT * FROM cashier_performance', (err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error fetching cashier performance data' });
-        }
+        handleDBError(res, 'Error fetching cashier performance data')(err);
         res.json(rows);
     });
 });
 
-// Track orders
+// Route to get all orders
 router.get('/orders', (req, res) => {
     db.all('SELECT * FROM orders', (err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error fetching orders' });
-        }
+        handleDBError(res, 'Error fetching orders')(err);
         res.json(rows);
     });
 });
 
-// Confirm payment
+// Route to confirm payment for an order
 router.post('/orders/:id/confirm-payment', (req, res) => {
     const orderId = req.params.id;
     db.run('UPDATE orders SET payment_status = ? WHERE id = ?', ['paid', orderId], (err) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error confirming payment' });
-        }
+        if (err) return res.status(500).json({ message: 'Error confirming payment' });
         logActivity(req.session.userId, 'payment_confirm', `Payment confirmed for order ${orderId}`);
         res.json({ message: 'Payment confirmed' });
     });
 });
 
-// Cancel order
+// Route to cancel an order
 router.post('/orders/:id/cancel', (req, res) => {
     const orderId = req.params.id;
     db.run('UPDATE orders SET status = ? WHERE id = ?', ['canceled', orderId], (err) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error canceling order' });
-        }
+        if (err) return res.status(500).json({ message: 'Error canceling order' });
         logActivity(req.session.userId, 'order_cancel', `Order ${orderId} canceled`);
         res.json({ message: 'Order canceled' });
     });
 });
 
-// Print receipt
+// Route to print a receipt
 router.get('/receipts/:id/print', (req, res) => {
     const receiptId = req.params.id;
     db.get('SELECT * FROM receipts WHERE id = ?', [receiptId], (err, receipt) => {
-        if (err || !receipt) {
-            return res.status(404).json({ message: 'Receipt not found' });
-        }
+        if (err || !receipt) return res.status(404).json({ message: 'Receipt not found' });
         // Printing logic here (omitted for brevity)
         res.json({ message: 'Receipt printed' });
     });
 });
 
-// Delete receipt
+// Route to delete a receipt
 router.delete('/receipts/:id', (req, res) => {
     const receiptId = req.params.id;
     db.run('DELETE FROM receipts WHERE id = ?', [receiptId], (err) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error deleting receipt' });
-        }
+        if (err) return res.status(500).json({ message: 'Error deleting receipt' });
         logActivity(req.session.userId, 'receipt_delete', `Receipt ${receiptId} deleted`);
         res.json({ message: 'Receipt deleted' });
     });
+});
+
+// Route to export data (JSON format)
+router.get('/api/export', (req, res) => {
+    const dataToExport = [
+        { id: 1, name: 'iPhone 13', type: 'Product', price: 999 },
+        { id: 2, name: 'Order #12345', type: 'Order', total: 300 },
+        { id: 3, name: 'John Doe', type: 'User', email: 'john@example.com' }
+    ];
+    res.json(dataToExport);
+});
+
+// Route to import data (CSV or Excel)
+router.post('/api/import', (req, res) => {
+    const importedData = req.body;
+    // Process and save the imported data to the database
+    res.status(200).json({ message: 'Data imported successfully' });
 });
 
 module.exports = router;

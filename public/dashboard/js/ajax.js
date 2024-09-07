@@ -1,3 +1,43 @@
+
+document.getElementById('add-product-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validate form data before sending
+    const productName = document.getElementById('product-name').value;
+    const productPrice = document.getElementById('product-price').value;
+
+    if (!productName || productName.trim() === "") {
+        alert('Product name is required.');
+        return;
+    }
+
+    if (!productPrice || isNaN(productPrice) || productPrice <= 0) {
+        alert('Valid product price is required.');
+        return;
+    }
+
+    // Proceed with form submission if valid
+    const formData = new FormData(this);
+
+    fetch('/api/products', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('Product added successfully!');
+        closeModal('product-modal');
+    })
+    .catch(error => {
+        alert('Error adding product: ' + error.message);
+    });
+});
+
 // Calculator functionality
 document.querySelectorAll('.calculator-buttons .btn').forEach(button => {
     button.addEventListener('click', function() {

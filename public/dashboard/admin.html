@@ -31,40 +31,6 @@
    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
 
-   <script>
-     // Firebase configuration
-     const firebaseConfig = {
-       apiKey: "YOUR_API_KEY",
-       authDomain: "YOUR_AUTH_DOMAIN",
-       projectId: "YOUR_PROJECT_ID",
-       storageBucket: "YOUR_STORAGE_BUCKET",
-       messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-       appId: "YOUR_APP_ID"
-     };
-
-     // Initialize Firebase
-     const app = firebase.initializeApp(firebaseConfig);
-     const messaging = firebase.messaging();
-
-     // Get registration token for push notifications
-     messaging.getToken({ vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
-       if (currentToken) {
-         console.log('Token:', currentToken);
-         // Send token to server to subscribe for push notifications
-       } else {
-         console.log('No registration token available. Request permission to generate one.');
-       }
-     }).catch((err) => {
-       console.log('An error occurred while retrieving token.', err);
-     });
-
-     // Listen for incoming messages
-     messaging.onMessage((payload) => {
-       console.log('Message received. ', payload);
-       // Display push notification
-       alert(`New Notification: ${payload.notification.title}`);
-     });
-   </script>
 </head>
 <body>
     
@@ -79,23 +45,13 @@
                 <button class="toggle-sidebar-btn">&times;</button>
             </div>
             <nav class="sidebar-nav">
-                <ul>
-                    <ul>
-                        <li class="nav-item"><a href="#" id="product-btn"><i class="fas fa-box"></i> Products</a></li>
-                        <li class="nav-item"><a href="#" id="orders-btn"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-                        <li class="nav-item"><a href="#" id="update-inventory-btn"><i class="fas fa-warehouse"></i> Update Inventory</a></li>
-                        <li class="nav-item"><a href="#" id="calculator-btn"><i class="fas fa-calculator"></i> Calculator</a></li>
-                        <li class="nav-item"><a href="#" id="add-cashier-btn"><i class="fas fa-user-plus"></i> Add Cashier</a></li>
-                        <li class="nav-item"><a href="#" id="daily-signups-btn"><i class="fas fa-users"></i> Daily Signups</a></li>
-                        <li class="nav-item"><a href="#" id="user-management-btn"><i class="fas fa-users"></i> User Management</a></li>
-                        <li class="nav-item"><a href="#" id="inventory-management-btn"><i class="fas fa-warehouse"></i> Inventory Management</a></li>
-                        <li class="nav-item"><a href="#" id="site-customization-btn"><i class="fas fa-paint-brush"></i> Site Customization</a></li>
-                        <li class="nav-item"><a href="#" id="revenue-reporting-btn"><i class="fas fa-chart-line"></i> Revenue & Orders</a></li>
-                        <li class="nav-item"><a href="#" id="activity-tracking-btn"><i class="fas fa-user-clock"></i> Activity Tracking</a></li>
-                    </ul>
-                </ul>
-            </nav>
-        </aside>
+ <a href="#" id="open-login-modal">Open Login Modal</a>
+<a href="#" id="open-data-import-modal">Open Data Import Modal</a>
+<a href="#" id="open-data-import-export-modal">Open Data Import/Export Modal</a>
+<a href="#" id="open-audit-logs-modal">Open Audit Logs Modal</a>
+<a href="#" id="open-inventory-management-modal">Open Inventory Management Modal</a>
+<a href="#" id="open-product-modal">Open Product Modal</a>
+<a href="#" id="open-add-cashier-modal">Open Add Cashier Modal</a>
 
         <!-- Main Content -->
         <div class="main-content">
@@ -108,25 +64,26 @@
                 <div class="navbar-middle">
                     <input type="text" class="search-bar" placeholder="Search...">
                 </div>
-                <div class="navbar-right">
-                    <div class="nav-item dropdown">
-                        <button class="dropbtn">Messages <span class="badge">5</span></button>
-                        <div class="dropdown-content">
-                            <a href="#">New Message 1</a>
-                            <a href="#">New Message 2</a>
-                            <a href="#">New Message 3</a>
-                            <a href="#">View All Messages</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <button class="dropbtn">Notifications <span class="badge">8</span></button>
-                        <div class="dropdown-content">
-                            <a href="#">Notification 1</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <a href="#">View All Notifications</a>
-                        </div>
-                    </div>
+                <!-- Notifications and Messages Dropdown Menu -->
+<div class="nav-item dropdown">
+    <button class="dropbtn">Messages <span class="badge">5</span></button>
+    <div class="dropdown-content">
+      <a href="#">New Message 1</a>
+      <a href="#">New Message 2</a>
+      <a href="#">New Message 3</a>
+      <a href="#">View All Messages</a>
+    </div>
+  </div>
+  <div class="nav-item dropdown">
+    <button class="dropbtn">Notifications <span class="badge">8</span></button>
+    <div class="dropdown-content">
+      <a href="#">Notification 1</a>
+      <a href="#">Notification 2</a>
+      <a href="#">Notification 3</a>
+      <a href="#">View All Notifications</a>
+    </div>
+  </div>
+  
                     <div class="nav-item dropdown">
                         <button class="dropbtn">Profile <i class="fas fa-user-circle"></i></button>
                         <div class="dropdown-content">
@@ -156,15 +113,32 @@
 
         <!-- Category Filter -->
         <div class="filter-group">
-            <label for="categoryFilter">Category:</label>
+            <label for="vendor">vendor:</label>
             <select id="categoryFilter">
-                <option value="">All Categories</option>
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="home-appliances">Home Appliances</option>
+                <option value="">All vendor</option>
+                <option value="cocacola">cocacola</option>
+                <option value="Bigi"Bigi>Clothing</option>
+                <option value="big">Home Appliances</option>
+                <option value="maltinal">Home Appliances</option>
+                <option value="pepsi">Home Appliances</option>
+                <option value="slim">Home Appliances</option>
+                <option value="holandia">Home Appliances</option>
+                <option value="lucozade">Home Appliances</option>
             </select>
         </div>
 
+                <!-- Category Filter -->
+        <div class="filter-group">
+            <label for="category">category:</label>
+            <select id="categoryFilter">
+                <option value="">All all category</option>
+                <option value="cola">cola</option>
+                <option value="tropical">tropical</option>
+                <option value="orange">orange</option>
+                <option value="lemon">lemon</option>
+                <option value="berry">berry</option>
+            </select>
+        </div>
         <!-- Date Range Filter -->
         <div class="filter-group">
             <label for="dateStart">Start Date:</label>
@@ -669,124 +643,6 @@
     <!-- External Script Fallback -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
 
-    <script>
-        // Show and close modals
-        function showModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        document.getElementById('product-btn').addEventListener('click', function() {
-            showModal('product-modal');
-        });
-
-        document.getElementById('close-product-modal').addEventListener('click', function() {
-            closeModal('product-modal');
-        });
-
-        document.getElementById('add-cashier-btn').addEventListener('click', function() {
-            showModal('add-cashier-modal');
-        });
-
-        document.getElementById('close-add-cashier-modal').addEventListener('click', function() {
-            closeModal('add-cashier-modal');
-        });
-
-        // Add Product Form Submission with Validation
-        document.getElementById('add-product-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const productName = document.getElementById('product-name').value;
-            const productPrice = document.getElementById('product-price').value;
-
-            if (!productName.trim()) {
-                alert('Product name is required.');
-                return;
-            }
-
-            if (productPrice <= 0 || isNaN(productPrice)) {
-                alert('Valid product price is required.');
-                return;
-            }
-
-            const formData = new FormData(this);
-
-            fetch('/api/products', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to add product');
-                return response.json();
-            })
-            .then(data => {
-                alert('Product added successfully!');
-                closeModal('product-modal');
-            })
-            .catch(error => {
-                alert('Error adding product: ' + error.message);
-            });
-        });
-
-        // Add Cashier Form Submission with Validation
-        document.getElementById('add-cashier-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const cashierName = document.getElementById('cashier-name').value;
-
-            if (!cashierName.trim()) {
-                alert('Cashier name is required.');
-                return;
-            }
-
-            const formData = new URLSearchParams(new FormData(this));
-
-            fetch('/api/cashiers', {
-                method: 'POST',
-                body: formData,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to add cashier');
-                return response.json();
-            })
-            .then(data => {
-                alert('Cashier added successfully!');
-                closeModal('add-cashier-modal');
-            })
-            .catch(error => {
-                alert('Error adding cashier: ' + error.message);
-            });
-        });
-
-        // Fetch and Populate Orders Table
-        async function populateOrders() {
-            try {
-                const response = await fetch('/api/orders');
-                if (!response.ok) throw new Error('Failed to fetch orders');
-                
-                const data = await response.json();
-                const tableBody = document.getElementById('orderTableBody');
-                tableBody.innerHTML = data.map(order => `
-                    <tr>
-                        <td>${order.buyerName}</td>
-                        <td>${order.store}</td>
-                        <td>${order.productName}</td>
-                        <td>${order.orderId}</td>
-                        <td>${order.trackingNumber}</td>
-                    </tr>
-                `).join('');
-            } catch (error) {
-                console.error('Error fetching orders:', error);
-                alert('Failed to load orders.');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', populateOrders);
-    </script>
 <!-- Styles for the Modal -->
 <style>
     /* Modal container styling */
@@ -828,34 +684,7 @@
     }
 </style>
 
-<!-- JavaScript to Open and Close Modal -->
-<script>
-    // Get the modal
-    const modal = document.getElementById("loginModal");
 
-    // Get the button that opens the modal
-    const btn = document.getElementById("openLoginModal");
-
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close-modal")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
     <!-- JavaScript for AJAX and Modal Functionality -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        

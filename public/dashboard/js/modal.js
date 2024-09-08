@@ -185,3 +185,70 @@ document.querySelector('.search-bar').addEventListener('input', async function()
         console.error('Search error:', error);
     }
 });
+
+
+// Function to open a modal
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+}
+
+// Function to close a modal
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// Event listeners for opening modals
+document.getElementById('open-search-filter-modal').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('searchFilterModal');
+});
+document.getElementById('open-site-customization-modal').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('siteCustomizationModal');
+});
+document.getElementById('open-login-modal').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('loginModal');
+});
+document.getElementById('open-data-import-export-modal').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('dataImportExportModal');
+});
+document.getElementById('open-audit-logs-modal').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('auditLogsModal');
+});
+document.getElementById('open-inventory-management-modal').addEventListener('click', function(e) {
+    e.preventDefault();
+    openModal('inventoryManagementModal');
+});
+
+// Event listeners for closing modals
+document.getElementById('close-search-filter-modal').addEventListener('click', function() {
+    closeModal('searchFilterModal');
+});
+document.getElementById('close-site-customization-modal').addEventListener('click', function() {
+    closeModal('siteCustomizationModal');
+});
+document.getElementById('close-login-modal').addEventListener('click', function() {
+    closeModal('loginModal');
+});
+document.getElementById('close-data-import-export-modal').addEventListener('click', function() {
+    closeModal('dataImportExportModal');
+});
+document.getElementById('close-audit-logs-modal').addEventListener('click', function() {
+    closeModal('auditLogsModal');
+});
+document.getElementById('close-inventory-management-modal').addEventListener('click', function() {
+    closeModal('inventoryManagementModal');
+});
+
+// Close modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target === modal) {
+            closeModal(modal.id);
+        }
+    });
+});

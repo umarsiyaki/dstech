@@ -5,7 +5,14 @@ const { body, validationResult } = require('express-validator');
 const NodeCache = require('node-cache');
 const asyncHandler = require('express-async-handler');
 const { getAllProducts, getProductById, createProduct, searchProducts } = require('../controllers/productController');
-const db = require('../../db/db'); // Assume a db.js file handles database connection and queries
+const db = require('../../db/db'); //  db.js file handles database connection and queries
+// routes/productRoutes.js
+const express = require('express');
+const productController = require('../controller/productController');
+
+router.get('/', productController.getAllProducts);
+
+module.exports = router;
 
 // Initialize cache with a default TTL (time-to-live) of 10 minutes
 const cache = new NodeCache({ stdTTL: 600 });

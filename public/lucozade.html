@@ -1,13 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pepsi Product Page</title>
+    <title>Lucozade Product Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
     <link rel="stylesheet" href="styles.css">
+    <script src="validation.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -45,12 +46,14 @@
     <!-- Product Cards Section -->
     <section class="products">
         <h2>Products</h2>
-        <div class="product-card" data-product-id="PS-001">
-            <img src="pepsi-cola.jpg" alt="Pepsi Cola">
-            <h3>Pepsi Cola</h3>
-            <p>Description: Classic Pepsi cola taste</p>
-            <p>Price: $2.00</p>
-            <p>Rating: 4.5/5</p>
+        
+        <!-- Lucozade Alert Tropical -->
+        <div class="product-card" data-product-id="LUC-001">
+            <img src="l-alert-t.jpeg" alt="Lucozade Alert Tropical">
+            <h3>Lucozade Alert Tropical</h3>
+            <p>Description: Tropical flavor energy drink.</p>
+            <p>Price: $2.50</p>
+            <p>Rating: 4.7/5</p>
             <button class="add-to-cart-btn">Add to Cart</button>
             <div class="quantity-controller">
                 <button class="decrease-quantity">-</button>
@@ -58,16 +61,17 @@
                 <button class="increase-quantity">+</button>
             </div>
             <button class="checkout-btn">Checkout</button>
+            <input type="hidden" class="tracking-number" value="LUC-TRACK-001">
+            <input type="hidden" class="api-endpoint" value="/api/products/luc-alert-t">
         </div>
-
-		<!--secondproduct-->
-
-        <div class="product-card" data-product-id="PS-001">
-            <img src="pepsi-cola.jpg" alt="Pepsi Cola">
-            <h3>Pepsi Cola</h3>
-            <p>Description: Classic Pepsi cola taste</p>
-            <p>Price: $2.00</p>
-            <p>Rating: 4.5/5</p>
+        
+        <!-- Lucozade Black Currant -->
+        <div class="product-card" data-product-id="LUC-002">
+            <img src="l-b-currant.jpeg" alt="Lucozade Black Currant">
+            <h3>Lucozade Black Currant</h3>
+            <p>Description: Refreshing black currant flavor.</p>
+            <p>Price: $2.50</p>
+            <p>Rating: 4.6/5</p>
             <button class="add-to-cart-btn">Add to Cart</button>
             <div class="quantity-controller">
                 <button class="decrease-quantity">-</button>
@@ -75,111 +79,17 @@
                 <button class="increase-quantity">+</button>
             </div>
             <button class="checkout-btn">Checkout</button>
+            <input type="hidden" class="tracking-number" value="LUC-TRACK-002">
+            <input type="hidden" class="api-endpoint" value="/api/products/luc-b-currant">
         </div>
-<!--secondproduct-->
-
-<div class="product-card" data-product-id="PS-001">
-	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
-	<h3>Pepsi Cola</h3>
-	<p>Description: Classic Pepsi cola taste</p>
-	<p>Price: $2.00</p>
-	<p>Rating: 4.5/5</p>
-	<button class="add-to-cart-btn">Add to Cart</button>
-	<div class="quantity-controller">
-		<button class="decrease-quantity">-</button>
-		<span class="quantity">1</span>
-		<button class="increase-quantity">+</button>
-	</div>
-	<button class="checkout-btn">Checkout</button>
-</div>
-<!--secondproduct-->
-
-<div class="product-card" data-product-id="PS-001">
-	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
-	<h3>Pepsi Cola</h3>
-	<p>Description: Classic Pepsi cola taste</p>
-	<p>Price: $2.00</p>
-	<p>Rating: 4.5/5</p>
-	<button class="add-to-cart-btn">Add to Cart</button>
-	<div class="quantity-controller">
-		<button class="decrease-quantity">-</button>
-		<span class="quantity">1</span>
-		<button class="increase-quantity">+</button>
-	</div>
-	<button class="checkout-btn">Checkout</button>
-</div>
-<!--secondproduct-->
-
-<div class="product-card" data-product-id="PS-001">
-	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
-	<h3>Pepsi Cola</h3>
-	<p>Description: Classic Pepsi cola taste</p>
-	<p>Price: $2.00</p>
-	<p>Rating: 4.5/5</p>
-	<button class="add-to-cart-btn">Add to Cart</button>
-	<div class="quantity-controller">
-		<button class="decrease-quantity">-</button>
-		<span class="quantity">1</span>
-		<button class="increase-quantity">+</button>
-	</div>
-	<button class="checkout-btn">Checkout</button>
-</div>
-<!--secondproduct-->
-
-<div class="product-card" data-product-id="PS-001">
-	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
-	<h3>Pepsi Cola</h3>
-	<p>Description: Classic Pepsi cola taste</p>
-	<p>Price: $2.00</p>
-	<p>Rating: 4.5/5</p>
-	<button class="add-to-cart-btn">Add to Cart</button>
-	<div class="quantity-controller">
-		<button class="decrease-quantity">-</button>
-		<span class="quantity">1</span>
-		<button class="increase-quantity">+</button>
-	</div>
-	<button class="checkout-btn">Checkout</button>
-</div>
-<!--secondproduct-->
-
-<div class="product-card" data-product-id="PS-001">
-	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
-	<h3>Pepsi Cola</h3>
-	<p>Description: Classic Pepsi cola taste</p>
-	<p>Price: $2.00</p>
-	<p>Rating: 4.5/5</p>
-	<button class="add-to-cart-btn">Add to Cart</button>
-	<div class="quantity-controller">
-		<button class="decrease-quantity">-</button>
-		<span class="quantity">1</span>
-		<button class="increase-quantity">+</button>
-	</div>
-	<button class="checkout-btn">Checkout</button>
-</div>
-<!--secondproduct-->
-
-<div class="product-card" data-product-id="PS-001">
-	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
-	<h3>Pepsi Cola</h3>
-	<p>Description: Classic Pepsi cola taste</p>
-	<p>Price: $2.00</p>
-	<p>Rating: 4.5/5</p>
-	<button class="add-to-cart-btn">Add to Cart</button>
-	<div class="quantity-controller">
-		<button class="decrease-quantity">-</button>
-		<span class="quantity">1</span>
-		<button class="increase-quantity">+</button>
-	</div>
-	<button class="checkout-btn">Checkout</button>
-</div>
-<!--secondproduct-->
-
-        <div class="product-card" data-product-id="PS-001">
-            <img src="pepsi-cola.jpg" alt="Pepsi Cola">
-            <h3>Pepsi Cola</h3>
-            <p>Description: Classic Pepsi cola taste</p>
-            <p>Price: $2.00</p>
-            <p>Rating: 4.5/5</p>
+        
+        <!-- Lucozade Original -->
+        <div class="product-card" data-product-id="LUC-003">
+            <img src="l-original.jpeg" alt="Lucozade Original">
+            <h3>Lucozade Original</h3>
+            <p>Description: Classic Lucozade energy drink.</p>
+            <p>Price: $2.50</p>
+            <p>Rating: 4.8/5</p>
             <button class="add-to-cart-btn">Add to Cart</button>
             <div class="quantity-controller">
                 <button class="decrease-quantity">-</button>
@@ -187,11 +97,48 @@
                 <button class="increase-quantity">+</button>
             </div>
             <button class="checkout-btn">Checkout</button>
+            <input type="hidden" class="tracking-number" value="LUC-TRACK-003">
+            <input type="hidden" class="api-endpoint" value="/api/products/luc-original">
         </div>
+        
+        <!-- Lucozade Fusion -->
+        <div class="product-card" data-product-id="LUC-004">
+            <img src="lucozadetfusi.jpeg" alt="Lucozade Fusion">
+            <h3>Lucozade Fusion</h3>
+            <p>Description: Unique fusion of tropical flavors.</p>
+            <p>Price: $2.50</p>
+            <p>Rating: 4.7/5</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+            <div class="quantity-controller">
+                <button class="decrease-quantity">-</button>
+                <span class="quantity">1</span>
+                <button class="increase-quantity">+</button>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+            <input type="hidden" class="tracking-number" value="LUC-TRACK-004">
+            <input type="hidden" class="api-endpoint" value="/api/products/luc-fusion">
+        </div>
+        
+        <!-- Lucozade Tropical -->
+        <div class="product-card" data-product-id="LUC-005">
+            <img src="lucozade-trop.jpeg" alt="Lucozade Tropical">
+            <h3>Lucozade Tropical</h3>
+            <p>Description: Exotic tropical drink.</p>
+            <p>Price: $2.50</p>
+            <p>Rating: 4.6/5</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+            <div class="quantity-controller">
+                <button class="decrease-quantity">-</button>
+                <span class="quantity">1</span>
+                <button class="increase-quantity">+</button>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+            <input type="hidden" class="tracking-number" value="LUC-TRACK-005">
+            <input type="hidden" class="api-endpoint" value="/api/products/luc-tropical">
+        </div>
+        
+        <!-- Additional products can be added here, following the same structure -->
 
-
-
-        <!-- Additional products can be added here -->
     </section>
     
     <!-- Recently Viewed Products Section -->
@@ -206,7 +153,7 @@
     <!-- Contact Form Section -->
     <section class="contact-form">
         <h2>Contact Us</h2>
-        <form id="contact-form">
+        <form id="contact-form" onsubmit="validateForm(event)">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required><br><br>
             <label for="email">Email:</label>
@@ -224,37 +171,25 @@
             <li><a href="#">Twitter</a></li>
             <li><a href="#">Instagram</a></li>
         </ul>
-        <p>&copy; 2024 Product Page</p>
+        <p>&copy; 2024 Lucozade Product Page</p>
     </footer>
 
     <!-- Modal for Cart and Checkout -->
     <div id="cart-modal" class="modal">
-        <!-- Cart details will be populated here dynamically -->
-    </div>
+       
 
-    <!-- Rating and Review Popup -->
-    <div id="rating-modal" class="modal">
-        <h2>Rate & Review</h2>
-        <form id="rating-form">
-            <label for="rating">Rating:</label>
-            <select id="rating" name="rating">
-                <option value="1">1 Star</option>
-                <option value="2">2 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="5">5 Stars</option>
-            </select>
-            <label for="review">Review:</label>
-            <textarea id="review" name="review"></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
 
-    <!-- JavaScript -->
+
+ <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
     
-<script src="main.js"></script>
-<script src="script.js"></script>
-<script src="profile.js"></script>
-    <script src="product.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -12,21 +12,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     
-<script>
-    const socket = io('http://localhost:5000');
 
-    // Listen for new notifications
-    socket.on('receiveNotification', function (notification) {
-        // Update your notifications section
-        const notificationList = document.getElementById('notificationList');
-        const newNotification = document.createElement('li');
-        newNotification.innerHTML = `${notification.message} - ${new Date(notification.timestamp).toLocaleTimeString()}`;
-        notificationList.appendChild(newNotification);
-
-        // Show a real-time alert (optional)
-        alert(notification.message);
-    });
-</script><script src="/socket.io/socket.io.js"></script>
+</script><script src="/js/scripts.js"></script>
    <!-- Include Firebase SDK -->
    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
@@ -39,20 +26,21 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <img src="assets/images/logo.png" alt="Oladayo enterprises Logo">
+                    <img src="images/admin.jpg" alt="Oladayo enterprises Logo">
                     <h2>Oladayo enterprises</h2>
                 </div>
                 <button class="toggle-sidebar-btn">&times;</button>
             </div>
             <nav class="sidebar-nav">
- <a href="#" id="open-login-modal">Open Login Modal</a>
-<a href="#" id="open-data-import-modal">Open Data Import Modal</a>
-<a href="#" id="open-data-import-export-modal">Open Data Import/Export Modal</a>
-<a href="#" id="open-audit-logs-modal">Open Audit Logs Modal</a>
-<a href="#" id="open-inventory-management-modal">Open Inventory Management Modal</a>
-<a href="#" id="open-product-modal">Open Product Modal</a>
-<a href="#" id="open-add-cashier-modal">Open Add Cashier Modal</a>
-
+                <button id="create-blog-btn">Create Blog</button>
+                <button id="open-login-modal">Open Login Modal</button>
+                <button id="open-data-import-modal">Open Data Import Modal</button>
+                <button id="open-data-import-export-modal">Open Data Import/Export Modal</button>
+                <button id="open-audit-logs-modal">Open Audit Logs Modal</button>
+                <button id="open-inventory-management-modal">Open Inventory Management Modal</button>
+                <button id="open-product-modal">Open Product Modal</button>
+                <button id="open-add-cashier-modal">Open Add Cashier Modal</button>
+</nav>
         <!-- Main Content -->
         <div class="main-content">
             <!-- Navbar -->
@@ -65,29 +53,30 @@
                     <input type="text" class="search-bar" placeholder="Search...">
                 </div>
                 <!-- Notifications and Messages Dropdown Menu -->
-<div class="nav-item dropdown">
-    <button class="dropbtn">Messages <span class="badge">5</span></button>
-    <div class="dropdown-content">
-      <a href="#">New Message 1</a>
-      <a href="#">New Message 2</a>
-      <a href="#">New Message 3</a>
-      <a href="#">View All Messages</a>
-    </div>
-  </div>
-  <div class="nav-item dropdown">
-    <button class="dropbtn">Notifications <span class="badge">8</span></button>
-    <div class="dropdown-content">
-      <a href="#">Notification 1</a>
-      <a href="#">Notification 2</a>
-      <a href="#">Notification 3</a>
-      <a href="#">View All Notifications</a>
-    </div>
-  </div>
+                <div class="nav-item dropdown">
+                    <button class="dropbtn">Messages <span class="badge">5</span></button>
+                    <div class="dropdown-content" id="message-container">
+                        <a href="#">New Message 1</a>
+                        <a href="#">New Message 2</a>
+                        <a href="#">New Message 3</a>
+                        <a href="#">View All Messages</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <button class="dropbtn">Notifications <span class="badge">8</span></button>
+                    <div class="dropdown-content" id="notificationSectionId">
+                        <a href="#">Notification 1</a>
+                        <a href="#">Notification 2</a>
+                        <a href="#">Notification 3</a>
+                        <a href="#">View All Notifications</a>
+                    </div>
+                </div>
   
-                    <div class="nav-item dropdown">
+         <div class="nav-item dropdown">
                         <button class="dropbtn">Profile <i class="fas fa-user-circle"></i></button>
                         <div class="dropdown-content">
                             <a href="#">Profile Settings</a>
+                            <a href="profile.htnl">check profile</a>
                             <button id="openLoginModal">Login</button>                        </div>
                     </div>
                 </div>
@@ -104,7 +93,7 @@
     <!-- Search Bar -->
     <div class="search-bar-container">
         <input type="text" id="searchInput" class="search-bar" placeholder="Search products, users, or orders..." oninput="autoSuggest()">
-        <div id="suggestions" class="suggestions-box"></div>
+        <div id="search-suggestions" class="suggestions-box"></div>
     </div>
 
     <!-- Filter Section -->
@@ -176,7 +165,7 @@
             <tbody id="resultsTable"></tbody>
         </table>
     </div>
-</div>
+</div></aside>
             <section id="site-customization">
                 <div class="card">
                     <h2>Site Customization</h2>
@@ -421,7 +410,7 @@
         <!-- Other dashboard content -->
         
         <!-- Create Blog Button -->
-        <button id="create-blog-btn">Create Blog</button>
+        
 
         <!-- Create Blog Section (Initially Hidden) -->
         <div id="create-blog-section" style="display: none;">
@@ -600,6 +589,7 @@
                     <label for="discount">Discount (%):</label>
                     <input type="number" id="calculator-discount" name="discount">
                 </div>
+                
                 <div id="input-display">
                     <p>Product Name: <span id="display-product-name"></span></p>
                     <p>Quantity: <span id="display-quantity"></span></p>
@@ -643,48 +633,6 @@
     <!-- External Script Fallback -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
 
-<!-- Styles for the Modal -->
-<style>
-    /* Modal container styling */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-    }
-
-    /* Modal content box */
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 40%; /* Width of the modal */
-        border-radius: 8px;
-    }
-
-    /* Close button */
-    .close-modal {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close-modal:hover,
-    .close-modal:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-</style>
-
-
     <!-- JavaScript for AJAX and Modal Functionality -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        
@@ -700,6 +648,18 @@
    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
    
-    <script src="/socket.io/socket.io.js"></script>
+   <script src="/socket.io/socket.io.js"></script>
+   <script src="../js/xlsx.js"></script>
+   <script src="../js/metwork.js"></script>
+   <script src="../js/productpage.js"></script>
+   <script src="../js/index.js"></script>
+   <script src="../js/profile.js"></script>
+   <script src="../js/cart.js.js"></script>
+   <script src="js/ajax.js"></script>
+    <script src="js/chart.js.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/search.js"></script>
 </body>
 </html>

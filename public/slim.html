@@ -1,71 +1,307 @@
-l-alert-t.jpeg
-l-b-currant.jpeg
-l-original.jpeg
-lucozadetfusi.jpeg
-lucozade-trop.jpeg
-malta-gueness.jpg
-malta-gueness-can.jpg
-m-amstel.jpg
-mbeta-gb.jpg
-m-betta-can.jpg
-mdubic.jpg
-m-grand.png
-m-hi-can.jpeg
-m-hipck.jpeg
-m-hi-plas.jpeg
-mltina-can.jpg
-m-macca.jpg
-mr.v.jpeg
-peak-youg.jpg
-pepsi-c.jpeg
-pepsi cola image:pepsi-col.jpeg
-reakhor image reactor.jpg
-schweppes tangerine image: scheppestangerin.webp
-schweppes image:schweppes.jpg
-schweppes canimage: schweppes-can.jpg
-schweppes tropical water images:chweppes-t-water.jpg
-slim red image: slim[-red.jpeg
-slim fraise 33cl image:Slim_FRAISE_33cl_PET.jpg
-slim orange image:slim-orange.jpg
-slide show image1:smoovpck.jpeg link it to smoove.htm
-super komando image:super-com.jpeg  category energy drink
 
-zag emergy drink image: zagg.jpg category energy drink
+
+pepsi.html:(super komando image:super-com.jpeg  category energy drink
+pepsi-c.jpeg category cola drink
+pepsi cola image:pepsi-col.jpeg cola
 7uppck.jpeg
 
-Bigi-Bitterlemon-50cl.webp
-bigi-cherib.jpeg fruit categori
-bigi-collection.jpeg slideshow5
-bigi-ginger.jpeg refreshment
-bigi-lime.jpeg refreshment
-big-orange.jpeg category orange
-bubbleup.jpeg
-climax-energy-drink-can-33cl.jpg category energy drink
+
+slide show image1:smoovpck.jpeg link it to smoove.htm
+
+
+
+
+
+climax.html:(climax-energy-drink-can-33cl.jpg category energy drink
 climaxh.jpgcategory energy drink
 climaxpck.jpeg category energy drink
-CLIMAX-RED.png category energy drink
-coke-a-creat.jpeg slideshow image2
-coke-create.jpeg
-cokepack.jpeg
-coke-zero.jpg category cola drink
-fanta.jpg  category tropical drink
-fantapack.jpeg slideshow image3
-fearless (2).jpeg category energy drink
-fearless.jpeg category energy drink
+CLIMAX-RED.png category energy drink)
+
+
 fearlesspack.jpeg  slideshow 4
 HAMOUD-BOUALEM-Slim-Orange-Verre-1l-300x300.jpg  category tropical drink
-hol-slim.png      category refreshment 
-pepsi-c.jpeg category cola drink
+
 slim[-red.jpeg  category cahpman drink
-viju chocolate image: v-choco.jpeg category fruit drink
-vigor image: vigor.jpeg category energy drink
-viju mr. bean soya drink image: vmr-beansoy.jpeg category fruit drink
-viju orange drink image: v-orange.jpeg category orange drink
-viju plain youghort image: vp-yough.jpeg youghort category
-v-smart image: v-smart.jpeg category fruit drink
-Viju wheat v-wheat.jpeg category fruit drink
-big cola 330ml image: big-cola330.jpeg category cola drink
-big cola 650ml image:big-cola650.jpeg category cola drink
-big green apple image:big-g-apple.jpeg category fruit drink
-bigi ginger image:bigi-ginger.jpeg refreshment categori
-bigi lime image: bigi-lime.jpeg refreshment  categori
+
+
+
+
+holandia.jpg
+peak-youg.jpg youghort categori
+
+
+as you can see the product name, catego vendor and their image are well arrange, use the following 
+template to design all the vendor pages as  organizes: "<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lucozade Product Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Products</a>
+                <ul class="dropdown">
+                    <li><a href="pepsi.html">Pepsi</a></li>
+                    <li><a href="cocacola.html">Coca-Cola</a></li>
+                    <li><a href="lucozade.html">Lucozade</a></li>
+                    <li><a href="maltina.html">Maltina</a></li>
+                    <li><a href="holandia.html">Holandia</a></li>
+                    <li><a href="viju.html">Viju</a></li>
+                    <li><a href="climax.html">Climax</a></li>
+                </ul>
+            </li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <input type="search" placeholder="Search products..." class="search-bar">
+        <button id="cart-button">Cart (0)</button>
+    </nav>
+    
+    <!-- Top Selling Section -->
+    <section class="top-selling">
+        <h2>Top Selling Products</h2>
+        <ul class="top-selling-list">
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>
+        </ul>
+    </section>
+    
+    <!-- Product Cards Section -->
+    <section class="products">
+        <h2>Products</h2>
+        <div class="product-card" data-product-id="PS-001">
+            <img src="pepsi-cola.jpg" alt="Pepsi Cola">
+            <h3>Pepsi Cola</h3>
+            <p>Description: Classic Pepsi cola taste</p>
+            <p>Price: $2.00</p>
+            <p>Rating: 4.5/5</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+            <div class="quantity-controller">
+                <button class="decrease-quantity">-</button>
+                <span class="quantity">1</span>
+                <button class="increase-quantity">+</button>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+
+		<!--secondproduct-->
+
+        <div class="product-card" data-product-id="PS-001">
+            <img src="pepsi-cola.jpg" alt="Pepsi Cola">
+            <h3>Pepsi Cola</h3>
+            <p>Description: Classic Pepsi cola taste</p>
+            <p>Price: $2.00</p>
+            <p>Rating: 4.5/5</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+            <div class="quantity-controller">
+                <button class="decrease-quantity">-</button>
+                <span class="quantity">1</span>
+                <button class="increase-quantity">+</button>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+<!--secondproduct-->
+
+<div class="product-card" data-product-id="PS-001">
+	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
+	<h3>Pepsi Cola</h3>
+	<p>Description: Classic Pepsi cola taste</p>
+	<p>Price: $2.00</p>
+	<p>Rating: 4.5/5</p>
+	<button class="add-to-cart-btn">Add to Cart</button>
+	<div class="quantity-controller">
+		<button class="decrease-quantity">-</button>
+		<span class="quantity">1</span>
+		<button class="increase-quantity">+</button>
+	</div>
+	<button class="checkout-btn">Checkout</button>
+</div>
+<!--secondproduct-->
+
+<div class="product-card" data-product-id="PS-001">
+	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
+	<h3>Pepsi Cola</h3>
+	<p>Description: Classic Pepsi cola taste</p>
+	<p>Price: $2.00</p>
+	<p>Rating: 4.5/5</p>
+	<button class="add-to-cart-btn">Add to Cart</button>
+	<div class="quantity-controller">
+		<button class="decrease-quantity">-</button>
+		<span class="quantity">1</span>
+		<button class="increase-quantity">+</button>
+	</div>
+	<button class="checkout-btn">Checkout</button>
+</div>
+<!--secondproduct-->
+
+<div class="product-card" data-product-id="PS-001">
+	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
+	<h3>Pepsi Cola</h3>
+	<p>Description: Classic Pepsi cola taste</p>
+	<p>Price: $2.00</p>
+	<p>Rating: 4.5/5</p>
+	<button class="add-to-cart-btn">Add to Cart</button>
+	<div class="quantity-controller">
+		<button class="decrease-quantity">-</button>
+		<span class="quantity">1</span>
+		<button class="increase-quantity">+</button>
+	</div>
+	<button class="checkout-btn">Checkout</button>
+</div>
+<!--secondproduct-->
+
+<div class="product-card" data-product-id="PS-001">
+	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
+	<h3>Pepsi Cola</h3>
+	<p>Description: Classic Pepsi cola taste</p>
+	<p>Price: $2.00</p>
+	<p>Rating: 4.5/5</p>
+	<button class="add-to-cart-btn">Add to Cart</button>
+	<div class="quantity-controller">
+		<button class="decrease-quantity">-</button>
+		<span class="quantity">1</span>
+		<button class="increase-quantity">+</button>
+	</div>
+	<button class="checkout-btn">Checkout</button>
+</div>
+<!--secondproduct-->
+
+<div class="product-card" data-product-id="PS-001">
+	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
+	<h3>Pepsi Cola</h3>
+	<p>Description: Classic Pepsi cola taste</p>
+	<p>Price: $2.00</p>
+	<p>Rating: 4.5/5</p>
+	<button class="add-to-cart-btn">Add to Cart</button>
+	<div class="quantity-controller">
+		<button class="decrease-quantity">-</button>
+		<span class="quantity">1</span>
+		<button class="increase-quantity">+</button>
+	</div>
+	<button class="checkout-btn">Checkout</button>
+</div>
+<!--secondproduct-->
+
+<div class="product-card" data-product-id="PS-001">
+	<img src="pepsi-cola.jpg" alt="Pepsi Cola">
+	<h3>Pepsi Cola</h3>
+	<p>Description: Classic Pepsi cola taste</p>
+	<p>Price: $2.00</p>
+	<p>Rating: 4.5/5</p>
+	<button class="add-to-cart-btn">Add to Cart</button>
+	<div class="quantity-controller">
+		<button class="decrease-quantity">-</button>
+		<span class="quantity">1</span>
+		<button class="increase-quantity">+</button>
+	</div>
+	<button class="checkout-btn">Checkout</button>
+</div>
+<!--secondproduct-->
+
+        <div class="product-card" data-product-id="PS-001">
+            <img src="pepsi-cola.jpg" alt="Pepsi Cola">
+            <h3>Pepsi Cola</h3>
+            <p>Description: Classic Pepsi cola taste</p>
+            <p>Price: $2.00</p>
+            <p>Rating: 4.5/5</p>
+            <button class="add-to-cart-btn">Add to Cart</button>
+            <div class="quantity-controller">
+                <button class="decrease-quantity">-</button>
+                <span class="quantity">1</span>
+                <button class="increase-quantity">+</button>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+
+
+
+        <!-- Additional products can be added here -->
+    </section>
+    
+    <!-- Recently Viewed Products Section -->
+    <section class="recently-viewed">
+        <h2>Recently Viewed Products</h2>
+        <ul class="recently-viewed-list">
+            <li>Product 1</li>
+            <li>Product 2</li>
+        </ul>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea><br><br>
+            <input type="submit" value="Send">
+        </form>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="footer">
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+        <p>&copy; 2024 Product Page</p>
+    </footer>
+
+    <!-- Modal for Cart and Checkout -->
+    <div id="cart-modal" class="modal">
+        <!-- Cart details will be populated here dynamically -->
+    </div>
+
+    <!-- Rating and Review Popup -->
+    <div id="rating-modal" class="modal">
+        <h2>Rate & Review</h2>
+        <form id="rating-form">
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating">
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+            </select>
+            <label for="review">Review:</label>
+            <textarea id="review" name="review"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    
+<script src="main.js"></script>
+<script src="script.js"></script>
+<script src="profile.js"></script>
+    <script src="product.js"></script>
+</body>
+</html>"
+
+make sure all match pefectly. much work to today, do it page after page, the we creat product modals for each product or sub page, make the one that is acording to ui design principles.
+add more fetures that aren't presnt and entegrate it with index while targeting product displaysecxtion, and each product must have card id 
+matching it name, and hiden tracking number, and api end point fo the product name, detail, image,price and quantity.
+this must collaborate with the admin to push, recieve notifications, mesages and analitics, we hav validation.js file which should be included in ever form actions.
+the rating,  and all  relat
+
+
+
+
+
+
+
+

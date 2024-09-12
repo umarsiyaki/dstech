@@ -1,310 +1,175 @@
+To connect and integrate your project structure using Express, follow these steps. This approach will help ensure that your files are properly wired up, and your backend will serve the front-end content dynamically.
 
-// Fetch and display activity log
-fetch('/api/activityLog')
-    .then(response => response.json())
-    .then(logs => {
-        const activityLogTable = document.getElementById('activityLogTable');
-        activityLogTable.innerHTML = '';
+### 1. **Setup `server.js`**
 
-        logs.forEach(log => {
-            const row = `<tr>
-                <td>${log.admin}</td>
-                <td>${log.action}</td>
-                <td>${new Date(log.timestamp).toLocaleString()}</td>
-            </tr>`;
-            activityLogTable.innerHTML += row;
-        });
-    });
-
-
-
-```
-
-### 3. **Additional Analytics and Reports Features:**
-
-- **Order Reports:** You can also implement charts for tracking total orders and order statuses over time.
-- **Filter by Date Range:** Add date range filters to allow admins to view reports for custom periods (e.g., last 30 days, this week, etc.).
-
-```html
-<div class="date-filter">
-    <label for="dateStart">Start Date:</label>
-    <input type="date" id="dateStart">
-    <label for="dateEnd">End Date:</label>
-    <input type="date" id="dateEnd">
-    <button onclick="fetchReports()">Filter</button>
-</div>
-```
-
-### Summary:
-- **Revenue Reports:** Using **Chart.js**, you can generate dynamic line charts for revenue trends.
-- **Sales Reports:** A bar chart for product sales.
-- **Admin Activity Log:** A table that displays actions taken by admins, such as product additions and user management tasks.
-  
-Next, we can continue with implementing **Search and Filter Functionality** or move to another feature of your choice. Let me know how you'd like to proceedLet's move on to the next feature: **Real-Time Notifications** with **Push Notifications** integration.
-
-We'll add **Socket.io** for in-app notifications and integrate **Firebase Cloud Messaging (FCM)** for push notifications to provide a complete real-time notification system for your admin dashboard.
-
-### 1. **Socket.io for Real-Time In-App Notifications**
-
-**Steps:**
-- Set up **Socket.io** for sending and receiving notifications in real-time.
-- Display notifications in the admin dashboard as soon as events happen, like new orders or low stock alerts.
-
-#### **Backend (Socket.io) Configuration:**
-
-We’ve already initialized **Socket.io** in the previous step. Let’s build upon that with real-time notifications for events like new orders.
-
-#### Modify **Socket.io** in `app.js`:
+In your `server/` folder, you have a `server.js` file. This will be the main entry point of your Express server. Configure it to set up middleware, routes, and start the server.
 
 ```javascript
-// app.js (Continuing from previous)
+// server/server.js
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+require('dotenv').config();
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
+// Serve static files
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoute');
+const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
+
+// Serve HTML pages for routes not handled by API
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../public/login.html')));
+app.get('/register', (req, res) => res.sendFile(path.join(__dirname, '../public/register.html')));
+// Add additional routes as needed
+
+// Error handling middleware
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, '../public/404.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 ```
 
-#### **Front-End JavaScript**:
+### 2. **Configure Routes**
 
-To listen for real-time notifications on the front end, we’ll use **Socket.io-client**. Make sure you include the Socket.io library in your front-end code.
+In the `routes/` folder, you have various route files. Ensure that each file properly exports its routes.
 
-```html
-<!-- Include Socket.io in your admin dashboard -->
-
-<script>
-    
-</script>
-```
-
-Now, whenever an event occurs (e.g., new order, low stock), notifications will be pushed to the admin panel in real-time.
-
-### 2. **Push Notifications with Firebase Cloud Messaging (FCM)**
-
-To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)** for web push notifications that work outside the application.
-
-#### **Setting up Firebase Cloud Messaging (FCM)**:
-
-1. **Create a Firebase Project**:
-   - Go to the [Firebase Console](https://console.firebase.google.com/).
-   - Create a new project.
-
-2. **Add Firebase to Your Web App**:
-   - In your Firebase project, go to **Project Settings**.
-   - Under the **General** tab, scroll to the **Your apps** section and click **Web** to register your web app.
-   - Copy your **Firebase SDK Config**.
-
-3. **Install Firebase SDK**:
-   - Install the Firebase SDK in your project:
-   ```bash
-   npm install firebase
-   ```
-
-4. **Add Firebase Config in the Front-End**:
-
-   ```html
-   <script>
-       // Firebase configuration
-       const firebaseConfig = {
-           apiKey: "YOUR_API_KEY",
-           authDomain: "YOUR_AUTH_DOMAIN",
-           projectId: "YOUR_PROJECT_ID",
-           storageBucket: "YOUR_STORAGE_BUCKET",
-           messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-           appId: "YOUR_APP_ID"
-       };
-
-       // Initialize Firebase
-       const app = firebase.initializeApp(firebaseConfig);
-       const messaging = firebase.messaging();
-
-       // Get registration token for push notifications
-       messaging.getToken({ vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
-           if (currentToken) {
-               console.log('Token:', currentToken);
-               // Send token to server to subscribe for push notifications
-           } else {
-               console.log('No registration token available. Request permission to generate one.');
-           }
-       }).catch((err) => {
-           console.log('An error occurred while retrieving token.', err);
-       });
-
-       // Listen for incoming messages
-       messaging.onMessage((payload) => {
-           console.log('Message received. ', payload);
-           // Display push notification
-           alert(`New Notification: ${payload.notification.title}`);
-       });
-   </script>
-   ```
-
-5. **Backend Integration with Firebase FCM**:
-   You can trigger push notifications from your server-side application whenever significant events occur.
-
-   Use the **Firebase Admin SDK** to send push notifications from your back-end:
-
-   ```bash
-   npm install firebase-admin
-   ```
-
-   Create a Firebase admin instance:
-
-   ```javascript
-   // config/firebase.js
-   const admin = require('firebase-admin');
-   const serviceAccount = require('./path/to/your-firebase-service-account.json');
-
-   admin.initializeApp({
-       credential: admin.credential.cert(serviceAccount),
-       databaseURL: "https://your-project-id.firebaseio.com"
-   });
-
-   module.exports = admin;
-   ```
-
-#### **Send Push Notifications from Backend**:
-
-Whenever an important event occurs (like a new order), you can trigger a push notification to all subscribed users.
-
+#### Example `authRoutes.js`:
 ```javascript
-// Send push notification for new order
-const sendPushNotification = async (token, message) => {
-    const payload = {
-        notification: {
-            title: 'New Order',
-            body: `Order #${message.orderId} has been placed.`,
-        }
-    };
+// server/routes/authRoutes.js
+const express = require('express');
+const router = express.Router();
+const authController = require('../controller/authController');
 
-    try {
-        await admin.messaging().sendToDevice(token, payload);
-        console.log('Push notification sent');
-    } catch (error) {
-        console.error('Error sending push notification:', error);
-    }
+// Route for login
+router.post('/login', authController.login);
+// Route for registration
+router.post('/register', authController.register);
+
+module.exports = router;
+```
+
+#### Example `adminRoute.js`:
+```javascript
+// server/routes/adminRoute.js
+const express = require('express');
+const router = express.Router();
+const adminController = require('../controller/adminController');
+const authMiddleware = require('../middleware/authMiddleware');
+
+// Route for admin dashboard (protected)
+router.get('/dashboard', authMiddleware(['admin']), adminController.getDashboard);
+
+module.exports = router;
+```
+
+### 3. **Controller Methods**
+
+Implement the logic for handling routes in your controller files.
+
+#### Example `authController.js`:
+```javascript
+// server/controller/authController.js
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+exports.login = (req, res) => {
+    // Logic for login
 };
 
-// Trigger when new order event occurs
-socket.on('newOrder', (orderData) => {
-    const message = {
-        orderId: orderData.orderId
-    };
-    // Send notification to the user's device token
-    sendPushNotification(userDeviceToken, message);
-});
+exports.register = (req, res) => {
+    // Logic for registration
+};
 ```
 
-### 3. **Push Notification Handling on the Front-End**
+### 4. **Middleware Setup**
 
-On receiving a push notification, users will see the notification as a browser pop-up even if they aren’t actively on the site.
+Your `middleware/` folder should include authentication and other middleware functions.
 
+#### Example `authMiddleware.js`:
 ```javascript
-// Handle incoming message
-messaging.onMessage((payload) => {
-    console.log('Message received. ', payload);
-    // Display push notification
-    const notificationOptions = {
-        body: payload.notification.body,
-        icon: '/icon.png'
+// middleware/authMiddleware.js
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const authMiddleware = (roles = []) => {
+    return (req, res, next) => {
+        const token = req.headers['authorization'];
+        if (!token) {
+            return res.status(401).json({ message: 'Access Denied: No Token Provided!' });
+        }
+
+        const tokenValue = token.split(" ")[1];
+
+        try {
+            const decoded = jwt.verify(tokenValue, process.env.JWT_SECRET);
+            req.user = decoded;
+
+            if (roles.length && !roles.includes(req.user.role)) {
+                return res.status(403).json({ message: 'Access Denied: Insufficient Permissions' });
+            }
+
+            next();
+        } catch (err) {
+            return res.status(401).json({ message: 'Invalid Token' });
+        }
     };
+};
 
-    new Notification(payload.notification.title, notificationOptions);
-});
+module.exports = authMiddleware;
 ```
 
-### Summary:
-- **Socket.io** allows for in-app real-time notifications for events like new orders or stock updates.
-- **Firebase Cloud Messaging** adds push notification functionality, which can notify users even when they are not actively using the admin panel.
-  
-With these notification systems, your admin panel will be capable of sending both real-time in-app notifications and push notifications for important events. Next steps could involve **customizing notification content**, handling **read/unread states**, and adding **notifications history**.
+### 5. **Database Configuration**
 
-Let me know if you would like to move forward with additional features or modifications!!### **4. Search and Filter Functionality**
+Ensure `db.js` handles your database connection logic.
 
-This feature will enhance user experience by allowing admins to search and filter through products, users, and orders based on multiple criteria (e.g., category, date range, order status). We will also add **auto-suggestion/autocomplete** functionality to provide quick search results.
-
-#### **HTML Structure for the Search and Filter:**
-
-We will create a search bar and filter section within the admin dashboard.
-Here is an updated version of the `App.js` file that includes rendering static files:
-```
-jsx
-
-### Steps Explained:
-1. **AJAX Request for Login**:
-   - When the user submits the login form, we prevent the default form submission (`e.preventDefault()`).
-   - We collect the username and password, then send them via a `POST` request to a `/api/login` endpoint.
-   - The server should handle authentication and return a success or failure response.
-
-2. **Handling Server Response**:
-   - If the login is successful, we redirect the user to the admin dashboard using `window.location.href = "/admin-dashboard"`.
-   - If login fails, we display an alert with the failure message.
-
-3. **Modular Form Handling**:
-   - The code is structured so that similar AJAX handlers can be added for phone number and email login by adding event listeners to those forms.
-
-### Backend Side (Server API Endpoint):
-For the AJAX to work correctly, you need a corresponding **server-side** endpoint (e.g., `/api/login`) that authenticates the user. Here's a basic idea of how the backend might look in **Node.js** (assuming you're using it):
-
+#### Example `db.js`:
 ```javascript
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.json());
-
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-
-    // Replace this with your actual authentication logic
-    if (username === 'admin' && password === 'adminpassword') {
-        // Success: Respond with a success message and user data
-        res.json({ success: true, message: 'Login successful' });
-    } else {
-        // Failure: Respond with an error message
-        res.json({ success: false, message: 'Invalid username or password' });
-    }
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
+// db/db.js
 ```
 
-### Next Step:
-1. **Session Management**: Once the login succeeds, we need to handle user sessions using cookies or tokens (e.g., JWT) to maintain the user's login state across pages.
-2. **Role-based Access Control (RBAC)**: After successful login, you can implement RBAC logic to ensure users only see sections of the admin panel they are authorized to access based on their role.
+### 6. **Static Files and Assets**
 
-Let me know if you'd like to proceed with session management and RBAC!
+Ensure static files in `public/` are correctly referenced and served. This includes JavaScript files, CSS, images, etc.
 
+### 7. **Error Pages**
 
-To enhance **safety** and ensure a **robust** system in your code, you should implement logic to handle potential issues like validation, error handling, and fallbacks. I'll walk through the key areas where logic should be added to ensure safety and robustness in the code.
+Add custom error pages like `404.html` and `500.html` in the `public/` directory.
 
-### 1. **Image Path Validation**
-   - Ensure that the image path exists and provide a fallback image if the logo fails to load.
+### 8. **Testing and Validation**
 
-   ```html
-   <img src="assets/images/logo.png" onerror="this.src='assets/images/default-logo.png';" alt="Logo">
-   ```
+Ensure that you have unit and integration tests in place. Add test cases for your controllers, routes, and middleware.
 
-   - This will ensure that if the logo fails to load, a default image (`default-logo.png`) is shown.
+### Summary
 
-### 2. **FullCalendar CSS/JS Fallback**
-   You can include fallback logic in case the CDN fails by providing a local alternative:
+- Configure `server.js` to handle routing and serve static files.
+- Implement route handlers in `routes/` folder.
+- Implement controller logic in `controller/` folder.
+- Ensure middleware functions are properly implemented in `middleware/`.
+- Set up database connections and queries in `db/`.
+- Ensure static files and error handling are correctly set up.
 
-   ```html
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet" onerror="this.href='assets/fullcalendar/main.min.css';">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
-   ```
-
-   - If the CDN fails, it will attempt to load the local version of the FullCalendar assets.
-
-### 3. **Form Validation**
-   For the form submissions (`add-product-form` and `add-cashier-form`), you should add client-side validation to ensure the data is correct before sending it to the server.
-
-   **Example: Add Product Form Validation**
-   ```javascript
-
-
-
-
-
-
-
-
-
-  
+This setup should provide a solid foundation for your Express-based backend, connecting your project’s various components and handling dynamic content creation and routing.

@@ -17,15 +17,19 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chart.js": "^4.4.4",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.20.0",
     "express-rate-limit": "^5.3.0",
+    "firebase": "^10.13.1",
     "helmet": "^4.4.1",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "node-cache": "^5.1.2",
+    "react": "^18.3.1",
     "socket.io": "^4.0.1"
   },
   "devDependencies": {
@@ -42,10 +46,10 @@
       "node": true
     },
     "extends": [
-"eslint:recommended",
-"plugin:react/recommended",
-"plugin:@typescript-eslint/recommended"
-],
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
     "parserOptions": {
       "ecmaFeatures": {
         "jsx": true
@@ -54,9 +58,9 @@
       "sourceType": "module"
     },
     "plugins": [
-"react",
-"@typescript-eslint"
-],
+      "react",
+      "@typescript-eslint"
+    ],
     "rules": {}
   },
   "prettier": {
@@ -64,32 +68,18 @@
     "semi": true
   },
   "nodemonConfig": {
-    "watch": ["server.js", "routes/", "models/", "components/", "db/"],
+    "watch": [
+      "server.js",
+      "routes/",
+      "models/",
+      "components/",
+      "db/"
+    ],
     "ext": "js,json,html,css",
-    "ignore": ["node_modules/"]
+    "ignore": [
+      "node_modules/"
+    ]
   },
   "author": "Umar yakub Siyaki",
   "license": "ISC"
-  
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAH9zgS4AELK21fF6hMlS0GllR6Ek52_zs",
-  authDomain: "oladayo-enterprises.firebaseapp.com",
-  projectId: "oladayo-enterprises",
-  storageBucket: "oladayo-enterprises.appspot.com",
-  messagingSenderId: "75285671355",
-  appId: "1:75285671355:web:d7924bba01aa659fd1289e",
-  measurementId: "G-SNN1RY2S9S"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 }

@@ -137,5 +137,24 @@ router.post('/api/import', (req, res) => {
     // Process and save the imported data to the database
     res.status(200).json({ message: 'Data imported successfully' });
 });
+// AdminDashboard.jsx
+import React, { useState } from 'react';
+import Modal from '../public/dashboard/js/Modals';
+
+const AdminDashboard = () => {
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
+
+    return (
+        <div>
+            <button onClick={openModal}>Add Cashier</button>
+            {showModal && <Modal closeModal={closeModal} />}
+        </div>
+    );
+};
+
+export default AdminDashboard;
 
 module.exports = router;

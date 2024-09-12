@@ -74,3 +74,32 @@ document.addEventListener("DOMContentLoaded", function () {
        console.error('Revenue chart canvas not found');
    }
 });
+
+// index.js
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProductData('viju', 'viju-products');
+    fetchProductData('cocacola', 'cocacola-products');
+    fetchProductData('bigi', 'bigi-products');
+    fetchProductData('big', 'big-products');
+    fetchProductData('maltina', 'maltina-products');
+    fetchProductData('lucozade', 'lucozade-products');
+    fetchProductData('climax', 'climax-products');
+    fetchProductData('slim', 'slim-products');
+    fetchProductData('holandia', 'holandia-products');
+});
+
+function fetchProductData(vendor, elementId) {
+    fetch(`${vendor}.html`)
+        .then(response => response.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const htmlDocument = parser.parseFromString(data, 'text/html');
+            const productCards = htmlDocument.querySelectorAll('.product-card');
+            const container = document.getElementById(elementId);
+
+            productCards.forEach(card => {
+                container.appendChild(card.cloneNode(true));
+            });
+        })
+        .catch(error => console.error('Error fetching product data:', error));
+}

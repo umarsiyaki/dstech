@@ -1,20 +1,4 @@
 
-// Fetch and display activity log
-fetch('/api/activityLog')
-    .then(response => response.json())
-    .then(logs => {
-        const activityLogTable = document.getElementById('activityLogTable');
-        activityLogTable.innerHTML = '';
-
-        logs.forEach(log => {
-            const row = `<tr>
-                <td>${log.admin}</td>
-                <td>${log.action}</td>
-                <td>${new Date(log.timestamp).toLocaleString()}</td>
-            </tr>`;
-            activityLogTable.innerHTML += row;
-        });
-    });
 
 
 
@@ -132,6 +116,32 @@ To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)*
            // Display push notification
            alert(`New Notification: ${payload.notification.title}`);
        });
+       
+// Send push notification for new order
+const sendPushNotification = async (token, message) => {
+    const payload = {
+        notification: {
+            title: 'New Order',
+            body: `Order #${message.orderId} has been placed.`,
+        }
+    };
+
+    try {
+        await admin.messaging().sendToDevice(token, payload);
+        console.log('Push notification sent');
+    } catch (error) {
+        console.error('Error sending push notification:', error);
+    }
+};
+
+// Trigger when new order event occurs
+socket.on('newOrder', (orderData) => {
+    const message = {
+        orderId: orderData.orderId
+    };
+    // Send notification to the user's device token
+    sendPushNotification(userDeviceToken, message);
+});
    </script>
    ```
 
@@ -164,31 +174,6 @@ To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)*
 Whenever an important event occurs (like a new order), you can trigger a push notification to all subscribed users.
 
 ```javascript
-// Send push notification for new order
-const sendPushNotification = async (token, message) => {
-    const payload = {
-        notification: {
-            title: 'New Order',
-            body: `Order #${message.orderId} has been placed.`,
-        }
-    };
-
-    try {
-        await admin.messaging().sendToDevice(token, payload);
-        console.log('Push notification sent');
-    } catch (error) {
-        console.error('Error sending push notification:', error);
-    }
-};
-
-// Trigger when new order event occurs
-socket.on('newOrder', (orderData) => {
-    const message = {
-        orderId: orderData.orderId
-    };
-    // Send notification to the user's device token
-    sendPushNotification(userDeviceToken, message);
-});
 ```
 
 ### 3. **Push Notification Handling on the Front-End**
@@ -249,19 +234,6 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-
-    // Replace this with your actual authentication logic
-    if (username === 'admin' && password === 'adminpassword') {
-        // Success: Respond with a success message and user data
-        res.json({ success: true, message: 'Login successful' });
-    } else {
-        // Failure: Respond with an error message
-        res.json({ success: false, message: 'Invalid username or password' });
-    }
-});
-
 app.listen(3000, () => console.log('Server running on port 3000'));
 ```
 
@@ -287,8 +259,7 @@ To enhance **safety** and ensure a **robust** system in your code, you should im
    You can include fallback logic in case the CDN fails by providing a local alternative:
 
    ```html
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet" onerror="this.href='assets/fullcalendar/main.min.css';">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
+
    ```
 
    - If the CDN fails, it will attempt to load the local version of the FullCalendar assets.
@@ -308,3 +279,60 @@ To enhance **safety** and ensure a **robust** system in your code, you should im
 
 
   
+No, there are a few more things to consider:
+
+- Error handling: You should add try-catch blocks to handle errors that may occur during the order submission and retrieval process.
+- Validation: You should validate the order data before submitting it to the database to ensure that it is correct and complete.
+- Security: You should consider adding security measures such as authentication and authorization to ensure that only authorized users can submit orders and view order history.
+- Database schema: You will need to create a database schema to store the order data. This will involve creating tables for orders, customers, products, and other relevant data.
+- Frontend code: You will need to write frontend code to display the order history and submit new orders. This will involve using HTML, CSS, and JavaScript to create a user interface.
+
+Here is an updated version of the code that includes some of these considerations:
+
+_order.js_
+```
+```
+
+_app.js_
+```
+const express = require('express');
+const app = express();
+```
+
+This is still a basic example and you will need to add more functionality and error handling to make it production-ready.Here is an updated version of the checkout page with actual logic implemented:
+
+_checkout.html_
+```
+<!-- ... -->
+<!-- ... -->
+```
+
+_checkout.js_
+Here is the rest of the code:
+
+```
+```
+
+Note that the `processPayment` and `placeOrder` functions are not implemented here, as they would require integration with a payment gateway and order management system, respectively. You would need to implement these functions according to your specific requirements.
+
+Also, the `cartItemsData` variable is assumed to be an array of objects, where each object represents a cart item with properties such as `name`, `price`, and `quantity`. You would need to modify the code to match your specific cart data structure.To send notifications to the admin and cashier, you can use JavaScript to update the notification containers in the dashboard/admin and cashier.html pages.
+
+Here's an example of how you can do it:
+
+```
+
+```
+
+Make sure to replace the `message-container`, `notification-container`, and `order-history` IDs with the actual IDs of the containers in your HTML.
+
+To send notifications in real-time, you would need to use a backend technology like Node.js, Python, or Ruby to send notifications to the admin and cashier dashboards. This would involve setting up a server-side application that listens for new orders and sends notifications to the relevant dashboards.
+
+To record orders in the order history section, you would need to store the order data in a database or file system, and then retrieve and display it in the order history container. This would also require a backend technology to manage the data storage and retrieval.Here's an example of how you can implement the order submission and storage in the database using Node.js, and then retrieve and display the order history:
+
+*db.js*
+```
+
+```
+
+*order.js*
+```

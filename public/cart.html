@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+
+<!-- ... -->
+<div class="cart-container">
+    <div class="cart-items">
+        <div class="cart-item">
+            <img src="product1.jpg" alt="Product 1">
+            <div class="cart-item-info">
+                <h2>Product 1</h2>
+                <p>Tracking Number: #123456</p>
+                <p>Size: Large</p>
+                <p>Quantity: 2</p>
+                <p>Price: ₦19,990</p>
+                <p>Rating: 4.5/5</p>
+                <p>Category: Electronics</p>
+                <p>Vendor: XYZ Store</p>
+            </div>
+            <button class="remove-btn"><i class="fas fa-trash"></i></button>
+        </div>
+        <!-- More cart items here -->
+    </div>
+    <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <p>Total Number of Products: <span id="total-products">0</span></p>
+        <p>Subtotal: ₦<span id="subtotal">0.00</span></p>
+        <p>Tax (8%): ₦<span id="tax">0.00</span></p>
+        <p>Total: ₦<span id="total">0.00</span></p>
+        <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+    </div>
+</div>
+<script src="dashboard/js/cart.js"></script>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet" onerror="this.href='assets/fullcalendar/main.min.css';">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js" onerror="this.src='assets/fullcalendar/main.min.js';"></script>
+</body>
+
+</html>

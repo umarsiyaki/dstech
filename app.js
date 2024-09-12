@@ -32,6 +32,36 @@ require('dotenv').config();
 // Create Express app
 const app = express();
 
+const order = require('./order');
+
+app.use(express.json());
+
+app.post('/submit-order', (req, res) => {
+  try {
+    const orderData = req.body;
+    order.submitOrder(orderData);
+    res.send('Order submitted successfully!');
+  } catch (err) {
+    console.error('error submitting order:', err);
+    res.status(500).send('Error submitting order');
+  }
+});
+
+app.get('/order-history', (req, res) => {
+  try {
+    order.getOrderHistory().then((results) => {
+      res.json(results);
+    });
+  } catch (err) {
+    console.error('error getting order history:', err);
+    res.status(500).send('Error getting order history');
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
 // Create Sequelize instance for SQL database
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
   host: process.env.DB_HOST,
@@ -95,6 +125,20 @@ app.post('/api/cashiers', async (req, res) => {
   }
 });
 
+
+
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Replace this with your actual authentication logic
+    if (username === 'admin' && password === 'adminpassword') {
+        // Success: Respond with a success message and user data
+        res.json({ success: true, message: 'Login successful' });
+    } else {
+        // Failure: Respond with an error message
+        res.json({ success: false, message: 'Invalid username or password' });
+    }
+});
 // Additional routes for orders, users, etc.
 app.get('/api/orders', async (req, res) => {
   // Logic to fetch orders

@@ -1,8 +1,51 @@
 To connect and integrate your project structure using Express, follow these steps. This approach will help ensure that your files are properly wired up, and your backend will serve the front-end content dynamically.
 
+<<<<<<< HEAD
 ### 1. **Setup `server.js`**
 
 In your `server/` folder, you have a `server.js` file. This will be the main entry point of your Express server. Configure it to set up middleware, routes, and start the server.
+=======
+
+
+
+```
+
+### 3. **Additional Analytics and Reports Features:**
+
+- **Order Reports:** You can also implement charts for tracking total orders and order statuses over time.
+- **Filter by Date Range:** Add date range filters to allow admins to view reports for custom periods (e.g., last 30 days, this week, etc.).
+
+```html
+<div class="date-filter">
+    <label for="dateStart">Start Date:</label>
+    <input type="date" id="dateStart">
+    <label for="dateEnd">End Date:</label>
+    <input type="date" id="dateEnd">
+    <button onclick="fetchReports()">Filter</button>
+</div>
+```
+
+### Summary:
+- **Revenue Reports:** Using **Chart.js**, you can generate dynamic line charts for revenue trends.
+- **Sales Reports:** A bar chart for product sales.
+- **Admin Activity Log:** A table that displays actions taken by admins, such as product additions and user management tasks.
+  
+Next, we can continue with implementing **Search and Filter Functionality** or move to another feature of your choice. Let me know how you'd like to proceedLet's move on to the next feature: **Real-Time Notifications** with **Push Notifications** integration.
+
+We'll add **Socket.io** for in-app notifications and integrate **Firebase Cloud Messaging (FCM)** for push notifications to provide a complete real-time notification system for your admin dashboard.
+
+### 1. **Socket.io for Real-Time In-App Notifications**
+
+**Steps:**
+- Set up **Socket.io** for sending and receiving notifications in real-time.
+- Display notifications in the admin dashboard as soon as events happen, like new orders or low stock alerts.
+
+#### **Backend (Socket.io) Configuration:**
+
+We’ve already initialized **Socket.io** in the previous step. Let’s build upon that with real-time notifications for events like new orders.
+
+#### Modify **Socket.io** in `app.js`:
+>>>>>>> 4d8d9876a85e6a44f245e5103d61ca4308d04243
 
 ```javascript
 // server/server.js
@@ -55,10 +98,139 @@ app.listen(PORT, () => {
 
 ### 2. **Configure Routes**
 
+<<<<<<< HEAD
 In the `routes/` folder, you have various route files. Ensure that each file properly exports its routes.
+=======
+To listen for real-time notifications on the front end, we’ll use **Socket.io-client**. Make sure you include the Socket.io library in your front-end code.
+
+```html
+<!-- Include Socket.io in your admin dashboard -->
+
+<script>
+    
+</script>
+```
+
+Now, whenever an event occurs (e.g., new order, low stock), notifications will be pushed to the admin panel in real-time.
+
+### 2. **Push Notifications with Firebase Cloud Messaging (FCM)**
+
+To add **push notifications**, we'll integrate **Firebase Cloud Messaging (FCM)** for web push notifications that work outside the application.
+
+#### **Setting up Firebase Cloud Messaging (FCM)**:
+
+1. **Create a Firebase Project**:
+   - Go to the [Firebase Console](https://console.firebase.google.com/).
+   - Create a new project.
+
+2. **Add Firebase to Your Web App**:
+   - In your Firebase project, go to **Project Settings**.
+   - Under the **General** tab, scroll to the **Your apps** section and click **Web** to register your web app.
+   - Copy your **Firebase SDK Config**.
+
+3. **Install Firebase SDK**:
+   - Install the Firebase SDK in your project:
+   ```bash
+   npm install firebase
+   ```
+
+4. **Add Firebase Config in the Front-End**:
+
+   ```html
+   <script>
+       // Firebase configuration
+       const firebaseConfig = {
+           apiKey: "YOUR_API_KEY",
+           authDomain: "YOUR_AUTH_DOMAIN",
+           projectId: "YOUR_PROJECT_ID",
+           storageBucket: "YOUR_STORAGE_BUCKET",
+           messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+           appId: "YOUR_APP_ID"
+       };
+
+       // Initialize Firebase
+       const app = firebase.initializeApp(firebaseConfig);
+       const messaging = firebase.messaging();
+
+       // Get registration token for push notifications
+       messaging.getToken({ vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
+           if (currentToken) {
+               console.log('Token:', currentToken);
+               // Send token to server to subscribe for push notifications
+           } else {
+               console.log('No registration token available. Request permission to generate one.');
+           }
+       }).catch((err) => {
+           console.log('An error occurred while retrieving token.', err);
+       });
+
+       // Listen for incoming messages
+       messaging.onMessage((payload) => {
+           console.log('Message received. ', payload);
+           // Display push notification
+           alert(`New Notification: ${payload.notification.title}`);
+       });
+       
+// Send push notification for new order
+const sendPushNotification = async (token, message) => {
+    const payload = {
+        notification: {
+            title: 'New Order',
+            body: `Order #${message.orderId} has been placed.`,
+        }
+    };
+
+    try {
+        await admin.messaging().sendToDevice(token, payload);
+        console.log('Push notification sent');
+    } catch (error) {
+        console.error('Error sending push notification:', error);
+    }
+};
+
+// Trigger when new order event occurs
+socket.on('newOrder', (orderData) => {
+    const message = {
+        orderId: orderData.orderId
+    };
+    // Send notification to the user's device token
+    sendPushNotification(userDeviceToken, message);
+});
+   </script>
+   ```
+
+5. **Backend Integration with Firebase FCM**:
+   You can trigger push notifications from your server-side application whenever significant events occur.
+
+   Use the **Firebase Admin SDK** to send push notifications from your back-end:
+
+   ```bash
+   npm install firebase-admin
+   ```
+
+   Create a Firebase admin instance:
+
+   ```javascript
+   // config/firebase.js
+   const admin = require('firebase-admin');
+   const serviceAccount = require('./path/to/your-firebase-service-account.json');
+
+   admin.initializeApp({
+       credential: admin.credential.cert(serviceAccount),
+       databaseURL: "https://your-project-id.firebaseio.com"
+   });
+
+   module.exports = admin;
+   ```
+
+#### **Send Push Notifications from Backend**:
+
+Whenever an important event occurs (like a new order), you can trigger a push notification to all subscribed users.
+>>>>>>> 4d8d9876a85e6a44f245e5103d61ca4308d04243
 
 #### Example `authRoutes.js`:
 ```javascript
+<<<<<<< HEAD
 // server/routes/authRoutes.js
 const express = require('express');
 const router = express.Router();
@@ -103,6 +275,8 @@ exports.login = (req, res) => {
 exports.register = (req, res) => {
     // Logic for registration
 };
+=======
+>>>>>>> 4d8d9876a85e6a44f245e5103d61ca4308d04243
 ```
 
 ### 4. **Middleware Setup**
@@ -148,7 +322,17 @@ Ensure `db.js` handles your database connection logic.
 
 #### Example `db.js`:
 ```javascript
+<<<<<<< HEAD
 // db/db.js
+=======
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+>>>>>>> 4d8d9876a85e6a44f245e5103d61ca4308d04243
 ```
 
 ### 6. **Static Files and Assets**
@@ -172,4 +356,85 @@ Ensure that you have unit and integration tests in place. Add test cases for you
 - Set up database connections and queries in `db/`.
 - Ensure static files and error handling are correctly set up.
 
+<<<<<<< HEAD
 This setup should provide a solid foundation for your Express-based backend, connecting your project’s various components and handling dynamic content creation and routing.
+=======
+   ```html
+
+   ```
+
+   - If the CDN fails, it will attempt to load the local version of the FullCalendar assets.
+
+### 3. **Form Validation**
+   For the form submissions (`add-product-form` and `add-cashier-form`), you should add client-side validation to ensure the data is correct before sending it to the server.
+
+   **Example: Add Product Form Validation**
+   ```javascript
+
+
+
+
+
+
+
+
+
+  
+No, there are a few more things to consider:
+
+- Error handling: You should add try-catch blocks to handle errors that may occur during the order submission and retrieval process.
+- Validation: You should validate the order data before submitting it to the database to ensure that it is correct and complete.
+- Security: You should consider adding security measures such as authentication and authorization to ensure that only authorized users can submit orders and view order history.
+- Database schema: You will need to create a database schema to store the order data. This will involve creating tables for orders, customers, products, and other relevant data.
+- Frontend code: You will need to write frontend code to display the order history and submit new orders. This will involve using HTML, CSS, and JavaScript to create a user interface.
+
+Here is an updated version of the code that includes some of these considerations:
+
+_order.js_
+```
+```
+
+_app.js_
+```
+const express = require('express');
+const app = express();
+```
+
+This is still a basic example and you will need to add more functionality and error handling to make it production-ready.Here is an updated version of the checkout page with actual logic implemented:
+
+_checkout.html_
+```
+<!-- ... -->
+<!-- ... -->
+```
+
+_checkout.js_
+Here is the rest of the code:
+
+```
+```
+
+Note that the `processPayment` and `placeOrder` functions are not implemented here, as they would require integration with a payment gateway and order management system, respectively. You would need to implement these functions according to your specific requirements.
+
+Also, the `cartItemsData` variable is assumed to be an array of objects, where each object represents a cart item with properties such as `name`, `price`, and `quantity`. You would need to modify the code to match your specific cart data structure.To send notifications to the admin and cashier, you can use JavaScript to update the notification containers in the dashboard/admin and cashier.html pages.
+
+Here's an example of how you can do it:
+
+```
+
+```
+
+Make sure to replace the `message-container`, `notification-container`, and `order-history` IDs with the actual IDs of the containers in your HTML.
+
+To send notifications in real-time, you would need to use a backend technology like Node.js, Python, or Ruby to send notifications to the admin and cashier dashboards. This would involve setting up a server-side application that listens for new orders and sends notifications to the relevant dashboards.
+
+To record orders in the order history section, you would need to store the order data in a database or file system, and then retrieve and display it in the order history container. This would also require a backend technology to manage the data storage and retrieval.Here's an example of how you can implement the order submission and storage in the database using Node.js, and then retrieve and display the order history:
+
+*db.js*
+```
+
+```
+
+*order.js*
+```
+>>>>>>> 4d8d9876a85e6a44f245e5103d61ca4308d04243

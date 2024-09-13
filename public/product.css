@@ -58,7 +58,7 @@ body {
 
 /* Product Cards */
 .product-card {
-    background-color: #fff;
+    background-color: #6596c4;
     border: 1px solid #ddd;
     padding: 20px;
     margin: 20px;
@@ -67,7 +67,7 @@ body {
 }
 
 .product-card img {
-    width: 15%;
+    width: 40px;
     height: auto;
     border-radius: 50px;
 }

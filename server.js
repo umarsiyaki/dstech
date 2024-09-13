@@ -16,6 +16,44 @@ const http = require('http');
 const socketIo = require('socket.io');
 const NodeCache = require('node-cache');
 
+app.use(bodyParser.json());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/reviewsdb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+// Define a review schema and model
+const reviewSchema = new mongoose.Schema({
+  name: String,
+  comment: String,
+  rating: Number
+});
+const Review = mongoose.model('Review', reviewSchema);
+
+// Handle review submission
+app.post('/api/reviews', async (req, res) => {
+  const { name, comment, rating } = req.body;
+  
+  try {
+    const review = new Review({ name, comment, rating });
+    await review.save();
+    res.json({ success: true });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
+// Fetch reviews
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await Review.find();
+    res.json(reviews);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 // Import routes
 const userRoutes = require('./server/routes/userRoutes');
 const productRoutes = require('./server/routes/productRoutes');

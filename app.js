@@ -245,5 +245,80 @@ const StaticFile = () => {
     <div>Loading...</div>
   );
 };
+// Vendor IDs mapping for each page
+const vendorMapping = {
+  'index.html': {
+    'bigi': 'bigi-products',
+    'maltinal': 'maltinal-products',
+    // add more vendors as needed
+  },
+  'bigi.html': { 'bigi': 'products' },
+  'maltina.html': { 'maltinal': 'products' },
+  // map other pages and vendors
+};
+
+// Example product data (can be retrieved from a server/database)
+const products = [
+  { id: 1, vendor: 'bigi', name: 'Bigi Cola', price: '$1', img: 'bigi-cola.jpg', size: '50cl' },
+  { id: 2, vendor: 'maltinal', name: 'Maltina (can)', price: '$1.5', img: 'maltina-can.jpg', size: '50cl' },
+  // Add more products
+];
+
+// Save product to localStorage and Database
+function saveProductData(product) {
+  let storedProducts = JSON.parse(localStorage.getItem('products')) || [];
+  storedProducts.push(product);
+  localStorage.setItem('products', JSON.stringify(storedProducts));
+
+  // Save to database
+  fetch('https://api.oladayoent.com.ng/save-product', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(product),
+  })
+  .then(response => response.json())
+  .then(data => console.log('Product saved to database:', data))
+  .catch(error => console.error('Error saving product:', error));
+}
+
+// Dynamically load and render products by vendor
+function renderProductsByVendor(vendorID) {
+  const productsContainer = document.getElementById(vendorID);
+  if (!productsContainer) return;
+
+  // Retrieve products from localStorage or fallback to default
+  const storedProducts = JSON.parse(localStorage.getItem('products')) || products;
+
+  storedProducts
+    .filter(product => product.vendor === vendorID)
+    .forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.classList.add('product-card');
+      productCard.innerHTML = `
+        <img src="${product.img}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>Size: ${product.size}</p>
+        <p>Price: ${product.price}</p>
+        <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+      `;
+      productsContainer.appendChild(productCard);
+    });
+
+  // Add event listeners for "Add to Cart" buttons
+  document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+      const productId = this.getAttribute('data-id');
+      const selectedProduct = storedProducts.find(product => product.id == productId);
+      saveProductData(selectedProduct);
+    });
+  });
+}
+
+// Get current page and load corresponding vendor products
+const currentPage = window.location.pathname.split('/').pop();
+const vendors = vendorMapping[currentPage];
+if (vendors) {
+  Object.values(vendors).forEach(vendorID => renderProductsByVendor(vendorID));
+}
 
 export default App;

@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/nav.css">
+
     
 
 </script><script src="/js/scripts.js"></script>
@@ -20,72 +23,176 @@
 
 </head>
 <body>
-    
     <div class="admin-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-left">
                 <div class="logo">
-                    <img src="images/admin.jpg" alt="Oladayo enterprises Logo">
-                    <h2>Oladayo enterprises</h2>
+                    <img src="images/admin.jpg" alt="Oladayo Enterprises Logo">
+                    <h2>Oladayo Enterprises</h2>
                 </div>
-                <button class="toggle-sidebar-btn">&times;</button>
+                <button class="toggle-sidebar-btn">&#9776;</button>
             </div>
-            <nav class="sidebar-nav">
-                <button id="create-blog-btn">Create Blog</button>
-                <button id="open-login-modal">Open Login Modal</button>
-                <button id="open-data-import-modal">Open Data Import Modal</button>
-                <button id="open-data-import-export-modal">Open Data Import/Export Modal</button>
-                <button id="open-audit-logs-modal">Open Audit Logs Modal</button>
-                <button id="open-inventory-management-modal">Open Inventory Management Modal</button>
-                <button id="open-product-modal">Open Product Modal</button>
-                <button id="open-add-cashier-modal">Open Add Cashier Modal</button>
-</nav>
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Navbar -->
-            <header class="navbar">
-                <div class="navbar-left">
-                    <button class="toggle-sidebar-btn">&#9776;</button>
-                    <h1>Admin Dashboard</h1>
-                </div>
-                <div class="navbar-middle">
-                    <input type="text" class="search-bar" placeholder="Search...">
-                </div>
-                <!-- Notifications and Messages Dropdown Menu -->
+            <div class="navbar-middle">
+                <input type="text" class="search-bar" placeholder="Search...">
+            </div>
+            <div class="navbar-right">
                 <div class="nav-item dropdown">
                     <button class="dropbtn">Messages <span class="badge">5</span></button>
-                    <div class="dropdown-content" id="message-container">
+                    <div class="dropdown-content">
                         <a href="#">New Message 1</a>
                         <a href="#">New Message 2</a>
-                        <a href="#">New Message 3</a>
                         <a href="#">View All Messages</a>
                     </div>
                 </div>
                 <div class="nav-item dropdown">
                     <button class="dropbtn">Notifications <span class="badge">8</span></button>
-                    <div class="dropdown-content" id="notificationSectionId">
+                    <div class="dropdown-content">
                         <a href="#">Notification 1</a>
                         <a href="#">Notification 2</a>
-                        <a href="#">Notification 3</a>
                         <a href="#">View All Notifications</a>
                     </div>
                 </div>
-  
-         <div class="nav-item dropdown">
-                        <button class="dropbtn">Profile <i class="fas fa-user-circle"></i></button>
-                        <div class="dropdown-content">
-                            <a href="#">Profile Settings</a>
-                            <a href="profile.htnl">check profile</a>
-                            <button id="openLoginModal">Login</button>                        </div>
+                <div class="nav-item dropdown">
+                    <button class="dropbtn">Profile <i class="fas fa-user-circle"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Profile Settings</a>
+                        <a href="#">Check Profile</a>
+                        <button id="openLoginModal">Login</button>
                     </div>
                 </div>
-            </header>
-
+            </div>
+        </header>
+    
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <button id="create-blog-btn">Create Blog</button>
+                <button id="open-login-modal">Open Login Modal</button>
+                <button id="open-data-import-modal">Open Data Import Modal</button>
+                <button id="open-audit-logs-modal">Open Audit Logs Modal</button>
+                <button id="open-inventory-management-modal">Open Inventory Management Modal</button>
+                <button id="open-product-modal">Open Product Modal</button>
+                <button id="open-add-cashier-modal">Open Add Cashier Modal</button>
+            </nav>
+        </aside>
+    
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Order History Section -->
+            <section class="order-history">
+                <h2>Order History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Name</th>
+                            <th>Tracking ID</th>
+                            <th>Total Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#00123</td>
+                            <td>John Doe</td>
+                            <td>TRACK123</td>
+                            <td>₦150,000</td>
+                            <td>
+                                <button>Print Receipt</button>
+                                <button>Confirm</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </section>
+    
+            <!-- Cashier Performance Section -->
+            <section class="cashier-performance">
+                <h2>Cashier Performance</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Store</th>
+                            <th>Time</th>
+                            <th>Tasks Done</th>
+                            <th>Contact</th>
+                            <th>Confirm Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Store A</td>
+                            <td>12:30 PM</td>
+                            <td>Payment Confirmation</td>
+                            <td><button>Message</button></td>
+                            <td><button>Confirm</button></td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </section>
+    
+            <!-- Top Selling Products Section -->
+            <section class="top-selling-products">
+                <h2>Top Selling Products</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Vendor</th>
+                            <th>Total Sales</th>
+                            <th>Link</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product 1</td>
+                            <td>Vendor A</td>
+                            <td>₦500,000</td>
+                            <td><a href="#">View Product</a></td>
+                            <td>4.5</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </section>
+    
+            <!-- User Signups Section -->
+            <section class="user-signups">
+                <h2>Recent User Signups</h2>
+                <input type="text" class="search-bar" placeholder="Search users...">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Email</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alice Smith</td>
+                            <td>Lagos, Nigeria</td>
+                            <td>alice@example.com</td>
+                            <td>2:15 PM</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    
             <!-- Additional Admin Sections -->
 
 
-            </section>
 
 <div class="search-filter-container">
     <h2>Search and Filter</h2>
@@ -470,35 +577,23 @@
         <div class="modal-content">
             <span class="close" id="close-product-modal">&times;</span>
             <h2>Add New Product</h2>
-            <form id="add-product-form">
-                <div class="form-group">
-                    <label for="product-name">Product Name:</label>
-                    <input type="text" id="product-name" name="productName" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-category">Category:</label>
-                    <input type="text" id="product-category" name="category" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-price">Product Price ($):</label>
-                    <input type="number" id="product-price" name="price" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-quantity">Quantity:</label>
-                    <input type="number" id="product-quantity" name="quantity" required>
-                </div>
-                <div class="form-group">
-                    <label for="total-left">Total Left:</label>
-                    <input type="number" id="total-left" name="totalLeft" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-image">Product Image:</label>
-                    <input type="file" id="product-image" name="image" accept="image/*" required>
-                </div>
-                <div class="form-group">
+            <!-- Product Form -->
+           <form id="product-form">
+                    <input type="text" id="product-id" placeholder="Product ID" required>
+                    <input type="text" id="product-name" placeholder="Product Name" required>
+                    <input type="text" id="product-image" placeholder="Image URL" required>
+                    <input type="text" id="product-description" placeholder="Description" required>
+                    <input type="text" id="product-category" placeholder="Category" required>
+                    <input type="number" id="product-price" placeholder="Price" required>
+                    <input type="number" id="product-discount" placeholder="Discount (in %)" required>
+                    <input type="text" id="product-promo-code" placeholder="Promo Code">
+                    <input type="number" id="product-stock" placeholder="Stock Quantity" required>
+                    <input type="text" id="product-packaging" placeholder="Packaging Info">
+                    <input type="text" id="product-brand" placeholder="Brand Name" required>
+                    <input type="text" id="product-rating" placeholder="Rating (1-5)">
                     <button type="submit">Add Product</button>
-                </div>
             </form>
+
         </div>
     </div>
 

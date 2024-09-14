@@ -6,6 +6,22 @@ const subtotalSpan = document.getElementById('subtotal');
 const taxSpan = document.getElementById('tax');
 const totalSpan = document.getElementById('total');
 const checkoutBtn = document.getElementById('checkout-btn');
+const cart = {};
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const productId = button.closest('.product-card').dataset.productId;
+        if (cart[productId]) {
+            cart[productId]++;
+        } else {
+            cart[productId] = 1;
+        }
+        updateCartUI();
+    });
+});
+
+function updateCartUI() {
+    document.getElementById('cart-button').innerText = `Cart (${Object.keys(cart).length})`;
+}
 
 // Function to populate cart items
 function populateCartItems() {
@@ -54,3 +70,19 @@ function handleCheckoutButtonClick() {
 // Initialize cart logic
 populateCartItems();
 checkoutBtn.addEventListener('click', handleCheckoutButtonClick);
+
+document.querySelectorAll('.increase-quantity').forEach(button => {
+    button.addEventListener('click', () => {
+        const quantity = button.previousElementSibling;
+        quantity.innerText = parseInt(quantity.innerText) + 1;
+    });
+});
+
+document.querySelectorAll('.decrease-quantity').forEach(button => {
+    button.addEventListener('click', () => {
+        const quantity = button.nextElementSibling;
+        if (parseInt(quantity.innerText) > 1) {
+            quantity.innerText = parseInt(quantity.innerText) - 1;
+        }
+    });
+});

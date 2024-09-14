@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const productModal = document.getElementById('product-modal');
     const addCashierModal = document.getElementById('add-cashier-modal');
 
+    //nav toggle
+    document.querySelector('.navbar-toggle').addEventListener('click', () => {
+        document.querySelector('.navbar-menu').classList.toggle('active');
+      });
+      
     // Get the buttons that open the modals
     const openLoginModalBtn = document.getElementById('openLoginModal');
     const productBtn = document.getElementById('product-btn');

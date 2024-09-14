@@ -530,7 +530,7 @@ UPDATE products
 SET price = price * (1 - (discount / 100.0))
 WHERE category = 'Drinks';
 
--- 6. Reset user passwords (example of bulk operations, use with caution)
+-- 6. Reset user passwords (bulk operations, use with caution)
 UPDATE users
 SET password = 'default_password_hash';  -- Replace with an appropriate hashed password.
 

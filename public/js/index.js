@@ -162,3 +162,34 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => console.error('Error:', error));
   });
   
+  fetch('/api/reviews', { /* ... */ })
+  .then(data => {
+    // Append the newly submitted review to the list immediately
+    const reviewCard = document.createElement('div');
+    reviewCard.innerHTML = `
+      <h3>${name}</h3>
+      <p>${comment}</p>
+      <p>Rating: ${'★'.repeat(rating)}</p>
+    `;
+    reviewsContainer.appendChild(reviewCard);
+  });
+ 
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/reviews')
+      .then(response => response.json())
+      .then(reviews => {
+        const reviewsContainer = document.getElementById('customer-reviews');
+        reviews.forEach(review => {
+          const reviewCard = document.createElement('div');
+          reviewCard.className = 'customer-card';
+          reviewCard.innerHTML = `
+            <h3>${review.name}</h3>
+            <p>${review.comment}</p>
+            <p>Rating: ${'★'.repeat(review.rating)}</p>
+          `;
+          reviewsContainer.appendChild(reviewCard);
+        });
+      })
+      .catch(error => console.error('Error fetching reviews:', error));
+  });
+  

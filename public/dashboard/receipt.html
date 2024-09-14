@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Template</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="socket.io/socket.io.js"></script>
+</head>
+<body>
+
+<div class="receipt-container">
+  <div class="receipt-header">
+    <h2>oladayo enterprises</h2>
+    <p>Transaction Date: <span id="transaction-date"></span></p>
+    <p>Receipt No: <span id="receipt-no"></span></p>
+  </div>
+
+  <div class="receipt-items">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Brand</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="receipt-items-body">
+        <!-- Items will be dynamically inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="receipt-summary">
+    <p>Subtotal: <span id="subtotal"></span></p>
+    <p>Tax (10%): <span id="tax"></span></p>
+    <p><strong>Total: <span id="total"></span></strong></p>
+  </div>
+
+  <div class="receipt-footer">
+    <p>Thank you for your purchase!</p>
+  </div>
+</div>
+
+<!-- Importing necessary JavaScript files -->
+<script src="Dashboard/js/cart.js"></script>
+<script src="Dashboard/js/checkOut.js"></script>
+<script src="Dashboard/js/calculate.js"></script>
+<script src="../../js/payment.js"></script>
+<script src="../js/fetching.js"></script>
+
+<!-- Socket.io handling -->
+<script>
+  const socket = io(); // Establishing socket connection
+
+  // Simulate user, cashier, and admin data
+  const currentUser = { name: 'John Doe', role: 'cashier' };
+
+  // Sample dynamic receipt data
+  const receiptData = {
+    transactionDate: new Date().toLocaleString(),
+    receiptNo: Math.floor(Math.random() * 1000000),
+    items: [
+      { name: 'All Natural Soap', brand: 'Bigi', qty: 2, price: 126 },
+      { name: 'Unscented Baby Powder', brand: 'Climax', qty: 1, price: 520 }
+    ],
+    taxRate: 0.10,
+    userName: currentUser.name
+  };
+
+  // Function to format numbers as currency
+  const formatCurrency = (amount) => '$' + amount.toFixed(2);
+
+  // Function to generate receipt and post data
+  const generateReceipt = (data) => {
+    // Set transaction date and receipt number
+    document.getElementById('transaction-date').textContent = data.transactionDate;
+    document.getElementById('receipt-no').textContent = data.receiptNo;
+
+    // Calculate totals
+    let subtotal = 0;
+    const receiptItemsBody = document.getElementById('receipt-items-body');
+    data.items.forEach(item => {
+      const total = item.qty * item.price;
+      subtotal += total;
+
+      // Insert each item row into the receipt table
+      const row = `<tr>
+                    <td>${item.name}</td>
+                    <td>${item.brand}</td>
+                    <td>${item.qty}</td>
+                    <td>${formatCurrency(item.price)}</td>
+                    <td>${formatCurrency(total)}</td>
+                  </tr>`;
+      receiptItemsBody.insertAdjacentHTML('beforeend', row);
+    });
+
+    const tax = subtotal * data.taxRate;
+    const total = subtotal + tax;
+
+    // Set summary details
+    document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+    document.getElementById('tax').textContent = formatCurrency(tax);
+    document.getElementById('total').textContent = formatCurrency(total);
+
+    // Emit socket.io event to notify admin and cashier
+    socket.emit('receipt-generated', {
+      user: currentUser.name,
+      transactionDate: data.transactionDate,
+      receiptNo: data.receiptNo,
+      totalAmount: formatCurrency(total),
+      items: data.items
+    });
+
+    // Send email notification to user/admin/cashier
+    sendEmailNotification(data);
+  };
+
+  // Function to send email notifications (via email.js)
+  const sendEmailNotification = (receiptData) => {
+    fetch('/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user: receiptData.userName,
+        receiptData
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Email sent successfully:', data);
+    })
+    .catch(error => {
+      console.error('Error sending email:', error);
+    });
+  };
+
+  // Generate the receipt on page load
+  generateReceipt(receiptData);
+</script>
+
+</body>
+</html>

@@ -303,7 +303,7 @@ canvas {
       width: 100%;
   }
 
-  .product-cards,
+  
   .customer-cards {
       flex-direction: column;
       align-items: center;
@@ -317,7 +317,6 @@ canvas {
 
 /* Tablets */
 @media only screen and (min-width: 601px) and (max-width: 768px) {
-  .product-cards,
   .customer-cards {
       justify-content: space-around;
   }
@@ -330,7 +329,6 @@ canvas {
       justify-content: space-between;
   }
 
-  .product-cards,
   .customer-cards {
       justify-content: space-between;
   }

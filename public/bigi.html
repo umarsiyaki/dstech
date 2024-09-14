@@ -8,109 +8,318 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="product.css">
-    <link rel="stylesheet" href="dashboard/css/nav.css">
-    <link rel="stylesheet" href="dashboard/css/product.css">
-    <link rel="stylesheet" href="dashboard/css/style.css">
-</head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="logo">
-            <img src="user.png" alt="Site Logo"><button id="cart-button">Cart (0)</button>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Vendor
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Big</a>
-                        <a class="dropdown-item" href="#">Bigi</a>
-                        <a class="dropdown-item" href="#">Holandia</a>
-                        <a class="dropdown-item" href="#">Viju</a>
-                        <a class="dropdown-item" href="#">Maltina</a>
-                        <a class="dropdown-item" href="#">Climax</a>
-                        <a class="dropdown-item" href="#">Pepsi</a>
-                        <a class="dropdown-item" href="#">Slim</a>
-                        <a class="dropdown-item" href="#">Smoov</a>
-                        <a class="dropdown-item" href="#">Lucozade</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sections
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Product</a>
-                        <a class="dropdown-item" href="#">Filters</a>
-                        <a class="dropdown-item" href="#">Top Selling</a>
-                        <a class="dropdown-item" href="#">Viewed Products</a>
-                        <a class="dropdown-item" href="#">Contact</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Services
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#payment">Payment</a>
-                        <a class="dropdown-item" href="#order">Orders</a>
-                        <a class="dropdown-item" href="# message.html">Message</a>
-                        <a class="dropdown-item" href="#dicounts.htmo">Discount</a>
-                        <a class="dropdown-item" href="#">Payment</a>
-                        <a class="dropdown-item" href="#">Orders</a>
-                        <a class="dropdown-item" href="#">Message</a>
-                        <a class="dropdown-item" href="#">Discount</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Message
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Inbox</a>
-                        <a class="dropdown-item" href="#">Read</a>
-                        <a class="dropdown-item" href="#">Unread</a>
-                        <a class="dropdown-item" href="#">Spam</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Notification
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Orders</a>
-                        <a class="dropdown-item" href="#">Receipt</a>
-                        <a class="dropdown-item" href="#">New</a>
-                    </div>
-                </li>
-<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Profile
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Update Profile</a>
-                        <a class="dropdown-item" href="#">Login/Register</a>
-                        <a class="dropdown-item" href="#">Theme</a>
-                    </div>
-                </li>
-            </ul>
-            <div class="search-bar">
-                <input type="search" placeholder="Search products...">
-                <button>Search</button>
-            </div>
-            <div class="user-image">
-                <img src="user-image.png" alt="User Image">
-            </div>
-        </div>
-    </nav>
+    <!-- 1. Navbar Section -->
+    <!-- Desktop Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light d-none d-lg-block">
+    <a class="navbar-brand" href="#"><img src="user.png" alt="Logo"></a>
+    <div class="collapse navbar-collapse" id="navbarDesktop">
+        <ul class="navbar-nav mr-auto">
+            <!-- Vendor Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="vendorDropdownDesktop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vendor</a>
+                <div class="dropdown-menu" aria-labelledby="vendorDropdownDesktop">
+                    <a class="dropdown-item" href="#">Big</a>
+                    <a class="dropdown-item" href="#">Bigi</a>
+                    <a class="dropdown-item" href="#">Holandia</a>
+                    <a class="dropdown-item" href="#">Viju</a>
+                    <a class="dropdown-item" href="#">Maltina</a>
+                    <a class="dropdown-item" href="#">Climax</a>
+                    <a class="dropdown-item" href="#">Pepsi</a>
+                    <a class="dropdown-item" href="#">Slim</a>
+                    <a class="dropdown-item" href="#">Smoov</a>
+                    <a class="dropdown-item" href="#">Lucozade</a>
+                </div>
+            </li>
 
+            <!-- Sections Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="sectionsDropdownDesktop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sections</a>
+                <div class="dropdown-menu" aria-labelledby="sectionsDropdownDesktop">
+                    <a class="dropdown-item" href="#">Product</a>
+                    <a class="dropdown-item" href="#">Filters</a>
+                    <a class="dropdown-item" href="#">Top Selling</a>
+                    <a class="dropdown-item" href="#">Viewed Products</a>
+                    <a class="dropdown-item" href="#">Contact</a>
+                </div>
+            </li>
+
+            <!-- Services Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="servicesDropdownDesktop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                <div class="dropdown-menu" aria-labelledby="servicesDropdownDesktop">
+                    <a class="dropdown-item" href="#payment">Payment history</a>
+                    <a class="dropdown-item" href="#order">Orders history</a>
+                    <a class="dropdown-item" href="message.html">Message</a>
+                    <a class="dropdown-item" href="discounts.html">Discount</a>
+                </div>
+            </li>
+
+            <!-- Message Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="messageDropdownDesktop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Message</a>
+                <div class="dropdown-menu" aria-labelledby="messageDropdownDesktop">
+                    <a class="dropdown-item" href="#">Inbox</a>
+                    <a class="dropdown-item" href="#">Read</a>
+                    <a class="dropdown-item" href="#">Unread</a>
+                    <a class="dropdown-item" href="#">Spam</a>
+                </div>
+            </li>
+
+            <!-- Notification Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdownDesktop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notification</a>
+                <div class="dropdown-menu" aria-labelledby="notificationDropdownDesktop">
+                    <a class="dropdown-item" href="#">Orders</a>
+                    <a class="dropdown-item" href="#">Receipt</a>
+                    <a class="dropdown-item" href="#">New</a>
+                </div>
+            </li>
+
+            <!-- Profile Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdownDesktop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                <div class="dropdown-menu" aria-labelledby="profileDropdownDesktop">
+                    <a class="dropdown-item" href="#">Update Profile</a>
+                    <a class="dropdown-item" href="#">Login/Register</a>
+                    <a class="dropdown-item" href="#">Theme</a>
+                </div>
+            </li>
+        </ul>
+        <div class="search-bar">
+            <input type="search" placeholder="Search products...">
+            <button>Search</button>
+        </div>
+        <div class="user-image">
+            <img src="user-image.png" alt="User Image">
+        </div>
+    </div>
+</nav>
+<!-- Tablet Navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block d-lg-none">
+<a class="navbar-brand" href="#"><img src="user.png" alt="Logo"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTablet" aria-controls="navbarTablet" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarTablet">
+    <ul class="navbar-nav mr-auto">
+        <!-- Vendor Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="vendorDropdownTablet" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vendor</a>
+            <div class="dropdown-menu" aria-labelledby="vendorDropdownTablet">
+                <a class="dropdown-item" href="#">Big</a>
+                <a class="dropdown-item" href="#">Bigi</a>
+                <a class="dropdown-item" href="#">Holandia</a>
+                <a class="dropdown-item" href="#">Viju</a>
+                <a class="dropdown-item" href="#">Maltina</a>
+                <a class="dropdown-item" href="#">Climax</a>
+                <a class="dropdown-item" href="#">Pepsi</a>
+                <a class="dropdown-item" href="#">Slim</a>
+                <a class="dropdown-item" href="#">Smoov</a>
+                <a class="dropdown-item" href="#">Lucozade</a>
+            </div>
+        </li>
+
+        <!-- Sections Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="sectionsDropdownTablet" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sections</a>
+            <div class="dropdown-menu" aria-labelledby="sectionsDropdownTablet">
+                <a class="dropdown-item" href="#">Product</a>
+                <a class="dropdown-item" href="#">Filters</a>
+                <a class="dropdown-item" href="#">Top Selling</a>
+                <a class="dropdown-item" href="#">Viewed Products</a>
+                <a class="dropdown-item" href="#">Contact</a>
+            </div>
+        </li>
+
+        <!-- Services Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdownTablet" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+            <div class="dropdown-menu" aria-labelledby="servicesDropdownTablet">
+                <a class="dropdown-item" href="#payment">Payment history</a>
+                <a class="dropdown-item" href="#order">Orders history</a>
+                <a class="dropdown-item" href="message.html">Message</a>
+                <a class="dropdown-item" href="discounts.html">Discount</a>
+            </div>
+        </li>
+
+        <!-- Message Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="messageDropdownTablet" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Message</a>
+            <div class="dropdown-menu" aria-labelledby="messageDropdownTablet">
+                <a class="dropdown-item" href="#">Inbox</a>
+                <a class="dropdown-item" href="#">Read</a>
+                <a class="dropdown-item" href="#">Unread</a>
+                <a class="dropdown-item" href="#">Spam</a>
+            </div>
+        </li>
+
+        <!-- Notification Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdownTablet" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notification</a>
+            <div class="dropdown-menu" aria-labelledby="notificationDropdownTablet">
+                <a class="dropdown-item" href="#">Orders</a>
+                <a class="dropdown-item" href="#">Receipt</a>
+                <a class="dropdown-item" href="#">New</a>
+            </div>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdownTablet" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+            <div class="dropdown-menu" aria-labelledby="profileDropdownTablet">
+                <a class="dropdown-item" href="#">Update Profile</a>
+                <a class="dropdown-item" href="#">Login/Register</a>
+                <a class="dropdown-item" href="#">Theme</a>
+            </div>
+        </li>
+    </ul>
+    <div class="search-bar">
+        <input type="search" placeholder="Search products...">
+        <button>Search</button>
+    </div>
+    <div class="user-image">
+        <img src="user-image.png" alt="User Image">
+    </div>
+</div>
+</nav>
+
+<!-- Mobile Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-lg-none">
+<a class="navbar-brand" href="#"><img src="user.png" alt="Logo"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile" aria-controls="navbarMobile" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarMobile">
+    <ul class="navbar-nav mr-auto">
+        <!-- Vendor Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="vendorDropdownMobile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vendor</a>
+            <div class="dropdown-menu" aria-labelledby="vendorDropdownMobile">
+                <a class="dropdown-item" href="#">Big</a>
+                <a class="dropdown-item" href="#">Bigi</a>
+                <a class="dropdown-item" href="#">Holandia</a>
+                <a class="dropdown-item" href="#">Viju</a>
+                <a class="dropdown-item" href="#">Maltina</a>
+                <a class="dropdown-item" href="#">Climax</a>
+                <a class="dropdown-item" href="#">Pepsi</a>
+                <a class="dropdown-item" href="#">Slim</a>
+                <a class="dropdown-item" href="#">Smoov</a>
+                <a class="dropdown-item" href="#">Lucozade</a>
+            </div>
+        </li>
+
+        <!-- Sections Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="sectionsDropdownMobile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sections</a>
+            <div class="dropdown-menu" aria-labelledby="sectionsDropdownMobile">
+                <a class="dropdown-item" href="#">Product</a>
+                <a class="dropdown-item" href="#">Filters</a>
+                <a class="dropdown-item" href="#">Top Selling</a>
+                <a class="dropdown-item" href="#">Viewed Products</a>
+                <a class="dropdown-item" href="#">Contact</a>
+            </div>
+        </li>
+
+        <!-- Services Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdownMobile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+            <div class="dropdown-menu" aria-labelledby="servicesDropdownMobile">
+                <a class="dropdown-item" href="#payment">Payment history</a>
+                <a class="dropdown-item" href="#order">Orders history</a>
+                <a class="dropdown-item" href="message.html">Message</a>
+                <a class="dropdown-item" href="discounts.html">Discount</a>
+            </div>
+        </li>
+
+        <!-- Message Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="messageDropdownMobile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Message</a>
+            <div class="dropdown-menu" aria-labelledby="messageDropdownMobile">
+                <a class="dropdown-item" href="#">Inbox</a>
+                <a class="dropdown-item" href="#">Read</a>
+                <a class="dropdown-item" href="#">Unread</a>
+                <a class="dropdown-item" href="#">Spam</a>
+            </div>
+        </li>
+
+        <!-- Notification Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdownMobile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notification</a>
+            <div class="dropdown-menu" aria-labelledby="notificationDropdownMobile">
+                <a class="dropdown-item" href="#">Orders</a>
+                <a class="dropdown-item" href="#">Receipt</a>
+                <a class="dropdown-item" href="#">New</a>
+            </div>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMobile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+            <div class="dropdown-menu" aria-labelledby="profileDropdownMobile">
+                <a class="dropdown-item" href="#">Update Profile</a>
+                <a class="dropdown-item" href="#">Login/Register</a>
+                <a class="dropdown-item" href="#">Theme</a>
+            </div>
+        </li>
+    </ul>
+    <div class="search-bar">
+        <input type="search" placeholder="Search products...">
+        <button>Search</button>
+    </div>
+    <div class="user-image">
+        <img src="user-image.png" alt="User Image">
+    </div>
+</div>
+</nav>
+<!--nav bar end here-->
+        <!-- 2. Slideshow Section -->
+        <section class="slideshow">
+            <div class="slideshow-container">
+                <div class="slide fade">
+                    <img src="images/7uppck.jpeg" alt="Slide 1">
+                    <div class="caption">natural taste clean and pleasant aroma</div>
+                    <a href="Pepsi.html">learn more</a>
+                </div>
+                <div class="slide fade">
+                    <img src="images/bigi-collection.jpeg" alt="Slide 2">
+                    <div class="caption">more taste different color different work</div>
+                    <a href="bigi.html">learn more</a>
+
+                </div>
+                <div class="slide fade">
+                    <img src="images/climaxpck.jpeg" alt="Slide 3">
+                    <div class="caption">aside from boot your power, it leaves you refreshe</div>
+                    <a href="climax.html">learn more</a>
+
+                </div>
+                <div class="slide fade">
+                    <img src="images/coke-a-creat.jpeg" alt="Slide 3">
+                    <div class="caption">cocacola rich in cola flavor</div>
+                    <a href="CocaCola.html">learn more</a>
+
+                </div>
+                <div class="slide fade">
+                    <img src="images/fearlesspack.jpeg" alt="Slide 3">
+                    <div class="caption">na small body, with big engine</div>
+                    <a href="bigi.html">learn more</a>
+
+                </div>
+            </div>
+            <br>
+            <div class="dot-container">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span>
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+            </div>
+        </section>
+    
     <!-- Top Selling Section -->
     <section class="top-selling">
-        <h2>Top Selling Products</h2>
+        <h4>Top Selling Products</h4>
         <ul class="top-selling-list">
             <!-- Add top selling products here -->
         </ul>
@@ -118,13 +327,13 @@
 
     <!-- Product Cards Section -->
     <section class="products">
-        <h2>Bigi Products</h2>
+        <h4>Bigi Products</h4>
         
         <div id="products">
         <!-- Zag Energy Drink -->
         <div class="product-card" data-product-id="BGI-001">
             <img src="images/zagg.jpg" alt="Zag Energy Drink">
-            <h3>Zag Energy Drink</h3>
+            <h4>Zag Energy Drink</h4>
             <p>Description: Boost your energy with Zag</p>
             <p>Category: Energy Drink</p>
             <p>Price: ₦500</p>
@@ -141,7 +350,7 @@
         <!-- Bigi Bitter Lemon 50cl -->
         <div class="product-card" data-product-id="BGI-002">
             <img src="images/Bigi-Bitterlemon-50cl.webp" alt="Bigi Bitter Lemon 50cl">
-            <h3>Bigi Bitter Lemon 50cl</h3>
+            <h4>Bigi Bitter Lemon 50cl</h4>
             <p>Description: Bitter Lemon Refreshment</p>
             <p>Category: Refreshment</p>
             <p>Price: ₦250</p>
@@ -158,7 +367,7 @@
         <!-- Bigi Cherib -->
         <div class="product-card" data-product-id="BGI-003">
             <img src="images/bigi-cherib.jpeg" alt="Bigi Cherib">
-            <h3>Bigi Cherib</h3>
+            <h4>Bigi Cherib</h4>
             <p>Description: Fruity Bigi Cherib</p>
             <p>Category: Fruit Drink</p>
             <p>Price: ₦300</p>
@@ -172,18 +381,12 @@
             <button class="checkout-btn">Checkout</button>
         </div>
 
-        <!-- Bigi Collection (Slideshow) -->
-        <div class="product-card" data-product-id="BGI-004">
-            <img src="images/bigi-collection.jpeg" alt="Bigi Collection">
-            <h3>Bigi Collection</h3>
-            <p>Description: Bigi Drink Collection</p>
-            <p>Slideshow Image 5</p>
-        </div>
+
 
         <!-- Bigi Ginger -->
         <div class="product-card" data-product-id="BGI-005">
             <img src="images/bigi-ginger.jpeg" alt="Bigi Ginger">
-            <h3>Bigi Ginger</h3>
+            <h4>Bigi Ginger</h4>
             <p>Description: Refreshing Ginger Drink</p>
             <p>Category: Refreshment</p>
             <p>Price: ₦320</p>
@@ -200,7 +403,7 @@
         <!-- Bigi Lime -->
         <div class="product-card" data-product-id="BGI-006">
             <img src="images/bigi-lime.jpeg" alt="Bigi Lime">
-            <h3>Bigi Lime</h3>
+            <h4>Bigi Lime</h4>
             <p>Description: Refreshing Lime Drink</p>
             <p>Category: Refreshment</p>
             <p>Price: ₦320</p>
@@ -217,7 +420,7 @@
         <!-- Bubble Up -->
         <div class="product-card" data-product-id="BGI-007">
             <img src="images/bubbleup.jpeg" alt="Bubble Up">
-            <h3>Bubble Up</h3>
+            <h4>Bubble Up</h4>
             <p>Description: Refreshing Bubble Up Drink</p>
             <p>Category: Refreshment</p>
             <p>Price: ₦270</p>
@@ -233,10 +436,10 @@
 </div>
     </section>
 
-    <script src="../dashboard/js/ajax.js"></script>
-    <script src="../dashboard/js/xlsx.js"></script>
-    <script src="../dashboard/js/search.js"></script>
-    <script src="../dashboard/socket.io/socket.io.js"></script>
+    <script src="dashboard/js/ajax.js"></script>
+    <script src="dashboard/js/xlsx.js"></script>
+    <script src="dashboard/js/search.js"></script>
+    <script src="dashboard/socket.io/socket.io.js"></script>
     <script src="js/script.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/fetching.js"></script>
@@ -245,9 +448,7 @@
     <script src="js/network.js"></script>
     <script src="js/profile.js"></script>
     <script src="dashboard/js/checkOut.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/index.js"></script>
+    <script src="dashboard/js/slide.js"></script>
 
 </body>
 </html>

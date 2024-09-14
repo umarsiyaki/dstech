@@ -24,12 +24,44 @@ mongoose.connect('mongodb://localhost:27017/reviewsdb', {
   useUnifiedTopology: true
 });
 
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/reviewsdb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Define a review schema and model
 const reviewSchema = new mongoose.Schema({
   name: String,
   comment: String,
   rating: Number
 });
+
+// Handle review submission
+app.post('/api/reviews', async (req, res) => {
+  const { name, comment, rating } = req.body;
+  
+  try {
+    const review = new Review({ name, comment, rating });
+    await review.save();
+    res.json({ success: true });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
+// Fetch reviews
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await Review.find();
+    res.json(reviews);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Define a review schema and model
+
 const Review = mongoose.model('Review', reviewSchema);
 
 // Handle review submission
@@ -247,6 +279,19 @@ app.use((err, req, res, next) => {
 // Error handling for 404
 app.use((req, res, next) => {
   res.status(404).send('Page not found');
+});
+// Middleware to check if user is authenticated
+function isAuthenticated(req, res, next) {
+  const token = req.headers.authorization;
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+  // Verify token and proceed
+  next();
+}
+
+// Protect review submission route
+app.post('/api/reviews', isAuthenticated, async (req, res) => {
+  // Review submission logic
 });
 
 // Start the server

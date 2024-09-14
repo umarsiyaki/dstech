@@ -386,3 +386,76 @@ function loadTableData(endpoint, tableId) {
     });
 }
 
+let currentPage = 1;
+const reviewsPerPage = 5;
+
+function fetchReviews(page = 1) {
+  fetch(`/api/reviews?page=${page}&limit=${reviewsPerPage}`)
+    .then(response => response.json())
+    .then(data => {
+      // Render reviews here
+      currentPage = page;
+      // Enable or disable next/previous buttons based on page count
+    })
+    .catch(error => console.error('Error fetching reviews:', error));
+}
+app.get('/api/reviews', async (req, res) => {
+    const { page = 1, limit = 5 } = req.query;
+    
+    try {
+      const reviews = await Review.find()
+        .skip((page - 1) * limit)
+        .limit(Number(limit));
+      const totalReviews = await Review.countDocuments();
+      res.json({
+        reviews,
+        totalPages: Math.ceil(totalReviews / limit),
+        currentPage: Number(page)
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.put('/api/reviews/:id/approve', async (req, res) => {
+    try {
+      const review = await Review.findByIdAndUpdate(req.params.id, { approved: true }, { new: true });
+      res.json(review);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  const reviewSchema = new mongoose.Schema({
+    name: String,
+    comment: String,
+    rating: Number,
+    approved: { type: Boolean, default: false }  // New field for moderation
+  });
+  
+document.getElementById('review-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+  
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
+    const rating = document.getElementById('rating').value;
+  
+    fetch('/api/reviews', { // Your server endpoint
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, comment, rating })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Review submitted successfully!');
+        // Optionally, clear the form or update the UI
+      } else {
+        alert('Failed to submit review. Please try again.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  });
+  

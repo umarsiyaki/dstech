@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Blog Article &ndash;oladayo enterprises </title>
+<title>message page &ndash;oladayo enterprises </title>
 <meta name="description" content="description">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Favicon -->
@@ -17,6 +17,188 @@
 <!-- Main Style CSS -->
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+
+<style>   /* Basic modal styling */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal.active {
+    display: flex; /* Display modal when active */
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Modal close button */
+  .close-modal {
+    background-color: #ff5c5c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    float: right;
+  }
+  
+  .close-modal:hover {
+    background-color: #e60000;
+  }
+  
+  /* Inbox modal styles */
+  .inbox-modal .message-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .inbox-modal .message-card.unread {
+    background-color: #fff7e0;
+  }
+  
+  .inbox-modal .message-card:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .inbox-modal .reply-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .inbox-modal .reply-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Add recipient modal styles */
+  #recipientSearch {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  .recipient-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fafafa;
+  }
+  
+  .recipient-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+  }
+  
+  .recipient-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Spam modal styles */
+  .spam-modal .spam-message {
+    background-color: #ffe0e0;
+    padding: 15px;
+    border: 1px solid #ffcccc;
+    margin-bottom: 10px;
+    border-radius: 6px;
+  }
+  
+  .spam-modal .mark-not-spam-button {
+    background-color: #ff6666;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .spam-modal .mark-not-spam-button:hover {
+    background-color: #ff4d4d;
+  }
+  
+  /* General page layout for the messaging page */
+  .messaging-page {
+    padding: 20px;
+    background-color: #f4f4f9;
+  }
+  
+  .messaging-page h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .messaging-page .message-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .messaging-page .message-options button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .messaging-page .message-options button:hover {
+    background-color: #0056b3;
+  }      @media (max-width: 768px) {
+    .modal-content {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .recipient-item, .message-card {
+      padding: 10px;
+    }
+  
+    .messaging-page h2 {
+      font-size: 20px;
+    }
+  
+    .messaging-page .message-options button {
+      padding: 8px 16px;
+    }
+  }
+   
+  </style>
 </head>
 <body class="template-blog belle">
 <div class="pageWrapper">
@@ -68,8 +250,9 @@
                 <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
                 	<span class="user-menu d-block d-lg-none"><i class="anm anm-user-al" aria-hidden="true"></i></span>
                     <ul class="customer-links list-inline">
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Create Account</a></li>
+                      <li><a href="login.html">Login</a></li>
+                      <li><span data-id="message-content"><a href="\">message</a></span></li>
+                      <li><a href="register.html">Create Account</a></li>
                         <li><a href="wishlist.html">Wishlist</a></li>
                     </ul>
                 </div>
@@ -422,38 +605,74 @@
             <li><a href="blog-article.html" class="site-nav">Article</a></li>
           </ul>
         </li>
-        	<li class="lvl1"><a href="#"><b>Buy Now!</b></a>
-        </li>
+        <li class="lvl1"><a href="#"><b>message</b></a></li>
+        <li class="lvl1"><a href="#"><b>Buy Now!</b></a></li>
       </ul>
 	</div>
 	<!--End Mobile Menu-->
     
     <!--Body contents-->
-    <button id="viewNotifications">View Notifications</button>
-    <button id="viewMessages">View Messages</button>
+    <!-- Inbox Section -->
+    <div class="messaging-section">
+      <h2>Inbox</h2>
+      <button id="openInbox" class="btn">Open Inbox</button>
+  </div>
 
-    <!-- Notifications Subpage (Initially Hidden) -->
-    <div id="notificationsSubpage" style="display: none;">
-        <h2>Notifications</h2>
-        <ul id="notificationList"></ul>
-        <button id="closeNotifications">Close</button>
+  <!-- Modals -->
+<!-- Open Inbox Modal -->
+<button class="open-modal" data-target="inboxModal">Open Inbox</button>
+  
+<!-- Inbox Modal -->
+<div id="inboxModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" data-target="inboxModal">Close</button>
+    <!-- Modal Content -->
+  </div>
+</div>
+
+<!-- Add Recipient Modal -->
+<div id="addRecipientModal" class="modal">
+  <div class="modal-content">
+    <input type="text" id="recipientSearch" placeholder="Search recipients...">
+    <div class="recipient-list">
+      <div class="recipient-item">
+        <span class="recipient-name">Admin</span>
+      </div>
+      <div class="recipient-item">
+        <span class="recipient-name">Support Team</span>
+      </div>
     </div>
+    <button class="close-modal" data-target="addRecipientModal">Close</button>
+  </div>
+</div>
 
-    <!-- Messages Subpage (Initially Hidden) -->
-    <div id="messagesSubpage" style="display: none;">
-        <h2>Messages</h2>
-        <ul id="messageList"></ul>
-        <form id="sendMessageForm">
-            <input type="text" id="receiverId" placeholder="Receiver ID">
-            <textarea id="messageBody" placeholder="Your message..."></textarea>
-            <button type="submit">Send</button>
-        </form>
-        <button id="closeMessages">Close</button>
+<!-- Spam Modal -->
+<div id="spamModal" class="modal">
+  <div class="modal-content">
+    <div class="spam-message">
+      <p>Spam Message 1</p>
+      <button class="mark-not-spam-button">Mark as Not Spam</button>
     </div>
-
+    <button class="close-modal" data-target="spamModal">Close</button>
+  </div>
+</div>
+  <!-- Recipient Details Modal -->
+  <div id="recipientDetailsModal" class="modal">
+      <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>Recipient Details</h2>
+          <p>Recipient Name: John Doe</p>
+          <p>Recipient Email: johndoe@example.com</p>
+      </div>
+  </div>
     <script src="main.js"></script>
     <script src="script.js"></script>
     <script src="profile.js"></script>
     <script src="js/scripts.js"></script>
 </body>
 </html>
+
+
+
+
+

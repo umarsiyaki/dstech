@@ -429,74 +429,96 @@
 	<!--End Mobile Menu-->
     
     <!--Body contents-->
-    
-    <!-- Top Selling Section -->
-    <section class="top-selling">
-        <h2>Top Selling Products</h2>
-        <ul class="top-selling-list">
-            <!-- Add top selling products here -->
-        </ul>
-    </section>
-    
-    <!-- Product Cards Section -->
-    <section class="products">
-        <h2>Products</h2>
-        <!-- Super Komando -->
-        <div class="product-card" data-product-id="PS-001">
-            <img src="images/super-com.jpeg" alt="Super Komando">
-            <h3>Super Komando</h3>
-            <p>Description: Energy Drink</p>
-            <p>Price: $3.00</p>
-            <p>Rating: 4.6/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-        </div>
+<!-- Top Selling Section -->
+<section class="top-selling my-4">
+  <div class="container">
+      <h2 class="text-center">Top Selling Products</h2>
+      <ul class="list-group top-selling-list">
+          <!-- Add top selling products here -->
+      </ul>
+  </div>
+</section>
 
-        <!-- Pepsi Cola -->
-        <div class="product-card" data-product-id="PS-002">
-            <img src="images/pepsi-col.jpeg" alt="Pepsi Cola">
-            <h3>Pepsi Cola</h3>
-            <p>Description: Classic Pepsi cola taste</p>
-            <p>Price: $2.50</p>
-            <p>Rating: 4.5/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-        </div>
+<!-- Product Cards Section -->
+<section class="products my-4">
+  <div class="container">
+      <h2 class="text-center mb-4">Products</h2>
+      <div class="row">
 
-        <!-- 7UP -->
-        <div class="product-card" data-product-id="PS-003">
-            <img src="images/7uppck.jpeg" alt="7UP">
-            <h3>7UP</h3>
-            <p>Description: Refreshing Lemon Lime</p>
-            <p>Price: $2.00</p>
-            <p>Rating: 4.4/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-        </div>
-    </section>
-    
-    <!-- Recently Viewed Products Section -->
-    <section class="recently-viewed">
-        <h2>Recently Viewed Products</h2>
-        <ul class="recently-viewed-list">
-            <!-- Add recently viewed products here -->
-        </ul>
-    </section>
+          <!-- Super Komando -->
+          <div class="col-md-4 mb-4">
+              <div class="card h-100" data-product-id="PS-001">
+                  <img src="images/super-com.jpeg" class="card-img-top" alt="Super Komando">
+                  <div class="card-body">
+                      <h3 class="card-title">Super Komando</h3>
+                      <p class="card-text">Description: Energy Drink</p>
+                      <p class="card-text">Price: ₦2,200</p>
+                      <p class="card-text">Rating: 4.6/5</p>
+                      <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                      <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                          <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                          <span class="quantity">1</span>
+                          <button class="btn btn-outline-secondary increase-quantity">+</button>
+                      </div>
+                      <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Pepsi Cola -->
+          <div class="col-md-4 mb-4">
+              <div class="card h-100" data-product-id="PS-002">
+                  <img src="images/pepsi-col.jpeg" class="card-img-top" alt="Pepsi Cola">
+                  <div class="card-body">
+                      <h3 class="card-title">Pepsi Cola</h3>
+                      <p class="card-text">Description: Classic Pepsi cola taste</p>
+                      <p class="card-text">Price: ₦1,800</p>
+                      <p class="card-text">Rating: 4.5/5</p>
+                      <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                      <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                          <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                          <span class="quantity">1</span>
+                          <button class="btn btn-outline-secondary increase-quantity">+</button>
+                      </div>
+                      <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
+                  </div>
+              </div>
+          </div>
+
+          <!-- 7UP -->
+          <div class="col-md-4 mb-4">
+              <div class="card h-100" data-product-id="PS-003">
+                  <img src="images/7uppck.jpeg" class="card-img-top" alt="7UP">
+                  <div class="card-body">
+                      <h3 class="card-title">7UP</h3>
+                      <p class="card-text">Description: Refreshing Lemon Lime</p>
+                      <p class="card-text">Price: ₦1,500</p>
+                      <p class="card-text">Rating: 4.4/5</p>
+                      <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                      <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                          <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                          <span class="quantity">1</span>
+                          <button class="btn btn-outline-secondary increase-quantity">+</button>
+                      </div>
+                      <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</section>
+
+<!-- Recently Viewed Products Section -->
+<section class="recently-viewed my-4">
+  <div class="container">
+      <h2 class="text-center">Recently Viewed Products</h2>
+      <ul class="list-group recently-viewed-list">
+          <!-- Add recently viewed products here -->
+      </ul>
+  </div>
+</section>
+
     
     <!-- Contact Form Section -->
     <section class="contact-form">
@@ -510,6 +532,8 @@
             <textarea id="message" name="message" required></textarea><br><br>
             <input type="submit" value="Send">
         </form>
+        <button class="close-modal" data-target="inboxModal">Close</button>
+
     </section>
     
     <!-- Footer Section -->
@@ -550,3 +574,7 @@
     <script src="dashboard/js/scripts.js"></script>
 </body>
 </html>
+
+
+
+

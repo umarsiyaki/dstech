@@ -1,137 +1,148 @@
-/* General Styling */
-* {
-    box-sizing: border-box;
+/* General Navbar Styles */
+nav.navbar {
+    background-color: #f8f9fa; /* Light background for all navbars */
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for some depth */
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.navbar-brand img {
+    height: 40px; /* Set logo height */
 }
 
-/* Admin Container */
-.admin-container {
-    display: flex;
-    width: 100%;
-}
-
-/* Navbar Styles */
-.navbar {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar .logo img {
-    width: 40px;
-    margin-right: 10px;
-}
-
-.navbar h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.search-bar {
-    padding: 8px;
+/* Search Bar Styling */
+.search-bar input {
+    padding: 0.5rem;
     border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.search-bar button {
+    padding: 0.5rem 1rem;
     border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    margin-left: 5px;
 }
 
-/* Sidebar Styles */
-.sidebar {
-    width: 250px;
-    height: 100%;
-    background-color: #34495e;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding-top: 60px;
-    transition: width 0.3s;
-    overflow-x: hidden;
+/* User Image Styling */
+.user-image img {
+    height: 40px; /* Set height for user image */
+    border-radius: 50%; /* Rounded user image */
 }
 
-.sidebar:hover {
-    width: 60px;
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    border-radius: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar .sidebar-nav button {
-    background: none;
-    border: none;
-    padding: 10px;
-    color: #ecf0f1;
-    text-align: left;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s;
+/* Navbar toggle button for mobile and tablet */
+.navbar-toggler {
+    border-color: transparent;
+    background-color: #007bff;
 }
 
-.sidebar .sidebar-nav button:hover {
-    background-color: #2980b9;
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28155, 155, 155, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Main Content Styles */
-.main-content {
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.3s;
-}
-
-.sidebar:hover ~ .main-content {
-    margin-left: 60px;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #2c3e50;
-    color: white;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 60px;
-    }
-
-    .main-content {
-        margin-left: 60px;
-    }
-
-    .navbar h1 {
-        font-size: 18px;
+/* Hide toggle icons on large screens */
+@media (min-width: 992px) {
+    .navbar-toggler {
+        display: none;
     }
 }
 
-@media (max-width: 480px) {
-    .navbar h1 {
-        font-size: 16px;
+/* Show Navbar for Desktop */
+@media (min-width: 992px) {
+    .navbar-expand-lg {
+        display: flex;
     }
 
-    .navbar .search-bar {
-        width: 100%;
+    .d-none.d-lg-block {
+        display: block !important;
+    }
+
+    .d-lg-none {
+        display: none !important;
     }
 }
 
+/* Show Navbar for Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-expand-md {
+        display: flex;
+    }
+
+    .d-none.d-md-block.d-lg-none {
+        display: block !important;
+    }
+
+    .d-lg-none, .d-md-none {
+        display: none !important;
+    }
+}
+
+/* Show Navbar for Mobile */
+@media (max-width: 767px) {
+    .navbar-expand-lg {
+        display: flex;
+    }
+
+    .d-lg-none {
+        display: block !important;
+    }
+
+    .d-none.d-lg-block, .d-none.d-md-block {
+        display: none !important;
+    }
+}
+
+/* Dropdown Hover Effect (optional for larger screens) */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Dropdown Toggle for mobile */
+.navbar-nav .dropdown-menu {
+    display: none;
+}
+
+.navbar-nav .dropdown.show .dropdown-menu {
+    display: block;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-expand-md {
+        /* Customize the look of the navbar for tablets here */
+        padding: 1rem;
+        background-color: #f8f9fa;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        padding: 0.75rem 1rem;
+    }
+
+    /* Customize dropdown behavior */
+    .navbar-nav .dropdown-menu {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+/* Custom styles for mobile navbar */
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+}
+
+.dropdown-menu {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional styling for user profile icon */
+.navbar-nav .nav-item .user-image {
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}

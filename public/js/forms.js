@@ -143,23 +143,8 @@ class ProductManager {
             console.error('Error saving product:', error);
         }
     }
-}
+};
  
-//collectin product data before sending
-class ProductManager {
-    constructor() {
-        this.vendorMap = {
-            'bigi': 'bigi-products',
-            'maltina': 'maltinal-products',
-            'climax': 'climax-products',
-            'cocacola': 'cocacola-products',
-            'slim': 'slim-products',
-            'viju': 'viju-products',
-            'smoov': 'smoov-products',
-            'pepsi': 'pepsi-products',
-            'holandi': 'holandi-products'
-        };
-    }
 
     // Method to add a product
     addProduct(product, vendor) {

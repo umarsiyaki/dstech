@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 
-<style>   /* Basic modal styling */
+<style> 
+  /* Basic modal styling */
   .modal {
     display: none;
     position: fixed;
@@ -52,6 +53,39 @@
     to { opacity: 1; transform: translateY(0); }
   }
   
+  .modal-nav a {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.modal-nav a:hover {
+  color: #007BFF; /* Hover effect */
+  font-weight: bold;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+ 
+.available-recipients ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.available-recipients ul li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.available-recipients ul li:hover {
+  background-color: #f5f5f5;
+}
+
   /* Modal close button */
   .close-modal {
     background-color: #ff5c5c;
@@ -98,7 +132,66 @@
   
   .inbox-modal .reply-button:hover {
     background-color: #45a049;
-  }
+  }  
+
+  #inbox-messages {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.message-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.message-item:hover {
+    background-color: #eef1f5;
+}
+
+.user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-content {
+    flex-grow: 1;
+}
+.reply-box {
+    display: none;
+    margin-top: 10px;
+}
+
+.reply-box textarea {
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+}
+
+.reply-box button {
+    margin-top: 5px;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.reply-box button:hover {
+    background-color: #0056b3;
+}
+
   
   /* Add recipient modal styles */
   #recipientSearch {
@@ -612,63 +705,150 @@
 	<!--End Mobile Menu-->
     
     <!--Body contents-->
-    <!-- Inbox Section -->
-    <div class="messaging-section">
-      <h2>Inbox</h2>
-      <button id="openInbox" class="btn">Open Inbox</button>
-  </div>
-
-  <!-- Modals -->
-<!-- Open Inbox Modal -->
-<button class="open-modal" data-target="inboxModal">Open Inbox</button>
-  
-<!-- Inbox Modal -->
-<div id="inboxModal" class="modal">
+  <!-- Inbox Modal -->
+<div id="inbox-modal" class="modal">
   <div class="modal-content">
-    <button class="close-modal" data-target="inboxModal">Close</button>
-    <!-- Modal Content -->
+    <span class="close-modal">&times;</span>
+    <h2>Inbox</h2>
+    <div class="modal-sections">
+      <!-- Links for Read, Unread, Filter, Recipient, and Reply -->
+      <nav class="modal-nav">
+        <a href="#" id="read-messages">Read</a>
+        <a href="#" id="unread-messages">Unread</a>
+        <a href="#" id="filter-messages">Filter</a>
+        <a href="#" id="recipient-messages">Recipient</a>
+        <a href="#" id="reply-messages">Reply</a>
+        <a href="#" id="pinned-messages">Pinned</a>
+        <a href="#" id="group-messages">Groups</a>
+      </nav>
+
+      <!-- Section to display messages -->
+      <div class="message-list">
+        <!-- Example of a message item -->
+        <div class="message-item" data-message-id="1">
+          <div class="user-image">
+            <img src="path_to_user_image.jpg" alt="User">
+          </div>
+          <div class="message-content">
+            <h4>Message Title</h4>
+            <p>This is a sample message content.</p>
+            <span class="read-status">Read</span> <!-- Read/Unread Status -->
+            <button class="reply-btn">Reply</button>
+            <button class="forward-btn">Forward</button>
+            <button class="pin-btn">Pin</button>
+            <div class="message-reactions">
+              <button class="like-btn">👍</button>
+              <button class="dislike-btn">👎</button>
+              <button class="laugh-btn">😂</button>
+            </div>
+            <div class="typing-indicator" style="display:none;">User is typing...</div> <!-- Typing Indicator -->
+            <div class="threaded-messages">
+              <!-- Placeholder for threaded replies -->
+            </div>
+          </div>
+        </div>
+         <!-- Spinner for loading -->
+<div id="loadingSpinner" style="display:none;">
+  <img src="assets/images/loader.gif" alt="Loading..." />
+</div>
+
+<!-- Notification List -->
+<ul id="notificationList"></ul>
+
+<!-- Send message button and input field -->
+<input type="text" id="messageInput" placeholder="Type your message here...">
+<button id="sendMessageButton">Send</button>
+
+        <!-- Recipient's Messages -->
+        <div class="recipient-image">
+          <img src="../images/user.jpg" alt="Recipient">
+        </div>
+        <div class="recipient-messages">
+          <p>This is a reply from the recipient.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Add Recipient Modal -->
-<div id="addRecipientModal" class="modal">
+<div id="recipient-modal" class="modal">
   <div class="modal-content">
-    <input type="text" id="recipientSearch" placeholder="Search recipients...">
-    <div class="recipient-list">
-      <div class="recipient-item">
-        <span class="recipient-name">Admin</span>
+    <span class="close-modal">&times;</span>
+    <h2>Add Recipient</h2>
+    <div class="modal-sections">
+      <!-- Search or Select Recipients -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search recipient by name" id="recipient-search">
       </div>
-      <div class="recipient-item">
-        <span class="recipient-name">Support Team</span>
+      <div class="available-recipients">
+        <h3>Send to:</h3>
+        <ul id="recipient-list">
+          <li data-user-id="1">Admin Team</li>
+          <li data-user-id="2">Support Team</li>
+          <!-- Add dynamic recipient list here -->
+        </ul>
       </div>
     </div>
-    <button class="close-modal" data-target="addRecipientModal">Close</button>
   </div>
 </div>
 
 <!-- Spam Modal -->
-<div id="spamModal" class="modal">
+<div id="spam-modal" class="modal">
   <div class="modal-content">
-    <div class="spam-message">
-      <p>Spam Message 1</p>
-      <button class="mark-not-spam-button">Mark as Not Spam</button>
+    <span class="close-modal">&times;</span>
+    <h2>Spam</h2>
+    <div class="modal-sections">
+      <!-- Display spam/unwanted messages -->
+      <div class="spam-list">
+        <div class="spam-item">
+          <div class="user-image">
+            <img src="../images/user.jpg" alt="Sender">
+          </div>
+          <div class="spam-content">
+            <h4>Spam Title</h4>
+            <p>This is a spam message content.</p>
+            <button class="report-spam-btn">Report Spam</button> <!-- Report Spam Button -->
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="close-modal" data-target="spamModal">Close</button>
   </div>
 </div>
-  <!-- Recipient Details Modal -->
-  <div id="recipientDetailsModal" class="modal">
-      <div class="modal-content">
-          <span class="close-modal">&times;</span>
-          <h2>Recipient Details</h2>
-          <p>Recipient Name: John Doe</p>
-          <p>Recipient Email: johndoe@example.com</p>
+
+<!-- Group Messaging Modal -->
+<div id="group-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Group Messaging</h2>
+    <div class="modal-sections">
+      <h3>Create a New Group</h3>
+      <input type="text" placeholder="Group Name" id="group-name">
+      <div class="search-bar">
+        <input type="text" placeholder="Search for users" id="user-search">
       </div>
+      <div class="available-users">
+        <h3>Select Users:</h3>
+        <ul id="user-list">
+          <li data-user-id="3">User One</li>
+          <li data-user-id="4">User Two</li>
+          <!-- Add dynamic user list here -->
+        </ul>
+      </div>
+      <button id="create-group-btn">Create Group</button>
+    </div>
   </div>
-    <script src="main.js"></script>
-    <script src="script.js"></script>
-    <script src="profile.js"></script>
-    <script src="js/scripts.js"></script>
+</div>
+
+    <script src="../js/index.js"></script>
+    <script src="../js/profile.js"></script>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="../dashboard/js/scripts.js"></script>
+    <script src="assets/js/message/search.js"></script>
+    <script src="assets/js/message/modals.js"></script>
+    <script src="assets/js/message/api.js"></script>
+    <script src="assets/js/message/messages.js"></script>
+
 </body>
 </html>
 

@@ -16,6 +16,116 @@ const http = require('http');
 const socketIo = require('socket.io');
 const NodeCache = require('node-cache');
 
+const mysql = require('mysql');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+
+
+db.connect((err) => {
+    if (err) throw err;
+    console.log('Connected to MySQL Database');
+});
+
+// Endpoint to handle checkout
+app.post('/api/cart/checkout', (req, res) => {
+    const { specialInstructions, cartData } = req.body;
+
+    // Insert into database or perform checkout logic
+    // Example: Insert order into orders table
+    const order = { special_instructions: specialInstructions, created_at: new Date() };
+    db.query('INSERT INTO orders SET ?', order, (error, results) => {
+        if (error) return res.status(500).json({ message: 'Checkout failed' });
+
+        const orderId = results.insertId;
+        const orderItems = cartData.map(item => ({
+            order_id: orderId,
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price
+        }));
+
+        // Use a batch insert for order items
+        const orderItemQuery = 'INSERT INTO order_items (order_id, name, quantity, price) VALUES ?';
+        const values = orderItems.map(item => [item.order_id, item.name, item.quantity, item.price]);
+        
+        db.query(orderItemQuery, [values], (err) => {
+            if (err) return res.status(500).json({ message: 'Checkout failed' });
+
+            res.status(200).json({ message: 'Order placed successfully!' });
+        });
+    });
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoute');
+const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
+
+// Serve HTML pages for routes not handled by API
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'public/login.html')));
+app.get('/products/contact-us', (req, res) => res.sendFile(path.join(__dirname, 'public/products/contact-us.html')));
+app.get('/products/check-out', (req, res) => res.sendFile(path.join(__dirname, 'public/products/check-out.html')));
+app.get('/products/climax', (req, res) => res.sendFile(path.join(__dirname, 'public/products/climax.html')));
+app.get('/products/collection-page', (req, res) => res.sendFile(path.join(__dirname, 'public/products/collection-page.html')));
+app.get('/products/holandia', (req, res) => res.sendFile(path.join(__dirname, 'public/products/holandia.html')));
+app.get('/products/locozade', (req, res) => res.sendFile(path.join(__dirname, 'public/products/locozade.html')));
+app.get('/products/vendor', (req, res) => res.sendFile(path.join(__dirname, 'public/products/vendor.html')));
+app.get('/products/maltina', (req, res) => res.sendFile(path.join(__dirname, 'public/products/maltina.html')));
+app.get('/products/marketing', (req, res) => res.sendFile(path.join(__dirname, 'public/products/marketing.html')));
+app.get('/products/message', (req, res) => res.sendFile(path.join(__dirname, 'public/register.html')));
+app.get('/register', (req, res) => res.sendFile(path.join(__dirname, 'public/register.html')));
+app.get('/products/cart', (req, res) => res.sendFile(path.join(__dirname, 'public/products/cart.html')));
+app.get('/products/faqs', (req, res) => res.sendFile(path.join(__dirname, 'public/products/faqs.html')));
+app.get('/products/bigi', (req, res) => res.sendFile(path.join(__dirname, 'public/products/bigi.html')));
+app.get('/products/big', (req, res) => res.sendFile(path.join(__dirname, 'public/products/big.html')));
+app.get('/products/vijju', (req, res) => res.sendFile(path.join(__dirname, 'public/products/vijju.html')));
+app.get('/products/404', (req, res) => res.sendFile(path.join(__dirname, 'public/products/404.html')));
+app.get('/products/about-us', (req, res) => res.sendFile(path.join(__dirname, 'public/products/about-us.html')));
+// Add additional routes as needed
+
+// Error handling middleware
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'public/404.html'));
+});
+app.use((req, res, next) => {
+  res.status(400).sendFile(path.join(__dirname, 'public/400.html'));
+});
+app.use((req, res, next) => {
+  res.status(402).sendFile(path.join(__dirname, 'public/402.html'));
+});
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'public/404.html'));
+});
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'public/404.html'));
+});
+
 app.use(bodyParser.json());
 
 // Connect to MongoDB
@@ -24,11 +134,6 @@ mongoose.connect('mongodb://localhost:27017/reviewsdb', {
   useUnifiedTopology: true
 });
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/reviewsdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
 
 // Define a review schema and model
 const reviewSchema = new mongoose.Schema({
@@ -55,7 +160,8 @@ app.get('/api/reviews', async (req, res) => {
   try {
     const reviews = await Review.find();
     res.json(reviews);
-  } catch (error) {
+  }
+   catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
@@ -105,7 +211,6 @@ const Notification = require('./server/models/notification');
 const Message = require('./server/models/message');
 
 // Initialize app
-const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 const cache = new NodeCache();

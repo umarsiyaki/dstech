@@ -550,3 +550,109 @@ VALUES (1, 'login', 'User logged in successfully.', datetime('now'));
 UPDATE products
 SET quantity = quantity + 10
 WHERE category = 'Energy Drinks';
+--messages queries to add, remove, spam and messaging
+INSERT INTO users (username, password, email) VALUES (?, ?, ?);
+
+--remove user
+DELETE FROM users WHERE id = ?;
+
+--adding message
+INSERT INTO messages (senderId, recipientId, content, mediaUrl) VALUES (?, ?, ?, ?);
+
+--updating message
+
+UPDATE messages SET status = 'read' WHERE id = ?;
+
+--inbox
+
+SELECT * FROM messages WHERE recipientId = ? ORDER BY createdAt DESC;
+
+--spam
+INSERT INTO spam (userId, messageId) VALUES (?, ?);
+
+
+--updating presence
+
+UPDATE presence SET status = ?, lastSeen = CURRENT_TIMESTAMP WHERE userId = ?;
+
+
+--retrieving user
+
+SELECT status FROM presence WHERE userId = ?;
+
+
+--add reaction
+
+INSERT INTO message_reactions (messageId, userId, reaction) VALUES (?, ?, ?);
+
+--remove reaction
+
+DELETE FROM message_reactions WHERE messageId = ? AND userId = ?;
+
+--get reaction for a message
+
+SELECT reaction, COUNT(*) as count FROM message_reactions WHERE messageId = ? GROUP BY reaction;
+
+--message refference
+ALTER TABLE messages ADD COLUMN parentId INT DEFAULT NULL;
+-- This references the ID of the message to which it is replying.
+
+--forwarding
+INSERT INTO messages (senderId, recipientId, content, parentId)
+VALUES (?, ?, ?, ?);
+
+--pined message
+ALTER TABLE messages ADD COLUMN isPinned BOOLEAN DEFAULT FALSE;
+
+--get group messages
+
+SELECT * FROM messages 
+WHERE recipientId IN (SELECT userId FROM group_members WHERE groupId = ?) 
+ORDER BY createdAt DESC;
+
+-- block user
+INSERT INTO blocked_users (blockerId, blockedId) VALUES (?, ?);
+
+--send emoji
+INSERT INTO messages (senderId, recipientId, content) VALUES (?, ?, ?);
+
+
+--show when message are read
+
+ALTER TABLE messages ADD COLUMN isRead BOOLEAN DEFAULT FALSE;
+
+--user presence status
+ALTER TABLE users ADD COLUMN presence ENUM('active', 'away', 'offline') DEFAULT 'offline';
+
+--media previews
+SELECT mediaUrl FROM messages WHERE id = ?; 
+-- You will also need to handle media uploads separately.
+
+--adming delete query
+
+DELETE FROM messages WHERE id = ?; -- Admin can delete any message
+
+--wish list
+
+INSERT INTO wishlists (user_id, product_id) VALUES (?, ?);
+
+--product comparism
+
+INSERT INTO comparisons (user_id, product_id) VALUES (?, ?);
+
+--creat order
+INSERT INTO orders (user_id, special_instructions, shipping_address, shipping_city, purchase_message) VALUES (?, ?, ?, ?, ?);
+
+--add item to order
+INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?);
+
+--record notification
+
+INSERT INTO notifications (user_id, message) VALUES (?, ?);
+
+-- store receipt
+
+INSERT INTO receipts (order_id, receipt_data) VALUES (?, ?);
+
+
+

@@ -281,3 +281,20 @@ wishlist.html
 
 
 
+/src
+  /api
+    ├── messagesAPI.js      # Handles API requests (e.g., fetching and sending messages)
+    ├── mediaUpload.js      # Handles media upload logic
+  /db
+    ├── dbConnection.js     # SQL database connection
+    ├── messageModel.js     # SQL queries and models related to messages
+    ├── userModel.js        # SQL queries and models related to users
+  /sockets
+    ├── socketServer.js     # Handles WebSocket server for real-time messaging
+    ├── socketClient.js     # WebSocket client-side connection logic
+  /utils
+    ├── encryption.js       # Encryption and decryption logic
+  /frontend
+    ├── messages.js         # Handles front-end message UI and WebSocket interaction
+    ├── mediaHandler.js     # Front-end file upload logic and media preview
+  server.js                 # Main Express server file

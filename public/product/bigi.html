@@ -18,6 +18,33 @@
 <!-- Main Style CSS -->
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+<style>
+    .card .h-100{
+        align-self: center;
+        float: right;
+        justify-content: flex-start;
+    }
+    .col-md-4 .mb-4{
+      min-width: none;
+      width: 45px;
+      height: 68px;
+      align-items: center;
+      text-align: center;
+      
+  
+    }
+    .card-img-top{
+      width: 205px;
+      height: 204px;
+      align-content: center;
+      margin-right: 20px;
+      margin-left: 85px; 
+      padding: 6PX;
+      border-radius: 45PX;
+      border-color: blue;
+  
+    }
+  </style>
 </head>
 <body class="template-blog belle">
 <div class="pageWrapper">
@@ -217,7 +244,7 @@
                             <li><a href="blog-article.html" class="site-nav">Article</a></li>
                           </ul>
                         </li>
-                        <li class="lvl1"><a href="#"><b>Buy Now!</b> <i class="anm anm-angle-down-l"></i></a></li>
+                        <li class="lvl1"><a href="marketing.html"><b>Buy Now!</b> <i class="anm anm-angle-down-l"></i></a></li>
                       </ul>
                     </nav>
                     <!--End Desktop Menu-->
@@ -431,50 +458,38 @@
     
     
 <!--nav bar end here-->
-        <!-- 2. Slideshow Section -->
-        <section class="slideshow">
-            <div class="slideshow-container">
-                <div class="slide fade">
-                    <img src="images/7uppck.jpeg" alt="Slide 1">
-                    <div class="caption">natural taste clean and pleasant aroma</div>
-                    <a href="Pepsi.html">learn more</a>
-                </div>
-                <div class="slide fade">
-                    <img src="images/bigi-collection.jpeg" alt="Slide 2">
-                    <div class="caption">more taste different color different work</div>
-                    <a href="bigi.html">learn more</a>
-
-                </div>
-                <div class="slide fade">
-                    <img src="images/climaxpck.jpeg" alt="Slide 3">
-                    <div class="caption">aside from boot your power, it leaves you refreshe</div>
-                    <a href="climax.html">learn more</a>
-
-                </div>
-                <div class="slide fade">
-                    <img src="images/coke-a-creat.jpeg" alt="Slide 3">
-                    <div class="caption">cocacola rich in cola flavor</div>
-                    <a href="CocaCola.html">learn more</a>
-
-                </div>
-                <div class="slide fade">
-                    <img src="images/fearlesspack.jpeg" alt="Slide 3">
-                    <div class="caption">na small body, with big engine</div>
-                    <a href="bigi.html">learn more</a>
-
+<div class="slideshow slideshow-wrapper pb-section sliderFull">
+    <div class="home-slideshow">
+        <div class="slide">
+            <div class="blur-up lazyload bg-size">
+                <img class="blur-up lazyload bg-img" data-src="../images/climaxpck.jpeg" src="../images/climaxpck.jpeg" alt="Shop Our New Collection" title="Shop Our New Collection" />
+                <div class="slideshow__text-wrap slideshow__overlay classic bottom">
+                    <div class="slideshow__text-content bottom">
+                        <div class="wrap-caption center">
+                                <h2 class="h1 mega-title slideshow__title">Shop Our New Collection</h2>
+                                <span class="mega-subtitle slideshow__subtitle">From Hight to low, classic or modern. We have you covered</span>
+                                <span class="btn">Shop now</span>
+                            </div>
+                    </div>
                 </div>
             </div>
-            <br>
-            <div class="dot-container">
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span>
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
+        </div>
+        <div class="slide">
+            <div class="blur-up lazyload bg-size">
+                <img class="blur-up lazyload bg-img" data-src="../images/bigi-collection.jpeg" src="../images/bigi-collection.jpeg" alt="bigi collection pack" title="bigi collection pack" />
+                <div class="slideshow__text-wrap slideshow__overlay classic bottom">
+                    <div class="slideshow__text-content bottom">
+                        <div class="wrap-caption center">
+                            <h2 class="h1 mega-title slideshow__title">bigi collection pack</h2>
+                            <span class="mega-subtitle slideshow__subtitle">Save up to 50% off this weekend only</span>
+                            <span class="btn"><a href="bigi.html">shop now</a> </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    
+        </div>
+    </div>
+</div>
     <!-- Top Selling Section -->
     <section class="top-selling">
         <h4>Top Selling Products</h4>
@@ -485,114 +500,172 @@
 
     <!-- Product Cards Section -->
     <section class="products">
-        <h4>Bigi Products</h4>
-        
-        <div id="products">
-        <!-- Zag Energy Drink -->
-        <div class="product-card" data-product-id="BGI-001">
-            <img src="images/zagg.jpg" alt="Zag Energy Drink">
-            <h4>Zag Energy Drink</h4>
-            <p>Description: Boost your energy with Zag</p>
-            <p>Category: Energy Drink</p>
-            <p>Price: ₦500</p>
-            <p>Rating: 4.3/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
+        <h2>Products</h2>
+        <!-- Schweppes Tange
+    <!-- Bigi bitter lemon -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100" data-product-id="BGI-001">
+            <img src="../images/Bigi-Bitterlemon-50cl.webp" class="card-img-top" alt="bIG Lemon">
+            <div class="card-body">
+                <h3 class="card-title">BIGI LEMON</h3>
+                <p class="card-text">Description: Energy Drink</p>
+                <p class="card-text">SIZE: 500ML</p>
+                <p class="card-text">Price: ₦2,200</p>
+                <p class="card-text">Rating: 4.6/5</p>
+                <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                    <span class="quantity">1</span>
+                    <button class="btn btn-outline-secondary increase-quantity">+</button>
+                </div>
+                <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
             </div>
-            <button class="checkout-btn">Checkout</button>
         </div>
-
-        <!-- Bigi Bitter Lemon 50cl -->
-        <div class="product-card" data-product-id="BGI-002">
-            <img src="images/Bigi-Bitterlemon-50cl.webp" alt="Bigi Bitter Lemon 50cl">
-            <h4>Bigi Bitter Lemon 50cl</h4>
-            <p>Description: Bitter Lemon Refreshment</p>
-            <p>Category: Refreshment</p>
-            <p>Price: ₦250</p>
-            <p>Rating: 4.1/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
+    </div>
+    <!--bigi ORANGE-->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100" data-product-id="BGI-002">
+            <img src="../images/Bigi-orange.png" class="card-img-top" alt="BIGI ORANGE">
+            <div class="card-body">
+                <h3 class="card-title">BIGI ORANGE</h3>
+                <p class="card-text">Description:  BIGI ORANGE flavoured drink Drink</p>
+                <p class="card-text">SIZE: ₦2,200</p>
+                <p class="card-text">Price: ₦2,200</p>
+                <p class="card-text">Rating: 4.6/5</p>
+                <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                    <span class="quantity">1</span>
+                    <button class="btn btn-outline-secondary increase-quantity">+</button>
+                </div>
+                <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
             </div>
-            <button class="checkout-btn">Checkout</button>
         </div>
-
-        <!-- Bigi Cherib -->
-        <div class="product-card" data-product-id="BGI-003">
-            <img src="images/bigi-cherib.jpeg" alt="Bigi Cherib">
-            <h4>Bigi Cherib</h4>
-            <p>Description: Fruity Bigi Cherib</p>
-            <p>Category: Fruit Drink</p>
-            <p>Price: ₦300</p>
-            <p>Rating: 4.4/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
+    </div>
+    <!--bigi soda-->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100" data-product-id="BGI-003">
+            <img src="../images/Bigi-soda.png" class="card-img-top" alt="BIGI SODA">
+            <div class="card-body">
+                <h3 class="card-title">pepsi cola zero suger</h3>
+                <p class="card-text">Description: zero suger SODA Drink</p>
+                <p class="card-text">Price: ₦2,200</p>
+                <p class="card-text">SIZE: ₦2,200</p>
+                <p class="card-text">Rating: 4.6/5</p>
+                <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                    <span class="quantity">1</span>
+                    <button class="btn btn-outline-secondary increase-quantity">+</button>
+                </div>
+                <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
             </div>
-            <button class="checkout-btn">Checkout</button>
         </div>
-
-
-
-        <!-- Bigi Ginger -->
-        <div class="product-card" data-product-id="BGI-005">
-            <img src="images/bigi-ginger.jpeg" alt="Bigi Ginger">
-            <h4>Bigi Ginger</h4>
-            <p>Description: Refreshing Ginger Drink</p>
-            <p>Category: Refreshment</p>
-            <p>Price: ₦320</p>
-            <p>Rating: 4.2/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
+    </div>
+    <!--bigi apple-->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100" data-product-id="BGI-004">
+            <img src="../images/Bigi_apple.jpg" class="card-img-top" alt="BIGI APPLE">
+            <div class="card-body">
+                <h3 class="card-title">BIGI APPLE</h3>
+                <p class="card-text">Description:APPLE from bigi diet Drink</p>
+                <p class="card-text">Price: ₦2,200</p>
+                <p class="card-text">SIZE: ₦2,200</p>
+                <p class="card-text">Rating: 4.6/5</p>
+                <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                    <span class="quantity">1</span>
+                    <button class="btn btn-outline-secondary increase-quantity">+</button>
+                </div>
+                <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
             </div>
-            <button class="checkout-btn">Checkout</button>
         </div>
+    </div>
 
-        <!-- Bigi Lime -->
-        <div class="product-card" data-product-id="BGI-006">
-            <img src="images/bigi-lime.jpeg" alt="Bigi Lime">
-            <h4>Bigi Lime</h4>
-            <p>Description: Refreshing Lime Drink</p>
-            <p>Category: Refreshment</p>
-            <p>Price: ₦320</p>
-            <p>Rating: 4.3/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
+      <!-- bigi chapman -->
+      <div class="col-md-4 mb-4">
+          <div class="card h-100" data-product-id="BGI-005">
+              <img src="../images/bigi-chapman.png" class="card-img-top" alt="bigi chapman">
+              <div class="card-body">
+                  <h3 class="card-title">Bigi chapman</h3>
+                  <p class="card-text">Description: Classic bigi chapman with great taste</p>
+                  <p class="card-text">Price: ₦1,800</p>
+                  <p class="card-text">SIZE: ₦2,200</p>
+                  <p class="card-text">Rating: 4.5/5</p>
+                  <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                  <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                      <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                      <span class="quantity">1</span>
+                      <button class="btn btn-outline-secondary increase-quantity">+</button>
+                  </div>
+                  <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
+              </div>
+          </div>
+      </div>
+       
+      <div class="col-md-4 mb-4">
+        <div class="card h-100" data-product-id="BGI-006">
+            <img src="../images/bigi-cherib.jpeg" class="card-img-top" alt="Bigi cherry Berry">
+            <div class="card-body">
+                <h3 class="card-title">bigi cherry berry</h3>
+                <p class="card-text">Description: Cherrish your nutrition Drink</p>
+                <p class="card-text">Price: ₦2,200</p>
+                <p class="card-text">Rating: 4.6/5</p>
+                <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                    <span class="quantity">1</span>
+                    <button class="btn btn-outline-secondary increase-quantity">+</button>
+                </div>
+                <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
             </div>
-            <button class="checkout-btn">Checkout</button>
         </div>
+      </div>
+      
+      <div class="col-md-4 mb-4">
+        <div class="card h-100" data-product-id="BGI-007">
+            <img src="../images/bigi-ginger.jpeg" class="card-img-top" alt="bigi ginger ">
+            <div class="card-body">
+                <h3 class="card-title">bigi ginger </h3>
+                <p class="card-text">Description: bigi ginger reffreshment Drink pack</p>
+                <p class="card-text">Price: ₦2,200</p>
+                <p class="card-text">Rating: 4.6/5</p>
+                <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                    <span class="quantity">1</span>
+                    <button class="btn btn-outline-secondary increase-quantity">+</button>
+                </div>
+                <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+    
+      <!-- 7UP -->
+      <div class="col-md-4 mb-4">
+          <div class="card h-100" data-product-id="PS-007">
+              <img src="../images/bigi-tamarin.png" class="card-img-top" alt="7UP">
+              <div class="card-body">
+                  <h3 class="card-title">Bigi tamarine</h3>
+                  <p class="card-text">Description: Refreshing tamarine refined drinks</p>
+                  <p class="card-text">Price: ₦1,500</p>
+                  <p class="card-text">Rating: 4.4/5</p>
+                  <button class="btn btn-primary btn-block add-to-cart-btn">Add to Cart</button>
+                  <div class="quantity-controller mt-3 d-flex justify-content-between align-items-center">
+                      <button class="btn btn-outline-secondary decrease-quantity">-</button>
+                      <span class="quantity">1</span>
+                      <button class="btn btn-outline-secondary increase-quantity">+</button>
+                  </div>
+                  <button class="btn btn-success btn-block mt-3 checkout-btn">Checkout</button>
+              </div>
+          </div>
+      </div>
 
-        <!-- Bubble Up -->
-        <div class="product-card" data-product-id="BGI-007">
-            <img src="images/bubbleup.jpeg" alt="Bubble Up">
-            <h4>Bubble Up</h4>
-            <p>Description: Refreshing Bubble Up Drink</p>
-            <p>Category: Refreshment</p>
-            <p>Price: ₦270</p>
-            <p>Rating: 4.0/5</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="quantity-controller">
-                <button class="decrease-quantity">-</button>
-                <span class="quantity">1</span>
-                <button class="increase-quantity">+</button>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-        </div>
+  </div>
 </div>
-    </section>
+</section>
+
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
@@ -601,20 +674,21 @@
                     <div class="rte-setting">
                         <p><strong>we at oladayo enterprises, <s>suply</s> our costumer quality products</strong></p>
                         <p>The standard  used since the 2021 to inprove or  reproduced best reputation beyound <b>Customs</b> 
-                          <br>imaginations, bridging between our intere ane for the interests of our valued <b>Customers</b>. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                          <br>imaginations, bridging between our intere ane for the interests of our valued <b>Customers</b>.
+                          </p>
                     </div>
                 </div>
                </div>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4"><img class="blur-up lazyload" data-src="assets/images/about1.jpg" src="assets/images/about1.jpg" alt="About Us" /></div>
-            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4"><img class="blur-up lazyload" data-src="assets/images/about2.jpg" src="assets/images/about2.jpg" alt="About Us" /></div>
-            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4"><img class="blur-up lazyload" data-src="assets/images/about3.jpg" src="assets/images/about3.jpg" alt="About Us" /></div>
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4"><img class="blur-up lazyload" data-src="assets/images/about1.jpg" src="../images/holandia-y-carton.jpg" alt="About Us" /></div>
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4"><img class="blur-up lazyload" data-src="assets/images/about2.jpg" src="../images/c-5alive-citrus-boost.jpg" alt="About Us" /></div>
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4"><img class="blur-up lazyload" data-src="assets/images/about3.jpg" src="../images/schweps-ginger.webp" alt="About Us" /></div>
         </div>
         <div class="row">
             <div class="col-12">
             <div class="rte-center">
-              <img src="assets/images/about2.jpg" alt="assets/images/about2.jpg"  srcset="assets/images/about2.jpg">
+              <img src="../images/holandia-nutriyo.jpg" alt="../images/holandia-nutriyo.jpg"  srcset="../images/holandia-nutriyo.jpg">
             </div>
                 <h2>Error handlings</h2>
                 <p> Errors in sites shouldn't our weaknes as we have <b>capable</b> <strong>qualified developer to handle threats <br>due to errors AND 
@@ -711,38 +785,39 @@
                     <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
                         <h4 class="h4">Quick Shop</h4>
                         <ul>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Men</a></li>
-                            <li><a href="#">Kids</a></li>
-                            <li><a href="#">Sportswear</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="register.html"">Women</a></li>
+                            <li><a href="login.html"">Men</a></li>
+                            <li><a href="market.html"">Kids</a></li>
+                            <li><a href="terms.html"">Sportswear</a></li>
+                            <li><a href="privacy.html"">Sale</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
                         <h4 class="h4">Informations</h4>
                         <ul>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                            <li><a href="#">Terms &amp; condition</a></li>
-                            <li><a href="#">My Account</a></li>
+                            <li><a href="about-us.html"">About us</a></li>
+                            <li><a href="careers.html"">Careers</a></li>
+                            <li><a href="location.html"">Privacy policy</a></li>
+                            <li><a href="teams.html"">Terms &amp; condition</a></li>
+                            <li><a href="dashbour.html"">My Account</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
                         <h4 class="h4">Customer Services</h4>
                         <ul>
-                            <li><a href="#">Request Personal Data</a></li>
-                            <li><a href="#">FAQ's</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Orders and Returns</a></li>
-                            <li><a href="#">Support Center</a></li>
+                            <li><a href="contact -us.html"">Request Personal Data</a></li>
+                            <li><a href="faq.html"">FAQ's</a></li>
+                            <li><a href="contact -us.html"">Contact Us</a></li>
+                            <li><a href="contact -us.html"">Orders and Returns</a></li>
+                            <li><a href="contact -us.html"">Support Center</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-3 col-lg-3 contact-box">
                         <h4 class="h4">Contact Us</h4>
                         <ul class="addressFooter">
-                            <li><i class="icon anm anm-map-marker-al"></i><p>55 Gallaxy Enque,<br>2568 steet, 23568 NY</p></li>
-                            <li class="phone"><i class="icon anm anm-phone-s"></i><p>(440) 000 000 0000</p></li>
+                            <li><i class="icon anm anm-map-marker-al"></i><p>copers lodge area,<br>sisimusu kisi road,<br> 
+                              opposite NIN office, <br> kaiama kwara state NIG.</p></li>
+                            <li class="phone"><i class="icon anm anm-phone-s"></i><p>+234 8(036) 396 181</p></li>
                             <li class="email"><i class="icon anm anm-envelope-l"></i><p>sales@yousite.com</p></li>
                         </ul>
                     </div>

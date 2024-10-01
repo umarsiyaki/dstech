@@ -193,3 +193,205 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY(sender_id) REFERENCES users(id),
     FOREIGN KEY(receiver_id) REFERENCES users(id)
 );
+
+
+--messages
+
+-- Schema for users table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Schema for messages table
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    senderId INT NOT NULL,
+    recipientId INT NOT NULL,
+    content TEXT,
+    mediaUrl VARCHAR(255),
+    status ENUM('sent', 'delivered', 'read') DEFAULT 'sent',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (senderId) REFERENCES users(id),
+    FOREIGN KEY (recipientId) REFERENCES users(id)
+);
+
+-- Schema for presence statuses
+CREATE TABLE presence (
+    userId INT PRIMARY KEY,
+    status ENUM('active', 'away', 'offline') DEFAULT 'offline',
+    lastSeen TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+
+-- Schema for spam messages (to store blocked messages or users)
+CREATE TABLE spam (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    messageId INT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(id),
+    FOREIGN KEY (messageId) REFERENCES messages(id)
+);
+
+-- Schema for message reactions
+CREATE TABLE message_reactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    messageId INT NOT NULL,
+    userId INT NOT NULL,
+    reaction ENUM('like', 'dislike', 'laugh', 'love', 'angry') NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (messageId) REFERENCES messages(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+
+
+--group message
+CREATE TABLE groups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE group_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    groupId INT NOT NULL,
+    userId INT NOT NULL,
+    FOREIGN KEY (groupId) REFERENCES groups(id),
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+
+
+--block/unblock incase of unwanted messages
+
+CREATE TABLE blocked_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    blockerId INT NOT NULL,
+    blockedId INT NOT NULL,
+    FOREIGN KEY (blockerId) REFERENCES users(id),
+    FOREIGN KEY (blockedId) REFERENCES users(id)
+);
+
+--emoji
+CREATE TABLE emojis (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    imageUrl VARCHAR(255) NOT NULL
+);
+
+
+
+--order items
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    special_instructions TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    name VARCHAR(255),
+    quantity INT,
+    price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    buyer_id VARCHAR(255) UNIQUE,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255), -- Consider using hashing for security
+    address VARCHAR(255),
+    city VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_number VARCHAR(100) UNIQUE,
+    name VARCHAR(255),
+    description TEXT,
+    price DECIMAL(10, 2),
+    category_id INT,
+    stock INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE wishlists (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE comparisons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    special_instructions TEXT,
+    shipping_address VARCHAR(255),
+    shipping_city VARCHAR(100),
+    purchase_message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    message TEXT,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE receipts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    receipt_data JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);
+
+CREATE TABLE shipping (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    tracking_number VARCHAR(255),
+    carrier VARCHAR(100),
+    status VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);

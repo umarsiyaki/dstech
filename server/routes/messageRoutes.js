@@ -1,3 +1,16 @@
+const express = require('express');
+const router = express.Router();
+const { getMessages, sendMessage, uploadMedia } = require('../components/message');
+
+// Route to get messages (Inbox, Unread, etc.)
+router.get('/messages', getMessages);
+
+// Route to send a new message
+router.post('/messages/send', sendMessage);
+
+// Route to upload media in a message
+router.post('/messages/upload', uploadMedia);
+
 // Update a message
 router.put('/messages/:id', (req, res) => {
     const id = req.params.id;

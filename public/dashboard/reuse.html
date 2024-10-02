@@ -940,6 +940,152 @@ input, textarea {
       </table>
     </section>
     
-    <!-- Calendar Section -->
+        <!-- Calendar Section -->
     <section id="calendar" style="display:none;">
-      <h1>Ca
+      <h1>Calendar</h1>
+      <div class="calendar-tools">
+        <label for="date">Date:</label>
+        <input type="date" id="date">
+        <button id="add-event-btn">Add Event</button>
+      </div>
+      <div id="calendar-container"></div>
+    </section>
+   
+    
+    <!-- Cashier Performance Section -->
+    <section id="cashier-performance" style="display:none;">
+      <h1>Cashier Performance</h1>
+      <table id="cashier-performance-table">
+        <thead>
+          <tr>
+            <th>Cashier ID</th>
+            <th>Username</th>
+            <th>Transactions</th>
+            <th>Total Sales</th>
+            <th>Average Rating</th>
+          </tr>
+        </thead>
+        <tbody id="cashier-performance-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Daily Transportation Section -->
+    <section id="daily-transportation" style="display:none;">
+      <h1>Daily Transportation</h1>
+      <table id="daily-transportation-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Transportation Mode</th>
+            <th>Distance</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody id="daily-transportation-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Total Revenue Section -->
+    <section id="total-revenue" style="display:none;">
+      <h1>Total Revenue</h1>
+      <p id="total-revenue-amount"></p>
+      <table id="total-revenue-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Revenue</th>
+          </tr>
+        </thead>
+        <tbody id="total-revenue-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Monthly Payment Confirmation Section -->
+    <section id="monthly-payment-confirmation" style="display:none;">
+      <h1>Monthly Payment Confirmation</h1>
+      <table id="monthly-payment-confirmation-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Payment Status</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="monthly-payment-confirmation-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Message Collaboration Tools Section -->
+    <section id="message-collaboration-tools" style="display:none;">
+      <h1>Message Collaboration Tools</h1>
+      <div class="message-tools">
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <button id="send-message-btn">Send</button>
+      </div>
+      <div id="message-log"></div>
+    </section>
+    <!-- Line chart -->
+<canvas id="line-chart" width="400" height="200"></canvas>
+
+<!-- Bar chart -->
+<canvas id="bar-chart" width="400" height="200"></canvas>
+
+<!-- Pie chart -->
+<canvas id="pie-chart" width="400" height="200"></canvas>
+
+<!-- Doughnut chart -->
+<canvas id="doughnut-chart" width="400" height="200"></canvas>
+
+<!-- Polar area chart -->
+<canvas id="polar-area-chart" width="400" height="200"></canvas>
+
+<!-- Radar chart -->
+<canvas id="radar-chart" width="400" height="200"></canvas>
+
+    <!-- Inventory UI Design Management Section -->
+    <section id="inventory-ui-design-management" style="display:none;">
+      <h1>Inventory UI Design Management</h1>
+      <div class="inventory-ui-design-tools">
+        <button id="create-inventory-btn">Create Inventory</button>
+        <button id="remove-inventory-btn">Remove Inventory</button>
+        <button id="import-inventory-btn">Import Inventory</button>
+        <button id="export-inventory-btn">Export Inventory</button>
+      </div>
+      <table id="inventory-table">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="inventory-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Blog Creation Section -->
+    <section id="blog-creation" style="display:none;">
+      <h1>Blog Creation</h1>
+      <form id="blog-form">
+        <label for="blog-title">Title:</label>
+        <input type="text" id="blog-title">
+        <label for="blog-content">Content:</label>
+        <textarea id="blog-content"></textarea>
+        <label for="blog-image">Image:</label>
+        <input type="file" id="blog-image">
+        <button id="create-blog-btn">Create Blog</button>
+      </form>
+      <div id="blog-list"></div>
+    </section>
+  </main>
+  
+  <script src="main.js"></script>
+</body>
+</html>

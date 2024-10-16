@@ -1,4 +1,3 @@
-// Sample data (In real implementation, fetch this data from your server)
 const data = [
   { id: 1, name: 'iPhone 13', type: 'Product', date: '2024-08-01', status: 'Available' },
   { id: 2, name: 'Samsung Galaxy S22', type: 'Product', date: '2024-07-15', status: 'Available' },
@@ -131,5 +130,3 @@ app.get('/api/search', (req, res) => {
 
   res.json(results);
 });
-``
-`

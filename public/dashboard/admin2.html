@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="favicon.ico">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Dashboard</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Users</a></li>
+        <li><a href="#">Orders</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Logout</a></li>
+        <li><a href="#">Chat</a></li>
+        <li><a href="#">Video Conference</a></li>
+        <li><a href="#">File Sharing</a></li>
+        <li><a href="#">Task Management</a></li>
+        <li><a href="#">Calendar</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    
+    <script>
+      // Additional JavaScript functionalities can be implemented here.
+    </script>
+    
+    <style>
+      /* Additional CSS styles can be included here. */
+    </style>
+    
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+      <h1>Dashboard</h1>
+      <div class="card">
+        <h2>Product Stats</h2>
+        <p>Total Products: <span id="total-products">0</span></p>
+        <p>Out of Stock: <span id="out-of-stock">0</span></p>
+        <p>Low Stock: <span id="low-stock">0</span></p>
+      </div>
+      <div class="card">
+        <h2>User Stats</h2>
+        <p>Total Users: <span id="total-users">0</span></p>
+        <p>Active Users: <span id="active-users">0</span></p>
+        <p>Pending Users: <span id="pending-users">0</span></p>
+      </div>
+      <div class="card">
+        <h2>Order Stats</h2>
+        <p>Total Orders: <span id="total-orders">0</span></p>
+        <p>Pending Orders: <span id="pending-orders">0</span></p>
+        <p>Completed Orders: <span id="completed-orders">0</span></p>
+      </div>
+      <div class="collaboration-tools">
+        <button id="dashboard-chat-btn">Chat</button>
+        <button id="dashboard-video-btn">Video Conference</button>
+        <button id="dashboard-file-btn">File Sharing</button>
+      </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section id="products" style="display:none;">
+      <h1>Products</h1>
+      <button id="add-product-btn">Add Product</button>
+      <table id="product-table">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="product-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Users Section -->
+    <section id="users" style="display:none;">
+      <h1>Users</h1>
+      <button id="add-user-btn">Add User</button>
+      <select id="user-role">
+        <option value="admin">Admin</option>
+        <option value="cashier">Cashier</option>
+        <option value="user">User</option>
+      </select>
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Middle Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>NIN Number</th>
+            <th>Profile Picture</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="user-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Orders Section -->
+    <section id="orders" style="display:none;">
+      <h1>Orders</h1>
+      <button id="add-order-btn">Add Order</button>
+      <table id="order-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="order-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Cart Report Section -->
+    <section id="cart-report" style="display:none;">
+      <h1>Cart Report</h1>
+      <table id="cart-report-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody id="cart-report-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Wallet Section -->
+    <section id="wallet" style="display:none;">
+      <h1>Wallet</h1>
+      <p id="wallet-balance"></p>
+      <button id="deposit-btn">Deposit</button>
+      <button id="withdraw-btn">Withdraw</button>
+    </section>
+    
+    <!-- Login/Signup Tracking Section -->
+    <section id="login-signup-tracking" style="display:none;">
+      <h1>Login/Signup Tracking</h1>
+      <table id="login-signup-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Username</th>
+            <th>Login/Signup</th>
+          </tr>
+        </thead>
+        <tbody id="login-signup-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Real-time Tracking Section -->
+    <section id="real-time-tracking" style="display:none;">
+      <h1>Real-time Tracking</h1>
+      <select id="real-time-role">
+        <option value="admin">Admin</option>
+        <option value="cashier">Cashier</option>
+        <option value="user">User</option>
+      </select>
+      <table id="real-time-table">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Activity</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody id="real-time-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Price Calculator Section -->
+    <section id="price-calculator" style="display:none;">
+      <h1>Price Calculator</h1>
+      <div class="calculator-tools">
+        <label for="product-price">Product Price:</label>
+        <input type="number" id="product-price">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity">
+        <button id="calculate-price-btn">Calculate Price</button>
+      </div>
+      <p id="calculated-price"></p>
+    </section>
+    
+    <!-- Task Management Section -->
+    <section id="task-management" style="display:none;">
+      <h1>Task Management</h1>
+      <div class="task-tools">
+        <label for="task-name">Task Name:</label>
+        <input type="text" id="task-name">
+        <label for="task-description">Task Description:</label>
+        <textarea id="task-description"></textarea>
+        <button id="add-task-btn">Add Task</button>
+      </div>
+      <table id="task-table">
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Task Name</th>
+            <th>Task Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="task-tbody">
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- Calendar Section -->
+    <section id="calendar" style="display:none;">
+      <h1>Calendar</h1>
+      <div class="calendar-tools">
+        <label for="date">Date:</label>
+        <input type="date" id="date">
+        <button id="add-event-btn">Add Event</button>
+      </div>
+      <div id="calendar-display"></div>
+    </section>
+
+  </main>
+  <footer>
+    <p>&copy; 2024 Your Company Name</p>
+  </footer>
+  
+  <script src="index.js"></script>
+</body>
+</html>

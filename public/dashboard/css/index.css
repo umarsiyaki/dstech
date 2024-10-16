@@ -1,0 +1,414 @@
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  /* Header Styles */
+  
+  header {
+    background-color: #2f4f7f;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  header nav ul li {
+    margin-right: 20px;
+  }
+  
+  header nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  header nav a:hover {
+    color: #ccc;
+  }
+  
+  /* Main Styles */
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4rem;
+  }
+  
+  section {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  h1 {
+    margin-top: 0;
+  }
+  
+  /* Table Styles */
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Button Styles */
+  
+  button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Form Styles */
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Dashboard Styles */
+  
+  .dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .dashboard-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+  }
+  
+  .dashboard-card h2 {
+    margin-top: 0;
+  }
+  
+  .dashboard-card p {
+    margin-bottom: 20px;
+  }
+  
+  /* Products Styles */
+  
+  .products {
+    padding: 20px;
+  }
+  
+  .product-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .product-th, .product-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .product-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Users Styles */
+  
+  .users {
+    padding: 20px;
+  }
+  
+  .user-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .user-th, .user-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .user-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Orders Styles */
+  
+  .orders {
+    padding: 20px;
+  }
+  
+  .order-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .order-th, .order-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .order-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Cart Report Styles */
+  
+  .cart-report {
+    padding: 20px;
+  }
+  
+  .cart-report-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .cart-report-th, .cart-report-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .cart-report-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Wallet Styles */
+  
+  .wallet {
+    padding: 20px;
+  }
+  
+  
+  .wallet-balance {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .deposit-btn, .withdraw-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .deposit-btn:hover, .withdraw-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Login/Signup Tracking Styles */
+  
+  .login-signup-tracking {
+    padding: 20px;
+  }
+  
+  .login-signup-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .login-signup-th, .login-signup-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .login-signup-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Real-time Tracking Styles */
+  
+  .real-time-tracking {
+    padding: 20px;
+  }
+  
+  .real-time-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .real-time-th, .real-time-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .real-time-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Price Calculator Styles */
+  
+  .price-calculator {
+    padding: 20px;
+  }
+  
+  .calculator-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .calculator-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .calculate-price-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .calculate-price-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Task Management Styles */
+  
+  .task-management {
+    padding: 20px;
+  }
+  
+  .task-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .task-th, .task-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .task-th {
+    background-color: #f0f0f0;
+  }
+  
+  .add-task-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .add-task-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Calendar Styles */
+  
+  .calendar {
+    padding: 20px;
+  }
+  
+  .calendar-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .calendar-th, .calendar-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .calendar-th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Responsive Design */
+  
+  @media only screen and (max-width: 768px) {
+    section {
+      width: 100%;
+    }
+    
+    .dashboard-card {
+      width: 100%;
+    }
+    
+    .product-table, .user-table, .order-table, .cart-report-table, .login-signup-table, .real-time-table, .task-table, .calendar-table {
+      overflow-x: auto;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    header nav ul {
+      flex-direction: column;
+    }
+    
+    header nav ul li {
+      margin-bottom: 10px;
+    }
+  }
+  

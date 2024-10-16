@@ -1,4 +1,6 @@
-
+//import message.js
+import MailMessage from "nodemailer/lib/mailer/mail-message";
+import {  } from "module";
 // Cart logic here
 const cartItemsContainer = document.querySelector('.cart-items');
 const totalProductsSpan = document.getElementById('total-products');
@@ -19,6 +21,8 @@ document.querySelectorAll('.add-to-cart-btn').forEach(button => {
     });
 });
 
+app.use(MailMessage);
+
 function updateCartUI() {
     document.getElementById('cart-button').innerText = `Cart (${Object.keys(cart).length})`;
 }
@@ -37,6 +41,7 @@ function populateCartItems() {
                 <p>Tracking Number: ${item.tracking_number}</p>
                 <p>Size: ${item.size}</p>
                 <p>Quantity: ${item.quantity}</p>
+                <p>Store: ${item.store}</p>
                 <p>Price: ₦${item.price}</p>
                 <p>Rating: ${item.rating}/5</p>
                 <p>Category: ${item.category}</p>
@@ -51,7 +56,7 @@ function populateCartItems() {
 
 // Function to calculate cart summary
 function calculateCartSummary() {
-    const subtotal = 0; // Replace with actual calculation
+    const subtotal = 0; //can be Replace with actual dynamic calculation
     const tax = subtotal * 0.08; // 8% tax
     const total = subtotal + tax;
     const totalProducts = cartItemsData.length;

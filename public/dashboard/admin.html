@@ -116,6 +116,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Role</th>
                             <th>Store</th>
                             <th>Time</th>
                             <th>Tasks Done</th>
@@ -126,11 +127,12 @@
                     <tbody>
                         <tr>
                             <td>Jane Doe</td>
+                            <td>admin</td>
                             <td>Store A</td>
                             <td>12:30 PM</td>
                             <td>Payment Confirmation</td>
-                            <td><button>Message</button></td>
-                            <td><button>Confirm</button></td>
+                            <td><button id="view-message">Message</button></td>
+                            <td><button id="confirm-payment">Confirm</button></td>
                         </tr>
                         <!-- Add more rows as needed -->
                     </tbody>
@@ -144,6 +146,8 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Vendor</th>
+                            <th>category</th>
                             <th>Vendor</th>
                             <th>Total Sales</th>
                             <th>Link</th>
@@ -499,12 +503,30 @@
                 <tr>
                     <th>Buyer Name</th>
                     <th>Store</th>
-                    <th>Product</th>
+                    <th>Product Name</th>
                     <th>Order ID</th>
-                    <th>Tracking</th>
+                    <th>category</th>
+                    <th>size</th>
+                    <th>quantity</th>
+                    <th>vendor</th>
+                    <th>Action</th>
+                    <th>Tracking number</th>
                 </tr>
             </thead>
             <tbody id="orderTableBody">
+                
+                <tr>
+                    <td>Buyer Name</td>
+                    <td>Store</td>
+                    <td>Product Name</td>
+                    <td>Order ID</td>
+                    <td>category</td>
+                    <td>size</td>
+                    <td>quantity</td>
+                    <td>vendor</td>
+                    <td>Action</td>
+                    <td>Tracking number</td>
+                </tr>
                 <!-- Orders will be loaded here -->
             </tbody>
         </table>
